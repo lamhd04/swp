@@ -50,6 +50,8 @@ public class PostDAO {
             }
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
         return list;
     }
