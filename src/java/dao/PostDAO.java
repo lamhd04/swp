@@ -5,7 +5,7 @@
  */
 package dao;
 
-import dbconnection.DBContext;
+import dbconnection.DBConnection;
 import entity.Post;
 import entity.PostCategory;
 import java.sql.Connection;
@@ -60,7 +60,7 @@ public class PostDAO {
         List<PostCategory> list = new ArrayList<>();
         String query = "Select * from PostCategory";
         try {
-            conn = new DBContext().getConnection();
+            conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -69,6 +69,8 @@ public class PostDAO {
             }
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
         return list;
     }
