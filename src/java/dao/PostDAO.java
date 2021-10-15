@@ -22,9 +22,10 @@ import java.util.logging.Logger;
  */
 public class PostDAO {
 
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+    private Connection conn;
+    private Statement stmt;
+    private ResultSet rs;
+    private PreparedStatement ps;
 
     public List<Post> getPosts() {
         List<Post> list = new ArrayList<>();
