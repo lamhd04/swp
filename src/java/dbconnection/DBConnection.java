@@ -23,7 +23,7 @@ public class DBConnection {
             //1. Đăng ký driver
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //2. Tạo và mở kết nối
-            return DriverManager.getConnection("jdbc:sqlserver://DESKTOP-6BMF6G2:1433;databaseName=SWP391_Prj_QuizPrac","sa","12345678");
+            return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SWP391_Prj_QuizPrac","sa","123456789");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

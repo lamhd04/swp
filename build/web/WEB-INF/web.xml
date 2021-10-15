@@ -60,6 +60,18 @@
         <servlet-name>UploadFileServlet</servlet-name>
         <servlet-class>servlet.UploadFileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DocumentControl</servlet-name>
+        <servlet-class>controller.DocumentControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DocumentDetailsServlet</servlet-name>
+        <servlet-class>servlet.DocumentDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DocumentCategoryServlet</servlet-name>
+        <servlet-class>servlet.DocumentCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -151,6 +163,18 @@
     <servlet-mapping>
         <servlet-name>UploadFileServlet</servlet-name>
         <url-pattern>/UploadFileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DocumentControl</servlet-name>
+        <url-pattern>/DocumentControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DocumentDetailsServlet</servlet-name>
+        <url-pattern>/DocumentDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DocumentCategoryServlet</servlet-name>
+        <url-pattern>/DocumentCategoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

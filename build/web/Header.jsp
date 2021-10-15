@@ -17,6 +17,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Eduwise - Education HTML5 Template</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        	
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- Goole Font -->
         <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
@@ -56,8 +58,8 @@
                             <div class="info_wrapper">
                                 <div class="contact_info">                   
                                     <ul class="list-unstyled">
-                                        <li><i class="flaticon-phone-receiver"></i>+000-2356-222</li>
-                                        <li><i class="flaticon-mail-black-envelope-symbol"></i>contact@yourdomain.com</li>
+                                        <li><i class="flaticon-phone-receiver"></i>+84 01234567</li>
+                                        <li><i class="flaticon-mail-black-envelope-symbol"></i>G1@gmail.com</li>
                                     </ul>                    
                                 </div>
                                 <div class="login_info"> 
@@ -73,7 +75,7 @@
                                             <li class="nav-item"><a href="AccountControl?op=logout" class="nav-link join_now js-modal-show"><i class="flaticon-padlock"></i>Log Out</a></li>
                                         </ul>
                                     </c:if>
-                                    <a href="#" title="" class="apply_btn">Apply Now</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -114,12 +116,10 @@
                                         <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
                                     </ul> 
                                 </li>
-                                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a>
+                                <li class="nav-item"><a href="blog.html" class="nav-link">Document</a>
                                     <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog List</a></li> 
-                                        <li class="nav-item"><a href="blog-2.html" class="nav-link">Blog Grid One</a></li> 
-                                        <li class="nav-item"><a href="blog-3.html" class="nav-link">Blog Grid Two</a></li>
-                                        <li class="nav-item"><a href="blog-details.html" class="nav-link">Blog Details</a></li>
+                                        <li class="nav-item"><a href="DocumentControl" class="nav-link">Document List</a></li>
+                                        
                                     </ul> 
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Pages</a>
@@ -150,40 +150,13 @@
                                         <li class="nav-item"><a href="forgot-password.html" class="nav-link">Forgot Password</a></li>
                                     </ul>                            
                                 </li>     
-                                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="mr-auto search_area ">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item"><i class="search_btn flaticon-magnifier"></i>
-                                    <div id="search">
-                                        <button type="button" class="close">×</button>
-                                        <form>
-                                            <input type="search" value="" placeholder="Search here...."  required/>
-                                        </form>
-                                    </div>
-                                </li>
+                                
                             </ul>
                         </div>
                     </nav><!-- END NAVBAR -->
                 </div> 
             </div>
 
-            <div class="intro_wrapper">
-                <div class="container">  
-                    <div class="row">        
-                        <div class="col-sm-12 col-md-8 col-lg-8">
-                            <div class="intro_text">
-                                <h1>About Page</h1>
-                                <div class="pages_links">
-                                    <a href="#" title="">Home</a>
-                                    <a href="#" title="" class="active">About Page</a>
-                                </div>
-                            </div>
-                        </div>              
-
-                    </div>
-                </div> 
-            </div> 
+            
         </header>
 </html>

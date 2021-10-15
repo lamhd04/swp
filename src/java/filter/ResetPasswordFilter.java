@@ -106,29 +106,29 @@ public class ResetPasswordFilter implements Filter {
 
         Throwable problem = null;
         try {
-            
+
             int check = 0;
-            String a=request.getParameter("email");
-            if(null==request.getParameter("email")){
-            String password = request.getParameter("npassword");
-            String repassword = request.getParameter("npassword1");
-            final String PASS_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-            if (!password.equals(repassword)) {
-                request.setAttribute("Error password", "Password didn't match repassword");
-                check = 1;
+            String a = request.getParameter("email");
+            if (null == request.getParameter("email")) {
+                String password = request.getParameter("npassword");
+                String repassword = request.getParameter("npassword1");
+                final String PASS_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+                if (!password.matches(PASS_PATTERN)) {
+                    request.setAttribute("Errorpassword", "Your password must be at least 8 characters,"
+                            + " included a number,"
+                            + " a lowercase alphabet and an uppercase alphabet,"
+                            + " a special character"
+                            + " and no space or tab ");
+                    check = 1;
+                } else if (!password.equals(repassword)) {
+                    request.setAttribute("Errorpassword", "Password didn't match repassword");
+                    check = 1;
+                    request.setAttribute("pass", password );
+                }
             }
-            if (!password.matches(PASS_PATTERN)) {
-                request.setAttribute("Error password", "At least 8 characters "
-                        + "A number must be included  "
-                        + "A lowercase alphabet and an uppercase alphabet must be included"
-                        + "A special character must be included"
-                        + "No space or tab");
-                check = 1;
-            }
-            }
-            if(check==0)
-            chain.doFilter(request, response);
-            else{
+            if (check == 0) {
+                chain.doFilter(request, response);
+            } else {
                 request.getRequestDispatcher("resetPass.jsp").forward(request, response);
             }
         } catch (Throwable t) {

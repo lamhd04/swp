@@ -54,110 +54,9 @@
 
     </style>
     <body>
+        <jsp:include page="Header.jsp" flush="true"></jsp:include>
         <header class="header_inner contact_page">
-            <!-- Preloader -->
-            <div id="preloader">
-                <div id="status">&nbsp;</div>
-            </div>    
-            <div class="header_top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-lg-12">
-                            <div class="info_wrapper">
-                                <div class="contact_info">                   
-                                    <ul class="list-unstyled">
-                                        <li><i class="flaticon-phone-receiver"></i>+000-2356-222</li>
-                                        <li><i class="flaticon-mail-black-envelope-symbol"></i>contact@yourdomain.com</li>
-                                    </ul>                    
-                                </div>
-                                <div class="login_info">
-                                    <ul class="d-flex">
-                                        <li class="nav-item"><a href="#" class="nav-link sign-in js-modal-show"><i class="flaticon-user-male-black-shape-with-plus-sign"></i>Sign Up</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link join_now js-modal-show"><i class="flaticon-padlock"></i>Lon In</a></li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="edu_nav">
-                <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light bg-faded">
-                        <a class="navbar-brand" href="index-2.html"><img src="images/logoquiz.jpg" style="width:100px" alt="logo"></a>
-                        <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav nav lavalamp ml-auto menu">
-                                <li class="nav-item"><a href="#" class="nav-link">Home</a>
-                                    <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="index-2.html" class="nav-link">Home Version 01</a></li>
-                                        <li class="nav-item"><a href="index-3.html" class="nav-link">Home Version 02</a></li>
-                                        <li class="nav-item"><a href="index-4.html" class="nav-link">Home Version 03</a></li>
-                                        <li class="nav-item"><a href="index-5.html" class="nav-link">Home Version 04</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                                <li class="nav-item"><a href="course.html" class="nav-link">Courses</a>
-                                    <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
-                                        <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a>
-                                    <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog List</a></li> 
-                                        <li class="nav-item"><a href="blog-2.html" class="nav-link">Blog Grid One</a></li> 
-                                        <li class="nav-item"><a href="blog-3.html" class="nav-link">Blog Grid Two</a></li>
-                                        <li class="nav-item"><a href="blog-details.html" class="nav-link">Blog Details</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="nav-item"><a href="#" class="nav-link active">Pages</a>
-                                    <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Courses</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
-                                                <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
-                                            </ul>    
-                                        </li>                                 
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Events</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="event.html" class="nav-link">Event</a></li>
-                                                <li class="nav-item"><a href="event-details.html" class="nav-link">Event Details</a></li>
-                                            </ul>    
-                                        </li>                               
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Blog</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="blog.html" class="nav-link">Blog List</a></li> 
-                                                <li class="nav-item"><a href="blog-2.html" class="nav-link">Blog Grid One</a></li> 
-                                                <li class="nav-item"><a href="blog-3.html" class="nav-link">Blog Grid Two</a></li>
-                                                <li class="nav-item"><a href="blog-details.html" class="nav-link">Blog Details</a></li>
-                                            </ul>    
-                                        </li> 
-                                        <li class="nav-item"><a href="become-a-teacher.html" class="nav-link">Become A Teacher</a></li>
-                                        <li class="nav-item"><a href="teacher-profile.html" class="nav-link">Teachers Profile</a></li>
-                                        <li class="nav-item"><a href="team.html" class="nav-link">Teachers Page</a></li>
-                                        <li class="nav-item"><a href="forgot-password.html" class="nav-link active">Forgot Password</a></li>
-                                    </ul>                            
-                                </li>     
-                                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="mr-auto search_area ">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item"><i class="search_btn flaticon-magnifier"></i>
-                                    <div id="search">
-                                        <button type="button" class="close">×</button>
-                                        <form>
-                                            <input type="search" value="" placeholder="Search here...."  required/>
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav><!-- END NAVBAR -->
-                </div> 
-            </div>
+           
 
             <div class="intro_wrapper">
                 <div class="container">  
@@ -176,102 +75,6 @@
             </div> 
         </header> <!-- End Header -->
 
-
-
-        <section class="login_signup_option">
-            <div class="l-modal is-hidden--off-flow js-modal-shopify">
-                <div class="l-modal__shadow js-modal-hide"></div>
-                <div class="login_popup login_modal_body">
-                    <div class="Popup_title d-flex justify-content-between">
-                        <h2 class="hidden">&nbsp;</h2>
-                        <!-- Nav tabs -->
-                        <div class="row">
-                            <div class="col-12 col-lg-12 col-md-12 col-lg-12 login_option_btn">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#login" role="tab">Login</a></li>
-                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Register</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-lg-12 col-md-12 col-lg-12">
-                                <!-- Tab panels -->
-                                <div class="tab-content card">
-                                    <!--Login-->
-                                    <div class="tab-pane fade in show active" id="login" role="tabpanel">
-                                        <form action="#">
-                                            <div class="row">
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Email</label>
-                                                        <input type="email" class="form-control" placeholder="Username">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Password</label>
-                                                        <input type="password" class="form-control" placeholder="Password">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-between login_option">
-                                                    <a href="forgot-password.html" title="" class="forget_pass">Forget Password ?</a>
-                                                    <button type="submit" class="btn btn-default login_btn">Login</button>
-                                                </div> 
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12">
-                                                    <div class="social_login">
-                                                        <div class="social_items">
-                                                            <button class="google_login google">Login Google</button>
-                                                            <button class="google_login facebook">Login Facebook</button>
-                                                            <button class="google_login twitter">Login Twitter</button>
-                                                            <button class="google_login linkdin">Login Linkdin</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!--/.Panel 1-->
-                                    <!--Panel 2-->
-                                    <div class="tab-pane fade" id="panel2" role="tabpanel">
-                                        <form action="#" class="register">
-                                            <div class="row">
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12">
-                                                    <div class="form-group">
-                                                        <label  class="control-label">Name</label>
-                                                        <input type="text" class="form-control" placeholder="Username">
-                                                    </div>
-                                                </div>                                        
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12">
-                                                    <div class="form-group">
-                                                        <label  class="control-label">Email</label>
-                                                        <input type="email" class="form-control" placeholder="Email">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12">
-                                                    <div class="form-group">
-                                                        <label  class="control-label">Password</label>
-                                                        <input type="password" class="form-control" placeholder="Password">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-between login_option">
-                                                    <button type="submit" class="btn btn-default login_btn">Register</button>
-                                                </div> 
-                                            </div>
-                                        </form>
-                                    </div><!--/.Panel 2-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>  <!-- End Login Signup Option -->
-
-
-
-
         <!-- forgot pass section -->
         <section class="forgot_pass">
             <div class="container">
@@ -280,6 +83,7 @@
                         <div class="forgot_wrapper">
                             <h6>Lost your password? Please enter your  email address. You will receive a link to create a new password via email.</h6>	
                             <form action ="ResetPasswordServlet">
+                                <font style="color:red">${msg1}</font>
                                 <div class="form-group"> 
                                     <input autocomplete="off" class="required form-control" placeholder="Please enter your email" name="email" type="text" required>
                                 </div>

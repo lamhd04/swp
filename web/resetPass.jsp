@@ -91,9 +91,10 @@
         <div id="wrapper">
             <form action="ResetPasswordServlet?id=<%= request.getParameter("id")%>" method="post" id="form-rp">
                 <h1 class="form-heading">Repassword</h1>
+                <font style="color:red">${Errorpassword}</font>
                 <div class="form-group">
                     <i class="far fa-key"></i>
-                    <input type="text" class="form-input" name="npassword" placeholder="Enter new password">
+                    <input type="text" class="form-input" value="${pass}" name="npassword" placeholder="Enter new password">
                 </div>
                 <div class="form-group">
                     <i class="fas fa-key"></i>
@@ -114,35 +115,4 @@
 
 
 
-<%--
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <form action="ResetPasswordServlet?id=<%= request.getParameter("id")%>" method="post">
-            <div class="login-form">
 
-                <div class="row">
-                    
-                    <div class="col-lg-12">
-
-                        <label>Enter Your New Password*</label>
-                        <input required type="password" name="npassword">
-                    </div>
-                    <div class="col-lg-12">
-
-                        <label>Confirm Your Password*</label>
-                        <input required type="password" name="npassword1">
-                    </div>
-                    <div style="text-align: center" class="col-md-12 mt-3 ">                                               
-                        <button class="btn btn-custom-size lg-size btn-pronia-primary">Send</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </body>
-</html>
---%>

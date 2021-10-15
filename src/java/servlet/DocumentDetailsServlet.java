@@ -5,11 +5,11 @@
  */
 package servlet;
 
-import controller.EmailController;
-import dao.AccountDAO;
-import entity.Account;
+import dao.DocumentDAO;
+import entity.Document;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hungl
  */
-public class ResetPasswordServlet extends HttpServlet {
+public class DocumentDetailsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,19 +33,11 @@ public class ResetPasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String email = request.getParameter("email");
-        AccountDAO dao = new AccountDAO();
-        EmailController send = new EmailController();
-        Account acc = dao.getAccount(email);
-        if (acc != null) {
-            send.Send(acc.getEmail(),acc.getUserId(),acc.getFullname());
-            request.setAttribute("msg", "Check your mail!");
-            request.getRequestDispatcher("notification.jsp").forward(request, response);
-        }else{
-            request.setAttribute("msg1", "Email isn't registered");
-            request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
-        }
-        
+        DocumentDAO dao = new DocumentDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Document> listDetails = dao.getDocumentsById(id);
+        request.setAttribute("listDetails", listDetails);
+        request.getRequestDispatcher("DocumentDetails.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,16 +66,7 @@ public class ResetPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String npass = request.getParameter("npassword");
-        int id = Integer.parseInt(request.getParameter("id"));
-
-        AccountDAO dao = new AccountDAO();
-        Account acc = dao.getAccount(id);
-        if (acc != null) {
-            acc.setPassword(npass);
-            dao.editAccount(acc);
-        }
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
