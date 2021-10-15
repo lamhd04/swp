@@ -79,7 +79,7 @@ public class PostDAO {
         List<Post> list = new ArrayList<>();
         String query = "select * from Post where cId=?";
         try {
-            conn = new DBContext().getConnection();
+            conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -97,6 +97,8 @@ public class PostDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
         return list;
     }
@@ -104,7 +106,7 @@ public class PostDAO {
     public Post getPostbyID(String id) {
         String query = "select * from Post where postid=?";
         try {
-            conn = new DBContext().getConnection();
+            conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -122,6 +124,8 @@ public class PostDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
         return null;
     }
