@@ -48,8 +48,8 @@ public class PostDAO {
                 pt.setStatus(rs.getString("status"));
                 list.add(pt);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             DBConnection.close(conn, stmt);
         }
@@ -67,8 +67,8 @@ public class PostDAO {
                 list.add(new PostCategory(rs.getInt(1),
                         rs.getString(2)));
             }
-        } catch (Exception ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             DBConnection.close(conn, stmt);
         }
@@ -95,7 +95,8 @@ public class PostDAO {
                         rs.getDate(9),
                         rs.getString(10)));
             }
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -119,7 +120,8 @@ public class PostDAO {
                         rs.getDate(9),
                         rs.getString(10));
             }
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
