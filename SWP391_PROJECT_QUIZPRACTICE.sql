@@ -13,7 +13,7 @@ phone varchar(10),
 permission bit not null,
 [status] varchar(10) not null
 )
-drop table Account
+--drop table Account
 
 
 insert into Account values (1,'admin','Mr','lamndhe151284@fpt.edu.vn','111111','0375596151','Hai Duong',1,'active')
@@ -43,7 +43,7 @@ settingOrder int ,
 [status] nvarchar(150),
 
 )
-drop table setting
+--drop table setting
 select MAX(userId) from account 
 insert into Setting([type],settingValue,settingOrder,[status]) values ('user_role','Admin',1,'active')
 insert into Setting([type],settingValue,settingOrder,[status]) values ('user_role','Guest',0,'active')
@@ -77,7 +77,7 @@ content varchar(200),
 media varchar(100),
 explanation varchar(100)
 )
-drop table question
+--drop table question
 create table AnswerOption
 (
 qId int not null,
@@ -124,3 +124,39 @@ insert into AnswerOption values (4,'A:alsdkfjasldkfjs',1)
 insert into AnswerOption values (4,'B:alsdkfjasldkfjs',0)
 insert into AnswerOption values (4,'C:alsdkfjasldkfjs',0)
 select * from Account
+
+create table PostCategory
+(
+cid int primary key,
+cname nvarchar(50)
+)
+
+create table Post
+(
+postid int,
+thumbnail varchar(1000),
+title nvarchar(70),
+brief nvarchar(4000), 
+detail ntext,
+cId int not null foreign key references PostCategory(cid),
+author int foreign key references Account(userId),
+featured varchar(1000),
+[time] smalldatetime,
+[status] varchar(10)
+)
+insert into PostCategory values (1,'Art & Design')
+insert into PostCategory values (2,'Business')
+insert into PostCategory values (3,'IT & Software')
+insert into PostCategory values (4,'Languages')
+insert into PostCategory values (5,'Programming')
+insert into PostCategory values (6,'Technology')
+
+insert into Post values ('images\blog\blog3-1.png','Research of Learn training process','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',5,2,'abcdef','2019-02-14','Completed')
+insert into Post values ('images\blog\blog3-2.png','Research of Learn training process','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',5,2,'abcdefghijk','2019-02-14','Completed')
+insert into Post values ('images\blog\blog3-3.png','Research of Learn training process','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',6,2,'12yfaskfac','2019-02-14','Completed')
+insert into Post values ('images\blog\details_2.png','Research of Learn training process','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',3,2,'abcdef','2019-02-14','Completed')
+insert into Post values ('images\blog\details_2.png','How to Become Master In CSS within a Week','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',3,2,'abcdef','2019-02-14','Completed')
+insert into Post values ('images\blog\details_2.png','Students work together to solve a problem','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',3,2,'abcdef','2019-02-14','Completed')
+
+
+
