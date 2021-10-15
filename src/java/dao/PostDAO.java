@@ -31,7 +31,7 @@ public class PostDAO {
         List<Post> list = new ArrayList<>();
         String query = "Select * from Post";
         try {
-            conn = new DBContext().getConnection();
+            conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
