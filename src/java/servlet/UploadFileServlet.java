@@ -81,7 +81,6 @@ public class UploadFileServlet extends HttpServlet {
             QuestionImport(request, response);
         }
         request.getRequestDispatcher("questionimport.jsp").forward(request, response);
-
     }
 
     private void QuestionImport(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException, ServletException {
