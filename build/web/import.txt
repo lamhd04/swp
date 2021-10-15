@@ -1,0 +1,5 @@
+This is the question content|This is the question level(Hard,Medium,Easy)|This is the question explanation|This is the question image or video link
+A:This is answer A,The key is to mark if this is the correct answer(key)
+B:This is answer B
+C:This is answer C,After every question you have to have the "end" keyword
+end
