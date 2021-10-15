@@ -158,5 +158,31 @@ insert into Post values ('images\blog\details_2.png','Research of Learn training
 insert into Post values ('images\blog\details_2.png','How to Become Master In CSS within a Week','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',3,2,'abcdef','2019-02-14','Completed')
 insert into Post values ('images\blog\details_2.png','Students work together to solve a problem','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',3,2,'abcdef','2019-02-14','Completed')
 
+create table Document
+(
+id int identity(1,1) primary key,
+thumbnail nvarchar(300) not null,
+title nvarchar(50) not null,
+author nvarchar(50) not null,
+update_date Date not null,
+brief_info nvarchar(50) not null,
+post_content nvarchar(200) not null,
+doccategory nvarchar(50),
+)
+
+insert into Document values('pic/education-la-gi-1-1008x570.jpg','Quiz1','Le Manh Hung','2021-5-19','This is Quiz1 brief_info','This is Quiz1 post_content','DocumentCate1')
+insert into Document values('pic/Education-la-gi-2-e1623658098277.jpg','Quiz2','Nguyen Thi Cuc','2018-3-29','This is Quiz2 brief_info','This is Quiz2 post_content','DocumentCate2')
+insert into Document values('pic/Picture1-6.jpg','Quiz3','Le Duy Hai','2021-4-20','This is Quiz3 brief_info','This is Quiz3 post_content','DocumentCate3')
+insert into Document values('pic/Education-in-Spain-1-1920x1080.jpg','Quiz4','Nguyen Dai Lam','2020-9-9','This is Quiz4 brief_info','This is Quiz4 post_content','DocumentCate1')
+insert into Document values('pic/edu.jpeg','Quiz5','Le Huu Phuc','2021-7-15','This is Quiz5 brief_info','This is Quiz5 post_content','DocumentCate2')
+insert into Document values('pic/pic/dreamstime_s_74311588.jpg','Quiz6','Trinh Anh Quan','2018-2-23','This is Quiz6 brief_info','This is Quiz6 post_content','DocumentCate3')
+insert into Document values('pic/30c65f19-8e87-457c-b22a-cb32f44f4dd0.jpeg','Quiz7','Pham Hung Ha','2020-6-28','This is Quiz6 brief_info','This is Quiz6 post_content','DocumentCate1')
+insert into Document values('pic/Picture1-6.jpg','Quiz8','Le Duy Hung','2021-10-24','This is Quiz8 brief_info','This is Quiz8 post_content','DocumentCate3')
+insert into Document values('pic/pic/education2.jpg','Quiz9','Le Manh Hung','2017-10-15','This is Quiz9 brief_info','This is Quiz9 post_content','DocumentCate1')
+insert into Document values('pic/education-la-gi-1-1008x570.jpg','Quiz10','Le Duy Hung','2020-8-12','This is Quiz10 brief_info','This is Quiz10 post_content','DocumentCate3')
+
+insert into Setting([type],settingValue,settingOrder,[status]) values('doccategory','DocumentCate1',1,'active')
+insert into Setting([type],settingValue,settingOrder,[status]) values('doccategory','DocumentCate2',2,'active')
+insert into Setting([type],settingValue,settingOrder,[status]) values('doccategory','DocumentCate3',3,'active')
 
 
