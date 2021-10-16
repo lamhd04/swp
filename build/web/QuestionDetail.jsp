@@ -33,7 +33,7 @@
                                 <form id="myForm" action="QuestionDetail" style="margin-bottom: 20px;margin-top: 10px;" method="POST">
                                     <input type="number" value="${i}" name="i" readonly hidden>
                                 <input type="text" name="qId" value="${question.qId}" readonly hidden>
-                                
+
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label">Subject</label> 
                                     <div class="col-8">
@@ -110,9 +110,12 @@
                                     <label class="col-4 col-form-label">Media</label>                                    
                                     <div class="col-8">
                                         <font color = "red">${errormedia}</font>
-                                        <input placeholder="Media" class="form-control here" type="text" name="media"value="${question.media}">
+                                        <input placeholder="Enter your media share here" class="form-control here" type="text" name="media">
+                                                <p  class="form-group row">${question.media}<p>
                                     </div>
+                                    
                                 </div>
+                                    
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label">Explanation</label> 
                                     <font color = "red">${errorexplanation}</font>

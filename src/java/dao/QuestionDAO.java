@@ -81,8 +81,8 @@ public class QuestionDAO {
             String sql = "update Question set [subject] = ?, category= ?,subcategory=?,[level]=?,[status]=?, quiz=?,content=?,media=?,explanation=? where qId = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, q.getSubject());
-            ps.setInt(2, Integer.parseInt(q.getCategory()));
-            ps.setInt(3, Integer.parseInt(q.getSubcategory()));
+            ps.setString(2, q.getCategory());
+            ps.setString(3, q.getSubcategory());
             ps.setString(4, q.getLevel());
             ps.setString(5, q.getStatus());
             ps.setString(6, q.getQuiz());
@@ -116,7 +116,6 @@ public class QuestionDAO {
 
     public void addQuestion(Question q) {
         try {
-            conn = DBConnection.open();
             String sql = "insert into Question values (?,?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
             ps.setString(1, q.getSubject());
@@ -135,7 +134,6 @@ public class QuestionDAO {
         } catch (SQLException ex) {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            DBConnection.close(conn, stmt);
         }
     }
 
@@ -272,30 +270,9 @@ public class QuestionDAO {
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        File file = new File("D:\\abc.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        FileWriter fw = new FileWriter(file);
-        QuestionDAO dao = new QuestionDAO();
-        PrintWriter pw = new PrintWriter(file);
-        try {
-//             fw.write("");
-//             fw.close();
-//             pw.write("");
-//             pw.close();
-reader.close();
-            if (file.delete()) {
-                System.out.println("File deleted successfully");
-            } else {
-                System.out.println("Failed to delete the file");
-            }
-        } catch (Exception ex) {
-
-        } finally {
-            try {
-                reader.close();
-                // file.close();
-            } catch (IOException ex) {
-            }
-        }
+        String a ="https://www.youtube.com/watch?v=vpRi8S6uXAg";
+        String abc = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+        if(a.matches(abc))
+            System.out.println(true);
     }
 }

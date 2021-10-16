@@ -79,18 +79,7 @@ public class QuestionDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //int qId = Integer.parseInt(request.getParameter("qId"));
-//        SettingDAO s = new SettingDAO();
-//        String condition = request.getParameter("condition");
-//        request.setAttribute("condition", condition);
-//        List<Setting> subcat = s.getSettingByType(condition);
-//        request.setAttribute("subcat", subcat);
-//        String condition2 = request.getParameter("condition2");
-//        if (condition2 != null && !"".equals(condition2)) {
-//
-//        }
-//        request.getRequestDispatcher("QuestionDetail.jsp").forward(request, response);
-        int qId = 1;
+        int qId = Integer.parseInt(request.getParameter("qId"));
         QuestionDAO dao = new QuestionDAO();
         int i = 0;
         if ("delete".equals(request.getParameter("op"))) {
@@ -118,13 +107,14 @@ public class QuestionDetail extends HttpServlet {
         String condition2 = request.getParameter("condition2");
         request.setAttribute("question", q);
         request.setAttribute("list", q.getList());
-        updateQuestion(request, response,i+q.getList().size());
+        updateQuestion(request, response, i + q.getList().size());
         request.getRequestDispatcher("QuestionDetail.jsp").forward(request, response);
 
     }
 
-    private void updateQuestion(HttpServletRequest request, HttpServletResponse response,int size) throws ServletException, IOException {
+    private void updateQuestion(HttpServletRequest request, HttpServletResponse response, int size) throws ServletException, IOException {
         int qId = Integer.parseInt(request.getParameter("qId"));
+        
         QuestionDAO dao = new QuestionDAO();
         Question q = dao.getQuestion(qId);
         String subject = request.getParameter("subject");
@@ -134,7 +124,7 @@ public class QuestionDetail extends HttpServlet {
         String status = request.getParameter("status");
         String quiz = request.getParameter("quiz");
         String content = request.getParameter("content");
-        String media = request.getParameter("media");
+        String media = new String(request.getParameter("media").getBytes("iso-8859-1"), "utf-8");
         String explanation = request.getParameter("explanation");
         int check = 0;
         String[] a = request.getParameterValues("answer");
@@ -151,18 +141,16 @@ public class QuestionDetail extends HttpServlet {
             request.setAttribute("errorcontent", "Question content must be under 200 character/n"
                     + "Questio content cannot be empty!");
         }
-        final String abc = "^((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$";
-        if (!media.matches(abc)) {
+        if (media.length() > 1000) {
             check = 1;
-            request.setAttribute("errormedia", "Wrong url");
-        }
-        if (media.length() > 100) {
-            check = 1;
-            request.setAttribute("errormedia", "media link is too long!");
+            request.setAttribute("errormedia", "media code is too long!");
         }
         if (explanation.length() > 100) {
             check = 1;
             request.setAttribute("errorexplanation", "Explanation is too long!");
+        }
+        if(!media.startsWith("<iframe")){
+            media="<img src=\""+media+"\" alt=\"\" class=\"img-fluid\">";
         }
         if (check == 0) {
             q.setCategory(category);
@@ -177,6 +165,7 @@ public class QuestionDetail extends HttpServlet {
             q.setList(list);
             dao.editQuestion(q);
         }
+        doGet(request,response);
         request.getRequestDispatcher("QuestionDetail.jsp").forward(request, response);
     }
 
