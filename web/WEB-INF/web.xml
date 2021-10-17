@@ -176,6 +176,30 @@
         <servlet-name>DocumentCategoryServlet</servlet-name>
         <url-pattern>/DocumentCategoryServlet</url-pattern>
     </servlet-mapping>
+     <servlet>
+        <servlet-name>SubjectServlet</servlet-name>
+        <servlet-class>servlet.SubjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubjectServlet</servlet-name>
+        <url-pattern>/subjects</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SubjectDetailServlet</servlet-name>
+        <servlet-class>servlet.SubjectOverViewlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubjectDetailServlet</servlet-name>
+        <url-pattern>/subject-detail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddSubjectServlet</servlet-name>
+        <servlet-class>servlet.AddSubjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddSubjectServlet</servlet-name>
+        <url-pattern>/subject-add</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
