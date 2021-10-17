@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:useBean id="a" class="dao.DocumentDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="a" class="dao.SettingDAO" scope="request"></jsp:useBean>
             <!-- Required meta tags -->
             	
             <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
