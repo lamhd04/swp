@@ -186,3 +186,95 @@ insert into Setting([type],settingValue,settingOrder,[status]) values('doccatego
 insert into Setting([type],settingValue,settingOrder,[status]) values('doccategory','DocumentCate3',3,'active')
 
 
+GO
+/****** Object:  Table [dbo].[Dimension]     ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Dimension](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[type] [nvarchar](50) NULL,
+	[dimension] [nvarchar](50) NULL,
+	[subject_id] [int] NULL,
+ CONSTRAINT [PK_Dimention] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Price_Package]     ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Price_Package](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[package] [nvarchar](50) NULL,
+	[duration] [int] NULL,
+	[list_price] [int] NULL,
+	[sale_price] [int] NULL,
+	[status] [nvarchar](50) NULL,
+	[subject_id] [int] NULL,
+ CONSTRAINT [PK_Price_Package] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Subject]    ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Subject](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[title] [nvarchar](255) NULL,
+	[author] [nvarchar](50) NULL,
+	[status] [nvarchar](50) NULL,
+	[featured] [bit] NULL,
+	[category] [nvarchar](50) NULL,
+	[name] [nvarchar](50) NULL,
+	[description] [text] NULL,
+ CONSTRAINT [PK_Subject] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Dimension] ON 
+
+INSERT [dbo].[Dimension] ([id], [type], [dimension], [subject_id]) VALUES (1, N'Domain', N'Business', 1)
+INSERT [dbo].[Dimension] ([id], [type], [dimension], [subject_id]) VALUES (2, N'Domain', N'Process', 1)
+INSERT [dbo].[Dimension] ([id], [type], [dimension], [subject_id]) VALUES (3, N'Domain', N'People', 1)
+INSERT [dbo].[Dimension] ([id], [type], [dimension], [subject_id]) VALUES (4, N'Group', N'Initialing', 1)
+INSERT [dbo].[Dimension] ([id], [type], [dimension], [subject_id]) VALUES (5, N'Group', N'Planning', 1)
+INSERT [dbo].[Dimension] ([id], [type], [dimension], [subject_id]) VALUES (6, N'Group', N'Executing', 1)
+SET IDENTITY_INSERT [dbo].[Dimension] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Price_Package] ON 
+
+INSERT [dbo].[Price_Package] ([id], [package], [duration], [list_price], [sale_price], [status], [subject_id]) VALUES (1, N'Gói truy cập 3 tháng', 3, 3600, 3200, N'Active', 1)
+INSERT [dbo].[Price_Package] ([id], [package], [duration], [list_price], [sale_price], [status], [subject_id]) VALUES (2, N'Gói truy cập 6 tháng', 6, 5000, 4500, N'Inactive', 1)
+INSERT [dbo].[Price_Package] ([id], [package], [duration], [list_price], [sale_price], [status], [subject_id]) VALUES (3, N'Gói truy cập vô thời hạn', NULL, 10000, 9800, N'Active', 1)
+SET IDENTITY_INSERT [dbo].[Price_Package] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Subject] ON 
+
+INSERT [dbo].[Subject] ([id], [title], [author], [status], [featured], [category], [name], [description]) VALUES (1, N't1', N'a1', N's1', 1, N'c1', N'n1_update', N'description')
+INSERT [dbo].[Subject] ([id], [title], [author], [status], [featured], [category], [name], [description]) VALUES (2, N't2', N'a2', N's2', 1, N'c2', N'n2', N'description')
+INSERT [dbo].[Subject] ([id], [title], [author], [status], [featured], [category], [name], [description]) VALUES (3, N't3', N'a3', N's3', 1, N'c3', N'n3', N'description')
+INSERT [dbo].[Subject] ([id], [title], [author], [status], [featured], [category], [name], [description]) VALUES (4, N't4', N'a4', N's4', 1, N'c4', N'n4', N'description')
+INSERT [dbo].[Subject] ([id], [title], [author], [status], [featured], [category], [name], [description]) VALUES (5, N't5', N'a5', N's5', 0, N'c5', N'n5', N'description')
+INSERT [dbo].[Subject] ([id], [title], [author], [status], [featured], [category], [name], [description]) VALUES (6, N't6', N'a6', N's6', 0, N'c6', N'n6', N'description')
+INSERT [dbo].[Subject] ([id], [title], [author], [status], [featured], [category], [name], [description]) VALUES (7, N'add sup', N'au1', N'published', 1, N'ca1', N'sup namw', N'hello')
+SET IDENTITY_INSERT [dbo].[Subject] OFF
+GO
+ALTER TABLE [dbo].[Dimension]  WITH CHECK ADD FOREIGN KEY([subject_id])
+REFERENCES [dbo].[Subject] ([id])
+GO
+ALTER TABLE [dbo].[Price_Package]  WITH CHECK ADD FOREIGN KEY([subject_id])
+REFERENCES [dbo].[Subject] ([id])
+GO
+
+
