@@ -21,9 +21,20 @@
                     <div class="col-3">
                         <select onchange="getSub()" class="form-control here"  id="1" name="condition" style="height: 40px">
                             <option value="">Any</option>
-                        <c:forEach items="${a.getSettingByType('quiz_category')}" var="x">
-                            <option  ${condition==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>
-                        </c:forEach> 
+                            <optgroup label="Category">
+                            <c:forEach items="${a.getSettingByType('quiz_category')}" var="x">
+                                <option  ${condition==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>
+                            </c:forEach> 
+                        </optgroup>
+                        <optgroup label="Level">
+                            <option value="levelEasy">Easy</option>
+                            <option value="levelMedium">Medium</option>
+                            <option value="levelHard">Hard</option>
+                        </optgroup >
+                        <optgroup label="Status">
+                            <option value="statusUnpublished">Unpublished</option>
+                            <option value="statusPublished">Published</option>
+                        </optgroup>
                     </select>
                 </div>
                 <script type="text/javascript">
@@ -40,9 +51,16 @@
                 <div  class="col-3">
                     <select class="form-control here" name="condition2" style="height: 40px">
                         <option value="">Any</option>
-                        <c:forEach items="${subcat}" var="x">
-                            <option ${condition2==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>                                
-                        </c:forEach>
+                        <optgroup label="Subcategory">
+                            <c:forEach items="${subcat}" var="x">
+                                <option ${condition2==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>                                
+                            </c:forEach>
+                        </optgroup>
+                        <optgroup label="Subject">
+                            <c:forEach items="${lsb}" var="x">
+                                <option ${condition2==x.settingValue ?"selected":""} value="subject${x.settingValue}">${x.settingValue}</option>                                
+                            </c:forEach>
+                        </optgroup>
                     </select>
                 </div>
                 <div class="col-5">
@@ -86,19 +104,21 @@
                 </tr>
             </c:forEach>
 
-        </table>  
+        </table>
+                <div>${x}</div>
+                <div>${y}</div>
         <nav aria-label="Pages">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
-                    <a a class="page-link" href="${url}1&order=${order}&conditon=${condition}" >|<<</a>
+                    <a a class="page-link" href="${url}1" >|<<</a>
                 </li>
-                <c:forEach begin="${x}" end="${y}" var="i">            
+                <c:forEach begin="${start}" end="${finish}" var="i">            
                     <li class="page-item">
-                        <a a class="page-link" href="${url}${i}&order=${order}&conditon=${condition}" >${i}</a>
+                        <a a class="page-link" href="${url}${i}" >${i}</a>
                     </li>
                 </c:forEach>        
                 <li class="page-item">
-                    <a a class="page-link" href="${url}${end}&order=${order}&conditon=${condition}" >>>|</a>
+                    <a a class="page-link" href="${url}${end}" >>>|</a>
                 </li>
             </ul>
         </nav>

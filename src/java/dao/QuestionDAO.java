@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import model.QuestionSearch;
 
 /**
  *
@@ -185,15 +186,38 @@ public class QuestionDAO {
         }
     }
 
-    public List<Question> search(String type, String name, int pageIndex, int pageSize, String order, String condition, String condition2) {
+    public List<Question> search(int pageIndex, int pageSize, QuestionSearch qs) {
         List<Question> list = new ArrayList<Question>();
         try {
-
-            String query = "select * from (select ROW_NUMBER() over (order by " + type + " " + order + ") as STT,* from Question \n"
-                    + "where content like ? " + condition + condition2 + ") as x where STT between (?-1)*?+1 and ?*?";
+            String category = "";
+            String subcategory = "";
+            String subject = "";
+            String level = "";
+            String status = "";
+            String content = "";
+            if (qs.getCategory() != null) {
+                category = " and category='" + qs.getCategory() + "'";
+            }
+            if (qs.getSubcategory() != null&&qs.getSubcategory() !="") {
+                subcategory = " and subcategory='" + qs.getSubcategory() + "'";
+            }
+            if (qs.getContent() != null) {
+                content = qs.getContent();
+            }
+            if (qs.getLevel() != null) {
+                level = " and level='" + qs.getLevel() + "'";
+            }
+            if (qs.getStatus() != null) {
+                status = " and status='" + qs.getStatus() + "'";
+            }
+            if (qs.getSubject() != null) {
+                subject = " and subject='" + qs.getSubject() + "'";
+            }
+            String query = "select * from (select ROW_NUMBER() over (order by qId asc) as STT,* from Question \n"
+                    + "where content like ? " + category + subcategory + level + status + subject + ") as x where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + name + "%");
+            ps.setString(1, "%" + content + "%");
             ps.setInt(2, pageIndex);
             ps.setInt(3, pageSize);
             ps.setInt(4, pageIndex);
@@ -213,13 +237,37 @@ public class QuestionDAO {
         return list;
     }
 
-    public int questionCount(String username, String condition, String condition2) {
+    public int questionCount(QuestionSearch qs) {
         int count = 0;
         try {
-            String query = "select count(*) from Question where content like ? " + condition + " " + condition2;
+            String category = "";
+            String subcategory = "";
+            String subject = "";
+            String level = "";
+            String status = "";
+            String content = "";
+            if (qs.getCategory() != null) {
+                category = " and category='" + qs.getCategory() + "'";
+            }
+            if (qs.getSubcategory() != null) {
+                subcategory = " and subcategory='" + qs.getSubcategory() + "'";
+            }
+            if (qs.getContent() != null) {
+                content = qs.getContent();
+            }
+            if (qs.getLevel() != null) {
+                level = " and level='" + qs.getLevel() + "'";
+            }
+            if (qs.getStatus() != null) {
+                status = " and status='" + qs.getStatus() + "'";
+            }
+            if (qs.getSubject() != null) {
+                subject = " and subject='" + qs.getSubject() + "'";
+            }
+            String query = "select count(*) from Question where content like ? " + category + subcategory + level + status + subject;
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + username + "%");
+            ps.setString(1, "%" + content + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 count = rs.getInt(1);
@@ -269,10 +317,13 @@ public class QuestionDAO {
         return a;
     }
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        String a ="https://www.youtube.com/watch?v=vpRi8S6uXAg";
-        String abc = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-        if(a.matches(abc))
-            System.out.println(true);
+    public static void main(String[] args) {
+        QuestionDAO qd = new QuestionDAO();
+        QuestionSearch qs = new QuestionSearch();
+        qs.setCategory("Math");
+        qs.setSubcategory(null);
+        List<Question> list = qd.search(1, 12, qs);
+        System.out.println(list.size());
     }
+
 }

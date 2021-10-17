@@ -7,6 +7,7 @@
             <file>file:/D:/javaweb/Project/src/java/servlet/UploadFileServlet.java</file>
             <file>file:/D:/javaweb/Project/src/java/dao/DocumentDAO.java</file>
             <file>file:/D:/javaweb/Project/src/java/dao/SettingDAO.java</file>
+            <file>file:/D:/javaweb/Project/web/Document.jsp</file>
             <file>file:/D:/javaweb/Project/src/java/servlet/PostDetailServlet.java</file>
             <file>file:/D:/javaweb/Project/src/java/servlet/QuestionDetail.java</file>
             <file>file:/D:/javaweb/Project/src/java/controller/SettingControl.java</file>
@@ -17,6 +18,7 @@
             <file>file:/D:/javaweb/Project/src/java/dao/AccountDAO.java</file>
             <file>file:/D:/javaweb/Project/src/java/servlet/QuestionPaging.java</file>
             <file>file:/D:/javaweb/Project/web/Profile.jsp</file>
+            <file>file:/D:/javaweb/Project/web/DocumentDetails.jsp</file>
             <file>file:/D:/javaweb/Project/src/java/dbconnection/DBConnection.java</file>
         </group>
     </open-files>
