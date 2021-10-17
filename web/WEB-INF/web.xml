@@ -72,6 +72,18 @@
         <servlet-name>DocumentCategoryServlet</servlet-name>
         <servlet-class>servlet.DocumentCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizControl</servlet-name>
+        <servlet-class>controller.QuizControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizListServlet</servlet-name>
+        <servlet-class>servlet.QuizListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizDetail</servlet-name>
+        <servlet-class>servlet.QuizDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -176,7 +188,7 @@
         <servlet-name>DocumentCategoryServlet</servlet-name>
         <url-pattern>/DocumentCategoryServlet</url-pattern>
     </servlet-mapping>
-     <servlet>
+    <servlet>
         <servlet-name>SubjectServlet</servlet-name>
         <servlet-class>servlet.SubjectServlet</servlet-class>
     </servlet>
@@ -199,6 +211,18 @@
     <servlet-mapping>
         <servlet-name>AddSubjectServlet</servlet-name>
         <url-pattern>/subject-add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizControl</servlet-name>
+        <url-pattern>/QuizControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizListServlet</servlet-name>
+        <url-pattern>/QuizListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizDetail</servlet-name>
+        <url-pattern>/QuizDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
