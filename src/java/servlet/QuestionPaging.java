@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.QuestionSearch;
+import model.SubjectSearch;
 
 /**
  *
@@ -40,6 +41,7 @@ public class QuestionPaging extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        doPost(request, response);
 
     }
 
@@ -55,6 +57,7 @@ public class QuestionPaging extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        doPost(request, response);
     }
 
     /**
@@ -68,37 +71,59 @@ public class QuestionPaging extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         SettingDAO s = new SettingDAO();
-        QuestionSearch qs = new QuestionSearch();
+
         String username = request.getParameter("search");
+        if (username == null) {
+            username = "";
+        }
         request.setAttribute("search", username);
         SubjectDAO sbd = new SubjectDAO();
-        //List<Subject> lsb=sbd.search(null);
-        //request.setAttribute("lsb", lsb);
+//        SubjectSearch sbs = new SubjectSearch();
+//        List<Subject> lsb=sbd.getAll();
+//        request.setAttribute("lsb", lsb);
         String pageind = request.getParameter("pageindex");
         if (pageind == null) {
             pageind = "1";
         }
         String condition = request.getParameter("condition");
+        if (condition == null) {
+            condition = "";
+        }
         request.setAttribute("condition", condition);
         String condition2 = request.getParameter("condition2");
-        request.setAttribute("condition2", condition2);
-        qs.setContent(username);
-        if (condition.contains("level")) {
-            String temp=condition.substring(4);         
-            qs.setLevel(temp);
-        } else if (condition.contains("status")) {
-            String temp=condition.substring(5);
-            qs.setStatus(temp);
-        } else {
-            qs.setCategory(condition);
+        if (condition2 == null) {
+            condition2 = "";
         }
-        if (condition2!=null&&condition2.contains("subject")) {
-            String temp=condition2.substring(7);
+        request.setAttribute("condition2", condition2);
+        QuestionSearch qs = new QuestionSearch();
+        qs.setContent(username);
+        String temp ="";
+        if (condition.contains("level")) {
+            temp = condition.substring(5);
+            qs.setLevel(temp);
+            request.setAttribute("temp", temp);
+        }
+        if (condition.contains("status")) {
+            temp = condition.substring(6);
+            qs.setStatus(temp);
+            request.setAttribute("temp", temp);
+        }
+        if (condition.contains("cat")) {
+            temp = condition.substring(3);
+            qs.setCategory(condition);
+            request.setAttribute("temp", temp);
+        }
+        if (condition2 != null && condition2.contains("subject")) {
+            String temp2 = condition2.substring(8);
             qs.setSubject(temp);
-        } else {
-           qs.setSubcategory(condition2);
+            request.setAttribute("temp2", temp2);
+        }
+        if (condition2 != null && condition2.contains("subcat")) {
+            String temp2 = condition2.substring(6);
+            qs.setSubcategory(condition2);
+            request.setAttribute("temp2", temp2);
+            
         }
 
         int pageindex = Integer.parseInt(pageind);
@@ -109,7 +134,7 @@ public class QuestionPaging extends HttpServlet {
         if (pagenum % pagesize != 0) {
             endpage++;
         }
-        List<Setting> subcat = s.getSettingByType(condition);
+        List<Setting> subcat = s.getSettingByType(temp);
         request.setAttribute("subcat", subcat);
         List<Question> list = skindao.search(pageindex, pagesize, qs);
         request.setAttribute("pageindex", pageindex);
@@ -132,6 +157,7 @@ public class QuestionPaging extends HttpServlet {
             x = pageindex - 2;
             y = pageindex + 2;
         }
+
         request.setAttribute("finish", y);
         request.setAttribute("start", x);
         request.getRequestDispatcher("QuestionList.jsp").forward(request, response);

@@ -94,9 +94,9 @@ public final class QuestionList_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write(" \n");
       out.write("                        </optgroup>\n");
       out.write("                        <optgroup label=\"Level\">\n");
-      out.write("                            <option value=\"levelEasy\">Easy</option>\n");
-      out.write("                            <option value=\"levelMedium\">Medium</option>\n");
-      out.write("                            <option value=\"levelHard\">Hard</option>\n");
+      out.write("                            <option value=\"levelEasy\"></option>\n");
+      out.write("                            <option value=\"levelMedium\"></option>\n");
+      out.write("                            <option value=\"levelHard\"></option>\n");
       out.write("                        </optgroup >\n");
       out.write("                        <optgroup label=\"Status\">\n");
       out.write("                            <option value=\"statusUnpublished\">Unpublished</option>\n");

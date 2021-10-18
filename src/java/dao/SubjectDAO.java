@@ -83,6 +83,32 @@ public class SubjectDAO {
         return list;
     }
 
+    public List<Subject> getAll() {
+        List<Subject> list = new ArrayList<>();
+        try {
+            conn = DBConnection.open();
+            String sql = "select * from Subject";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                list.add(new Subject(rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("status"),
+                        rs.getBoolean("featured"),
+                        rs.getString("category"),
+                        rs.getString("name"),
+                        rs.getString("description")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SubjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
+
     public int totalSubjects(SubjectSearch param) {
 
         try {

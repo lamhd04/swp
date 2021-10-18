@@ -20,27 +20,27 @@
                 <div class="form-group row">
                     <div class="col-3">
                         <select onchange="getSub()" class="form-control here"  id="1" name="condition" style="height: 40px">
-                            <option value="">Any</option>
-                            <optgroup label="Category">
+                        <option value="Any">Any</option>
+                        <optgroup label="Category">
                             <c:forEach items="${a.getSettingByType('quiz_category')}" var="x">
-                                <option  ${condition==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>
+                                <option  ${temp==x.settingValue ?"selected":""} value="cat${x.settingValue}">${x.settingValue}</option>
                             </c:forEach> 
                         </optgroup>
                         <optgroup label="Level">
-                            <option value="levelEasy">Easy</option>
-                            <option value="levelMedium">Medium</option>
-                            <option value="levelHard">Hard</option>
+                            <option ${temp=='Easy' ?"selected":""} value="levelEasy">Easy</option>
+                            <option ${temp=='Medium' ?"selected":""} value="levelMedium">Medium</option>
+                            <option ${temp=='Hard' ?"selected":""} value="levelHard">Hard</option>
                         </optgroup >
                         <optgroup label="Status">
-                            <option value="statusUnpublished">Unpublished</option>
-                            <option value="statusPublished">Published</option>
+                            <option ${temp=='Unpublished' ?"selected":""} value="statusUnpublished">Unpublished</option>
+                            <option ${temp=='Published' ?"selected":""} value="statusPublished">Published</option>
                         </optgroup>
                     </select>
                 </div>
                 <script type="text/javascript">
                     function getSub() {
                         var e = document.getElementById("1");
-                        var condition = 'condition=' + e.options[e.selectedIndex].text;
+                        var condition = 'condition=' + e.options[e.selectedIndex].value;
                         httpRequest = new XMLHttpRequest();
                         httpRequest.open('POST', 'QuestionPaging');
                         httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -50,10 +50,10 @@
                 </script>
                 <div  class="col-3">
                     <select class="form-control here" name="condition2" style="height: 40px">
-                        <option value="">Any</option>
+                        <option value="Any">Any</option>
                         <optgroup label="Subcategory">
                             <c:forEach items="${subcat}" var="x">
-                                <option ${condition2==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>                                
+                                <option ${temp2==x.settingValue ?"selected":""} value="subcat${x.settingValue}">${x.settingValue}</option>                                
                             </c:forEach>
                         </optgroup>
                         <optgroup label="Subject">
@@ -105,20 +105,20 @@
             </c:forEach>
 
         </table>
-                <div>${x}</div>
-                <div>${y}</div>
+        <div>${x}</div>
+        <div>${y}</div>
         <nav aria-label="Pages">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
-                    <a a class="page-link" href="${url}1" >|<<</a>
+                    <a a class="page-link" href="${url}1&condition=${condition}&condition2=${condition2}&search=${search}" >|<<</a>
                 </li>
                 <c:forEach begin="${start}" end="${finish}" var="i">            
                     <li class="page-item">
-                        <a a class="page-link" href="${url}${i}" >${i}</a>
+                        <a a class="page-link" href="${url}${i}&condition=${condition}&condition2=${condition2}&search=${search}" >${i}</a>
                     </li>
                 </c:forEach>        
                 <li class="page-item">
-                    <a a class="page-link" href="${url}${end}" >>>|</a>
+                    <a a class="page-link" href="${url}${end}&condition=${condition}&condition2=${condition2}&search=${search}" >>>|</a>
                 </li>
             </ul>
         </nav>

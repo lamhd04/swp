@@ -195,11 +195,13 @@ public class QuestionDAO {
             String level = "";
             String status = "";
             String content = "";
-            if (qs.getCategory() != null) {
-                category = " and category='" + qs.getCategory() + "'";
+            if (qs.getCategory() != null&&!"".equals(qs.getCategory())) {
+                                String temp = qs.getCategory().substring(3);
+                category = " and category='" + temp + "'";
             }
-            if (qs.getSubcategory() != null&&qs.getSubcategory() !="") {
-                subcategory = " and subcategory='" + qs.getSubcategory() + "'";
+            if (qs.getSubcategory() != null&&!"".equals(qs.getSubcategory())) {
+                String temp = qs.getSubcategory().substring(6);
+                subcategory = " and subcategory='" + temp + "'";
             }
             if (qs.getContent() != null) {
                 content = qs.getContent();
@@ -246,11 +248,13 @@ public class QuestionDAO {
             String level = "";
             String status = "";
             String content = "";
-            if (qs.getCategory() != null) {
-                category = " and category='" + qs.getCategory() + "'";
+            if (qs.getCategory() != null&&!"".equals(qs.getCategory())&&!qs.getCategory().equals("Any")) {
+                String temp = qs.getCategory().substring(3);
+                category = " and category='" + temp + "'";
             }
-            if (qs.getSubcategory() != null) {
-                subcategory = " and subcategory='" + qs.getSubcategory() + "'";
+            if (qs.getSubcategory() != null&&!"".equals(qs.getSubcategory())&&!qs.getSubcategory().equals("Any")) {
+                String temp = qs.getSubcategory().substring(6);
+                subcategory = " and subcategory='" + temp + "'";
             }
             if (qs.getContent() != null) {
                 content = qs.getContent();
