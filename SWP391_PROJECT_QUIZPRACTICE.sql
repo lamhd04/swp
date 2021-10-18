@@ -277,4 +277,31 @@ ALTER TABLE [dbo].[Price_Package]  WITH CHECK ADD FOREIGN KEY([subject_id])
 REFERENCES [dbo].[Subject] ([id])
 GO
 
+create table QuizList(
+	quizId int identity(1,1) primary key,
+	title nvarchar(2000),
+	[subject] nvarchar(100),
+	category nvarchar(100),
+	[level] nvarchar(50),
+	[type] nvarchar(50),
+	passRate int ,
+	expert int FOREIGN KEY REFERENCES Account(userId)
+  )
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('discrete mathematics and its applications','Math','advanced math','university','free test',80,6)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Mathematics for Engineering','Math','advanced math','university','free test',80,6)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Statistics and Probability','Math','advanced math','university','free test',80,6)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Programming Fundamentals','Program','c++ program','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
+  insert into QuizList (title,[subject],category,[level],[type],passRate,expert) values('Object-Oriented Programming','Program','OOP with Java','university','free test',80,4)
 
