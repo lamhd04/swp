@@ -54,7 +54,7 @@
                         <c:forEach items="${listP}" var="o">
                             <div class="single_blog">
                                 <div class="blog_banner">
-                                    <a href="postdetail?id=${o.postid}" title=""><img src="${o.thumbnail}" alt="" class="img-fluid"></a>
+                                    <a href="postdetail?postid=${o.postid}" title=""><img src="${o.thumbnail}" alt="" class="img-fluid"></a>
                                 </div>
                                 <div class="post_content_wrapper">
                                     <div class="post_date"><p>Posted On : ${o.time} - <span>Education Category</span></p></div>

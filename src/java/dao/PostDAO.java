@@ -38,7 +38,7 @@ public class PostDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Post pt = new Post();
-                pt.setPostid(rs.getInt("postId"));
+                pt.setPostid(rs.getInt("postid"));
                 pt.setThumbnail(rs.getString("thumbnail"));
                 pt.setTitle(rs.getString("title"));
                 pt.setBrief(rs.getString("brief"));
