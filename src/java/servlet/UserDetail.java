@@ -79,12 +79,11 @@ public class UserDetail extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
         AccountDAO acd = new AccountDAO();
         Account acc = new Account();
         String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String name = request.getParameter("fullname");
+        String address = new String(request.getParameter("address").getBytes("iso-8859-1"), "utf-8");
+        String name = new String(request.getParameter("fullname").getBytes("iso-8859-1"), "utf-8");
         final String phoneNumberPattern = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
         int check = 0;
         if (!phone.matches(phoneNumberPattern)) {
@@ -106,7 +105,16 @@ public class UserDetail extends HttpServlet {
             acc.setPhone(phone);
             acc.setAddress(address);
             acc.setPermission(request.getParameter("permission"));
+            acc.setEmail(request.getParameter("email"));
+            acc.setStatus(request.getParameter("status"));
             acd.editAccount(acc);
+            acc=acd.getAccount(Integer.parseInt(request.getParameter("userId")));
+            request.setAttribute("acc",acc);
+            request.setAttribute("role", acd.getSetting(acc.getPermission()));
+            SettingDAO dao1 = new SettingDAO();
+            List<Setting> list1 = dao1.getSettingByType("user_role");
+            request.setAttribute("list1", list1);
+            request.getRequestDispatcher("Profile.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("Profile.jsp").forward(request, response);
         }

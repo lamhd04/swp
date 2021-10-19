@@ -87,8 +87,6 @@ public class UploadFileServlet extends HttpServlet {
         Part file = request.getPart("file");
         String category = request.getParameter("condition");
         String subcategory = request.getParameter("condition2");
-        String quiz = request.getParameter("quiz");
-        String subject = request.getParameter("subject");
         InputStreamReader inputStreamReader = new InputStreamReader(file.getInputStream());
         BufferedReader reader = new BufferedReader(inputStreamReader);
         QuestionDAO dao = new QuestionDAO();

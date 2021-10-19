@@ -118,6 +118,7 @@ public class QuestionDAO {
     public void addQuestion(Question q) {
         try {
             String sql = "insert into Question values (?,?,?,?,?,?,?,?,?)";
+            conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setString(1, q.getSubject());
             ps.setString(2, q.getCategory());
@@ -130,11 +131,12 @@ public class QuestionDAO {
             ps.setString(9, q.getExplanation());
             ps.executeUpdate();
             for (int i = 0; i < q.getList().size(); i++) {
-                addAnswer(q.getList().get(i));
+                addAnswer(q.getList().get(i), "");
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+            DBConnection.close(conn, stmt);
         }
     }
 
@@ -153,6 +155,20 @@ public class QuestionDAO {
             DBConnection.close(conn, stmt);
         }
         return count;
+    }
+
+    public void addAnswer(Answer q, String s) {
+        try {
+            String sql = "insert into AnswerOption values (?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, q.getqId());
+            ps.setString(2, q.getAnswer());
+            ps.setInt(3, q.getKey());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+        }
     }
 
     public void addAnswer(Answer q) {
@@ -195,11 +211,11 @@ public class QuestionDAO {
             String level = "";
             String status = "";
             String content = "";
-            if (qs.getCategory() != null&&!"".equals(qs.getCategory())) {
-                                String temp = qs.getCategory().substring(3);
+            if (qs.getCategory() != null && !"".equals(qs.getCategory())) {
+                String temp = qs.getCategory().substring(3);
                 category = " and category='" + temp + "'";
             }
-            if (qs.getSubcategory() != null&&!"".equals(qs.getSubcategory())) {
+            if (qs.getSubcategory() != null && !"".equals(qs.getSubcategory())) {
                 String temp = qs.getSubcategory().substring(6);
                 subcategory = " and subcategory='" + temp + "'";
             }
@@ -248,11 +264,11 @@ public class QuestionDAO {
             String level = "";
             String status = "";
             String content = "";
-            if (qs.getCategory() != null&&!"".equals(qs.getCategory())&&!qs.getCategory().equals("Any")) {
+            if (qs.getCategory() != null && !"".equals(qs.getCategory()) && !qs.getCategory().equals("Any")) {
                 String temp = qs.getCategory().substring(3);
                 category = " and category='" + temp + "'";
             }
-            if (qs.getSubcategory() != null&&!"".equals(qs.getSubcategory())&&!qs.getSubcategory().equals("Any")) {
+            if (qs.getSubcategory() != null && !"".equals(qs.getSubcategory()) && !qs.getSubcategory().equals("Any")) {
                 String temp = qs.getSubcategory().substring(6);
                 subcategory = " and subcategory='" + temp + "'";
             }
@@ -322,12 +338,8 @@ public class QuestionDAO {
     }
 
     public static void main(String[] args) {
-        QuestionDAO qd = new QuestionDAO();
-        QuestionSearch qs = new QuestionSearch();
-        qs.setCategory("Math");
-        qs.setSubcategory(null);
-        List<Question> list = qd.search(1, 12, qs);
-        System.out.println(list.size());
+
+
     }
 
 }

@@ -42,7 +42,7 @@
                         </select>
                     </div>
                     <div class="col-6">
-                        <input class="form-control here" type="text" value="${fullname}">
+                        <input class="form-control here" type="text" value="${fullname}" name="fullname">
                 </div>
                 <div class="col-1">
                     <input class="btn btn-primary"  type="submit" value="enter" style="height: 40px ;width:60px ">
@@ -73,7 +73,7 @@
                     <td>${x.permission}</td>
                     <td>${x.status}</td>
                     <td>
-                        <a href="AdminControl?userId=${x.userId}&op=view">View</a>
+                        <a href="UserDetail?userId=${x.userId}">View</a>
                         &nbsp;&nbsp;
 
                         <c:if test="${x.status == 'active'}">

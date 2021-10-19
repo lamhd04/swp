@@ -36,9 +36,6 @@ public class UserPaging extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        if("Admin".equals(acc.getPermission())){
         String type = request.getParameter("type");
         if (type == null) {
             type = "userId";
@@ -97,7 +94,7 @@ public class UserPaging extends HttpServlet {
         request.setAttribute("y", y);
         request.setAttribute("x", x);
         request.getRequestDispatcher("ShowAccount.jsp").forward(request, response);
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -64,7 +64,7 @@
                     </select>
                 </div>
                 <div class="col-5">
-                    <input class="form-control here" type="text" value="${search}">
+                    <input class="form-control here" type="text" value="${search}" name="search">
                 </div>
                 <div class="col-1">
                     <input class="btn btn-primary"  type="submit" value="enter" style="height: 40px ;width:60px ">

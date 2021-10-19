@@ -81,6 +81,7 @@ public class AccountDAO {
             ps.setInt(1, userId);
             rs = ps.executeQuery();
             while (rs.next()) {
+                user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUserTitle(rs.getString("userTitle"));
@@ -89,6 +90,7 @@ public class AccountDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
                 user.setPermission(getSetting(rs.getInt("permission")));
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,12 +104,12 @@ public class AccountDAO {
         Account user = new Account();
         try {
             conn = DBConnection.open();
-            String sql = "select * from Account where email = ?";
+            String sql = "select * from Account where email=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
-
+                 user.setStatus(rs.getString("status"));               
                 user.setUserId(rs.getInt("userId"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUserTitle(rs.getString("userTitle"));
@@ -115,7 +117,7 @@ public class AccountDAO {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setPermission(getSetting(rs.getInt("permission")));
+                user.setPermission(getSetting(rs.getInt("permission")));  
                 return user;
             }
         } catch (SQLException ex) {
@@ -163,6 +165,7 @@ public class AccountDAO {
         }
         return role;
     }
+
     public int getSetting(String settingValue) {
         int i = 0;
         try {
@@ -176,10 +179,11 @@ public class AccountDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-           
+
         }
         return i;
     }
+
     public void editAccount(Account user) {
         try {
             conn = DBConnection.open();
@@ -204,7 +208,7 @@ public class AccountDAO {
     public List<Account> search(String type, String name, int pageIndex, int pageSize, String order, String condition) {
         List<Account> list = new ArrayList<Account>();
         try {
-            
+
             String query = "select * from (select ROW_NUMBER() over (order by " + type + " " + order + ") as STT,* from Account \n"
                     + "where fullname like ? " + condition + ") as x where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
@@ -215,8 +219,9 @@ public class AccountDAO {
             ps.setInt(4, pageIndex);
             ps.setInt(5, pageSize);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            while (rs.next()) {              
                 Account user = new Account();
+                user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUserTitle(rs.getString("userTitle"));
@@ -224,11 +229,10 @@ public class AccountDAO {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setPermission(rs.getString("permission"));
-                user.setStatus(rs.getString("status"));
+                user.setPermission(rs.getString("permission"));                
                 list.add(user);
             }
-            for(int i=0;i<list.size();i++){
+            for (int i = 0; i < list.size(); i++) {
                 list.get(i).setPermission(getSetting(Integer.parseInt(list.get(i).getPermission())));
             }
         } catch (SQLException ex) {
@@ -239,13 +243,13 @@ public class AccountDAO {
         return list;
     }
 
-    public int accountCount(String username,String condition) {
+    public int accountCount(String username, String condition) {
         int count = 0;
         try {
-            String query = "select count(*) from dbo.Account where fullname like ? "+condition+"";
+            String query = "select count(*) from dbo.Account where fullname like ? " + condition + "";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%"+username+"%");
+            ps.setString(1, "%" + username + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 count = rs.getInt(1);

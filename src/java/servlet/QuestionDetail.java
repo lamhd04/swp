@@ -37,6 +37,7 @@ public class QuestionDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        doPost(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,11 +53,28 @@ public class QuestionDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-//        int qId = Integer.parseInt(request.getParameter("qId"));
-        int qId = 1;
+        //int qId = Integer.parseInt(request.getParameter("qId"));
+        int qId=1;
         QuestionDAO dao = new QuestionDAO();
         SettingDAO s = new SettingDAO();
         Question q = dao.getQuestion(qId);
+        int i = 0;
+        if ("delete".equals(request.getParameter("op"))) {
+            String answer = request.getParameter("content");
+            dao.deleteAnAnswer(answer, qId);
+        }
+        if ("addanswer".equals(request.getParameter("op"))) {
+            i = Integer.parseInt(request.getParameter("i"));
+            i++;
+            request.setAttribute("i", i);
+        } else if ("removeanswer".equals(request.getParameter("op"))) {
+            i = Integer.parseInt(request.getParameter("i"));
+            i--;
+            request.setAttribute("i", i);
+
+        } else {
+            request.setAttribute("i", 0);
+        }
         request.setAttribute("question", q);
         request.setAttribute("list", q.getList());
         request.setAttribute("condition", q.getCategory());
@@ -79,27 +97,12 @@ public class QuestionDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int qId = Integer.parseInt(request.getParameter("qId"));
+//        int qId = Integer.parseInt(request.getParameter("qId"));
+        int qId = 1;
         QuestionDAO dao = new QuestionDAO();
-        int i = 0;
-        if ("delete".equals(request.getParameter("op"))) {
-            String answer = request.getParameter("content");
-            dao.deleteAnAnswer(answer, qId);
-        }
         Question q = dao.getQuestion(qId);
-        if ("addanswer".equals(request.getParameter("op"))) {
-            i = Integer.parseInt(request.getParameter("i"));
-            i++;
-            request.setAttribute("i", i);
-        } else if ("removeanswer".equals(request.getParameter("op"))) {
-            i = Integer.parseInt(request.getParameter("i"));
-            i--;
-            request.setAttribute("i", i);
-
-        } else {
-            request.setAttribute("i", 0);
-        }
         SettingDAO s = new SettingDAO();
+        int i=Integer.parseInt(request.getParameter("i"));
         String condition = request.getParameter("condition");
         request.setAttribute("condition", condition);
         List<Setting> subcat = s.getSettingByType(condition);
@@ -113,10 +116,9 @@ public class QuestionDetail extends HttpServlet {
     }
 
     private void updateQuestion(HttpServletRequest request, HttpServletResponse response, int size) throws ServletException, IOException {
-        int qId = Integer.parseInt(request.getParameter("qId"));
-        
+        //int qId = Integer.parseInt(request.getParameter("qId"));
         QuestionDAO dao = new QuestionDAO();
-        Question q = dao.getQuestion(qId);
+        Question q = dao.getQuestion(1);
         String subject = request.getParameter("subject");
         String category = request.getParameter("condition");
         String subcategory = request.getParameter("condition2");
@@ -124,7 +126,9 @@ public class QuestionDetail extends HttpServlet {
         String status = request.getParameter("status");
         String quiz = request.getParameter("quiz");
         String content = request.getParameter("content");
-        String media = new String(request.getParameter("media").getBytes("iso-8859-1"), "utf-8");
+        String media="";
+        if(request.getParameter("media")!=null)
+        media = new String(request.getParameter("media").getBytes("iso-8859-1"), "utf-8");
         String explanation = request.getParameter("explanation");
         int check = 0;
         String[] a = request.getParameterValues("answer");
@@ -149,8 +153,8 @@ public class QuestionDetail extends HttpServlet {
             check = 1;
             request.setAttribute("errorexplanation", "Explanation is too long!");
         }
-        if(!media.startsWith("<iframe")){
-            media="<img src=\""+media+"\" alt=\"\" class=\"img-fluid\">";
+        if (!media.startsWith("<iframe")&&!media.equals("")) {
+            media = "<img src=\"" + media + "\" alt=\"\" class=\"img-fluid\">";
         }
         if (check == 0) {
             q.setCategory(category);
@@ -165,7 +169,7 @@ public class QuestionDetail extends HttpServlet {
             q.setList(list);
             dao.editQuestion(q);
         }
-        doGet(request,response);
+        doGet(request, response);
         request.getRequestDispatcher("QuestionDetail.jsp").forward(request, response);
     }
 

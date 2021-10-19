@@ -19,7 +19,7 @@
             <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <!------ Include the above in your HEAD tag ---------->
-            
+
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
@@ -57,13 +57,13 @@
                                         <div class="form-group row">
                                             <label class="col-4 col-form-label">Gender</label> 
                                             <div class="col-8">
-                                                <select class="form-control here"  name="sex">
+                                                <select class="form-control here"  name="userTitle">
                                                     <option value="Mr" >Male</option>
                                                     <option value="Mrs">Female</option>
                                                 </select>
                                             </div>
                                         </div> 
-
+                                        <input type="text" name="status" value="${acc.status}" hidden>
                                         <div class="form-group row">
                                             <label class="col-4 col-form-label">Password</label> 
                                             <div class="col-8">
