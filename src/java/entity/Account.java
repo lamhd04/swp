@@ -10,6 +10,7 @@ package entity;
  * @author User
  */
 public class Account {
+
     private int userId;
     private String fullname;
     private String userTitle;
@@ -19,6 +20,7 @@ public class Account {
     private String address;
     private String permission;
     private String status;
+    private int isVerified;
 
     public Account() {
     }
@@ -33,6 +35,14 @@ public class Account {
         this.address = address;
         this.permission = permission;
         this.status = status;
+    }
+
+    public int getIsVerified() {
+        return isVerified;
+    }
+
+    public void setIsVerified(int isVerified) {
+        this.isVerified = isVerified;
     }
 
     public int getUserId() {
@@ -107,8 +117,4 @@ public class Account {
         this.status = status;
     }
 
-
-    
-
-    
 }

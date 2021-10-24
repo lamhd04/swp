@@ -26,15 +26,15 @@
                 <div class="image-holder">
                     <img src="images/blog/blog_2.jpg" alt="">
                 </div>
-                <form action="SignupServlet">
+                <form id="form" action="SignupServlet" method="POST" onsubmit="return onSubmitForm()">
                     <h3>Registration Form</h3>
                     <div class="form-wrapper">
-                        <input type="text" placeholder="FullName" class="form-control" name ="name">
+                        <input type="text" placeholder="FullName" class="form-control" name ="name" required value="${name}">
 
                     </div>
                     <font color = "red">${Erroremail}</font>
                     <div class="form-wrapper">
-                        <input type="text" placeholder="Email Address" class="form-control" name ="email">
+                        <input type="email" placeholder="Email Address" class="form-control" name ="email" value="${email}" required>
                         <i class="zmdi zmdi-email"></i>
                     </div>
 
@@ -43,27 +43,30 @@
                             <option value="" disabled selected>Gender</option>
                             <option value="Mr" >Male</option>
                             <option value="Mrs">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                         <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
                     </div>
                     <div class="form-wrapper">
-                        <font color = "red">${Errorpassword}</font>
-                        <input type="password" placeholder="Password" class="form-control" name = "password">
+                        <font color = "red" id="message">${Errorpassword}</font>
+                        <input type="password" id="password" placeholder="Password" class="form-control" name = "password" 
+                               onfocusout="notifyMatchPassword()" required>
                         <i class="zmdi zmdi-lock"></i>
                     </div>
                     <div class="form-wrapper">
-                        
-                        <input type="password" placeholder="Confirm Password" class="form-control" name = "repassword">
+
+                        <input type="password" id="repassword" placeholder="Confirm Password" class="form-control" name = "repassword"  
+                               onfocusout="notifyMatchPassword()" required>
                         <i class="zmdi zmdi-lock"></i>
                     </div>
 
                     <div class="form-wrapper">
                         <font color = "red">${Errorphone}</font>
-                        <input type="text" placeholder="Phone Number" class="form-control" name ="phone">
+                        <input type="text" placeholder="Phone Number" class="form-control" name ="phone" required value="${phone}">
                         <i class="zmdi zmdi-email"></i>
                     </div>
                     <div class="form-wrapper">
-                        <input type="text" placeholder=" Address" class="form-control" name ="add">
+                        <input type="text" placeholder=" Address" class="form-control" name ="add" required value = "${add}">
                         <i class="zmdi zmdi-email"></i>
                     </div>
                     <button>Register
@@ -74,7 +77,42 @@
         </div>
 
     </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
+    <script>
+        function notifyMatchPassword() {
+            var isMatching = isMatchPassword();
+            if (!isMatching) {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'password not match';
+            } else {
+                document.getElementById('message').innerHTML = '';
+            }
+        }
+        function isMatchPassword() {
+            var passVal = document.getElementById('password').value;
+            var repassVal = document.getElementById('repassword').value;
+            if (passVal.length !== 0) {
+                if (repassVal.length !== 0) {
+                    if (passVal !== repassVal) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        function isEmpty(tagId) {
+            var value = document.getElementById(tagId).value;
+            if (value.length === 0) {
+                return true;
+            }
+            return false;
+        }
+        function onSubmitForm() {
+            if (isEmpty('password') || isEmpty('repassword') || !isMatchPassword()) {
+                return false;
+            }
+            return true;
+        }
+    </script>
 </html>
 <!---
 <h1>

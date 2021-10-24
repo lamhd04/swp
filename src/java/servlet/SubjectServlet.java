@@ -37,13 +37,14 @@ public class SubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            final int PAGE_SIZE = 2;
+            final int PAGE_SIZE = 5;
             SubjectSearch param = new SubjectSearch();
 
             Integer pageIndex = 1;
             if (request.getParameter("pageIndex") != null) {
                 pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
             }
+            
             param.setPageIndex(pageIndex);
             param.setPageSize(PAGE_SIZE);
             param.setTitle(request.getParameter("title"));
@@ -52,6 +53,7 @@ public class SubjectServlet extends HttpServlet {
             SubjectDAO subjectDAO = new SubjectDAO();
             int totalSubjects = subjectDAO.totalSubjects(param);
             int totalPage = totalSubjects / param.getPageSize();
+            //lay total page
             if (totalSubjects % param.getPageSize() != 0) {
                 totalPage++;
             }
@@ -68,7 +70,6 @@ public class SubjectServlet extends HttpServlet {
             if (param.getStatus() != null) {
                 params.put("status", param.getStatus());
             }
-            request.setAttribute("paran", param);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("url", "subjects" + UrlHelper.getQueryParam(params));
             request.setAttribute("listSubjects", listSubjects);

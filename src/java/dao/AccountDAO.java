@@ -90,7 +90,7 @@ public class AccountDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
                 user.setPermission(getSetting(rs.getInt("permission")));
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,12 +104,12 @@ public class AccountDAO {
         Account user = new Account();
         try {
             conn = DBConnection.open();
-            String sql = "select * from Account where email=?";
+            String sql = "select * from [dbo].[Account] where email=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
-                 user.setStatus(rs.getString("status"));               
+                user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUserTitle(rs.getString("userTitle"));
@@ -117,7 +117,8 @@ public class AccountDAO {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setPermission(getSetting(rs.getInt("permission")));  
+                user.setIsVerified(rs.getInt("verified"));
+                user.setPermission(getSetting(rs.getInt("permission")));
                 return user;
             }
         } catch (SQLException ex) {
@@ -131,21 +132,36 @@ public class AccountDAO {
     public void addAcc(Account account) {
         try {
             conn = DBConnection.open();
-            String sql = "insert into Account values (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO [dbo].[Account]( fullname, userTitle, email, password, phone, address, permission,status, verified)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, account.getUserId());
-            ps.setString(2, account.getFullname());
-            ps.setString(3, account.getUserTitle());
-            ps.setString(4, account.getEmail());
-            ps.setString(5, account.getPassword());
-            ps.setString(6, account.getPhone());
-            ps.setString(7, account.getAddress());
-            ps.setInt(8, 0);
+            int index = 0;
+            ps.setString(++index, account.getFullname());
+            ps.setString(++index, account.getUserTitle());
+            ps.setString(++index, account.getEmail());
+            ps.setString(++index, account.getPassword());
+            ps.setString(++index, account.getPhone());
+            ps.setString(++index, account.getAddress());
+            ps.setInt(++index, 0);
+            ps.setString(++index, account.getStatus());
+            ps.setInt(++index, account.getIsVerified());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             DBConnection.close(conn, stmt);
+        }
+    }
+
+    public void deleteAccount(int id) {
+        try {
+            String sql = "DELETE FROM Account where userId = ?";
+            
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -188,7 +204,7 @@ public class AccountDAO {
         try {
             conn = DBConnection.open();
             int i = getSetting(user.getPermission());
-            String sql = "update Account set fullname = ?, userTitle= ?,phone=?,address=?,permission=?,status=? where userId = ?";
+            String sql = "update Account set fullname = ?, userTitle= ?,phone=?,address=?,permission=?,status=?, verified = ? where userId = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, user.getFullname());
             ps.setString(2, user.getUserTitle());
@@ -196,7 +212,9 @@ public class AccountDAO {
             ps.setString(4, user.getAddress());
             ps.setInt(5, i);
             ps.setString(6, user.getStatus());
-            ps.setInt(7, user.getUserId());
+            ps.setInt(7, user.getIsVerified());
+            ps.setInt(8, user.getUserId());
+            System.out.println(user.getIsVerified());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,7 +237,7 @@ public class AccountDAO {
             ps.setInt(4, pageIndex);
             ps.setInt(5, pageSize);
             rs = ps.executeQuery();
-            while (rs.next()) {              
+            while (rs.next()) {
                 Account user = new Account();
                 user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
@@ -229,7 +247,7 @@ public class AccountDAO {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setPermission(rs.getString("permission"));                
+                user.setPermission(rs.getString("permission"));
                 list.add(user);
             }
             for (int i = 0; i < list.size(); i++) {

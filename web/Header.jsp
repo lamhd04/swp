@@ -65,7 +65,7 @@
                                 <div class="login_info"> 
                                     <c:if test="${sessionScope.acc==null}">
                                         <ul class="d-flex">                                       
-                                            <li class="nav-item"><a href="Signup.jsp" class="nav-link sign-in js-modal-show"><i class="flaticon-user-male-black-shape-with-plus-sign"></i>Sign Up</a></li>
+                                            <li class="nav-item"><a href="${pageContext.request.contextPath}/SignupServlet" class="nav-link sign-in js-modal-show"><i class="flaticon-user-male-black-shape-with-plus-sign"></i>Sign Up</a></li>
                                             <li class="nav-item"><a href="Login.jsp" class="nav-link join_now js-modal-show"><i class="flaticon-padlock"></i>Log In</a></li>
                                         </ul>
                                     </c:if>
@@ -149,13 +149,21 @@
                                         <li class="nav-item"><a href="team.html" class="nav-link">Teachers Page</a></li>
                                         <li class="nav-item"><a href="forgot-password.html" class="nav-link">Forgot Password</a></li>
                                     </ul>                            
-                                </li>     
+                                </li>
+                                <li class="nav-item"><a href="#" class="nav-link">Subject</a>
+                                    <ul class="navbar-nav nav mx-auto">
+                                        <li class="nav-item"><a href="${pageContext.request.contextPath}/subjects" class="nav-link dropdown_icon">Subject List</a>
+                                                
+                                        </li>                                 
+                                      
+                                    </ul>               
                                 
                             </ul>
                         </div>
                     </nav><!-- END NAVBAR -->
                 </div> 
             </div>
+            
 
             
         </header>
