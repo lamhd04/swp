@@ -46,25 +46,27 @@ public class QuestionDetail extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
+     * @param i
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        //int qId = Integer.parseInt(request.getParameter("qId"));
-        int qId=1;
+        int qId = Integer.parseInt(request.getParameter("qId"));
+        //int qId=1;
         QuestionDAO dao = new QuestionDAO();
         SettingDAO s = new SettingDAO();
         Question q = dao.getQuestion(qId);
-        int i = 0;
+        int i=0;
         if ("delete".equals(request.getParameter("op"))) {
             String answer = request.getParameter("content");
             dao.deleteAnAnswer(answer, qId);
         }
         if ("addanswer".equals(request.getParameter("op"))) {
-            i = Integer.parseInt(request.getParameter("i"));
+            if (request.getParameter("i") != null) {
+                i = Integer.parseInt(request.getParameter("i"));
+            }
             i++;
             request.setAttribute("i", i);
         } else if ("removeanswer".equals(request.getParameter("op"))) {
@@ -97,12 +99,12 @@ public class QuestionDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        int qId = Integer.parseInt(request.getParameter("qId"));
-        int qId = 1;
+        int qId = Integer.parseInt(request.getParameter("qId"));
+        //int qId = 1;
         QuestionDAO dao = new QuestionDAO();
         Question q = dao.getQuestion(qId);
         SettingDAO s = new SettingDAO();
-        int i=Integer.parseInt(request.getParameter("i"));
+        int i = Integer.parseInt(request.getParameter("i"));
         String condition = request.getParameter("condition");
         request.setAttribute("condition", condition);
         List<Setting> subcat = s.getSettingByType(condition);
@@ -116,9 +118,9 @@ public class QuestionDetail extends HttpServlet {
     }
 
     private void updateQuestion(HttpServletRequest request, HttpServletResponse response, int size) throws ServletException, IOException {
-        //int qId = Integer.parseInt(request.getParameter("qId"));
+        int qId = Integer.parseInt(request.getParameter("qId"));
         QuestionDAO dao = new QuestionDAO();
-        Question q = dao.getQuestion(1);
+        Question q = dao.getQuestion(qId);
         String subject = request.getParameter("subject");
         String category = request.getParameter("condition");
         String subcategory = request.getParameter("condition2");
@@ -126,18 +128,20 @@ public class QuestionDetail extends HttpServlet {
         String status = request.getParameter("status");
         String quiz = request.getParameter("quiz");
         String content = request.getParameter("content");
-        String media="";
-        if(request.getParameter("media")!=null)
-        media = new String(request.getParameter("media").getBytes("iso-8859-1"), "utf-8");
+        String media = "";
+        if (request.getParameter("media") != null) {
+            media = new String(request.getParameter("media").getBytes("iso-8859-1"), "utf-8");
+        }
         String explanation = request.getParameter("explanation");
         int check = 0;
         String[] a = request.getParameterValues("answer");
         String[] k = request.getParameterValues("key");
         ArrayList<Answer> list = new ArrayList<Answer>();
         for (int i = 0; i < size; i++) {
-            if (a[i].length() > 100) {
+            if (a[i].length() > 100 || a[i].equals("")) {
                 check = 1;
-            }
+                request.setAttribute("erroranswer", "Answer cannot be empty or more than 100 characters");
+            }else
             list.add(new Answer(q.getqId(), a[i], Integer.parseInt(k[i])));
         }
         if (content == null || content.length() > 200) {
@@ -153,7 +157,7 @@ public class QuestionDetail extends HttpServlet {
             check = 1;
             request.setAttribute("errorexplanation", "Explanation is too long!");
         }
-        if (!media.startsWith("<iframe")&&!media.equals("")) {
+        if (!media.startsWith("<iframe") && !media.equals("")) {
             media = "<img src=\"" + media + "\" alt=\"\" class=\"img-fluid\">";
         }
         if (check == 0) {

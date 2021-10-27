@@ -46,7 +46,8 @@ public class QuizControl extends HttpServlet {
                 String level = request.getParameter("level");
                 String type = request.getParameter("type");
                 String passRate=request.getParameter("passRate");
-                qd.addQuiz(title, subject, category, level, type,passRate, id);
+                int quesNum = Integer.parseInt(request.getParameter("quesNum"));
+                qd.addQuiz(title, subject, category, level, type,quesNum,passRate, id);
                 response.sendRedirect("QuizListServlet");
                 break;
             case "view":

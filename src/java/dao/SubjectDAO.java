@@ -173,6 +173,30 @@ public class SubjectDAO {
         }
         return null;
     }
+        public Subject getByTitle(String title) {
+        try {
+            conn = DBConnection.open();
+            String sql = "select * from [Subject] where title = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, title);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Subject(rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("status"),
+                        rs.getBoolean("featured"),
+                        rs.getString("category"),
+                        rs.getString("name"),
+                        rs.getString("description"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SubjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return null;
+    }
 
     public boolean insert(Subject subject) {
         int count = 0;

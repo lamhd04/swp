@@ -37,15 +37,15 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label">Subject</label> 
                                     <div class="col-8">
-                                        <input type="text" placeholder="Subject" name="subject" value="${question.subject}" class="form-control here">
+                                        <input type="text" placeholder="Subject" name="subject" value="${question.subject}" class="form-control here" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-4 col-form-label">Subject</label> 
+                                    <label class="col-4 col-form-label">Category</label> 
                                     <div class="col-8">
                                         <select onchange="getSub()" class="form-control here"  id="1" name="condition" style="height: 40px">
                                             <option value="">Any</option>
-                                            <c:forEach items="${a.getSettingByType('quiz_category')}" var="x">
+                                            <c:forEach items="${a.getSettingByType('category')}" var="x">
                                                 <option  ${condition==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>
                                             </c:forEach> 
                                         </select>
@@ -63,7 +63,7 @@
                                     }
                                 </script>
                                 <div class="form-group row">
-                                    <label class="col-4 col-form-label">Subject</label> 
+                                    <label class="col-4 col-form-label">Subcategory</label> 
                                     <div  class="col-8">
                                         <select class="form-control here" name="condition2" style="height: 40px">
                                             <option value="">Any</option>
@@ -77,26 +77,21 @@
                                     <label class="col-4 col-form-label">Level</label> 
                                     <div class="col-8">
                                         <select class="form-control here"  name="level">
-                                            <option value="Easy" ${currentlevel=='Easy' ? "selected":""} >Easy</option>
-                                            <option value="Medium" ${currentlevel=='Medium' ? "selected":""} >Medium</option>
-                                            <option value="Hard"  ${currentlevel=='Hard' ? "selected":""} >Hard</option>
+                                            <option value="university" ${currentlevel=='university' ? "selected":""} >university</option>
                                         </select>
                                     </div>
                                 </div> 
-
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label">Status</label> 
                                     <div class="col-8">
-                                        <select class="form-control here"  name="status">
-                                            <option value="Unpublished" ${currentstatus=='Unpublished' ? "selected":""} >Unpublished</option>
-                                            <option value="Published" ${currentstatus=='Published' ? "selected":""}>Published</option>
-                                        </select>
+                                        <input name="status" type="radio" value="Unpublished" ${currentstatus=='Unpublished' ? "checked":""} >Unpublished
+                                        <input name="status" type="radio" value="Published" ${currentstatus=='Published' ? "checked":""}>Published
                                     </div>
                                 </div>  
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label">Quiz</label> 
                                     <div class="col-8">
-                                        <input placeholder="Quiz" class="form-control here" type="text" name="quiz" value="${question.quiz}">
+                                        <input placeholder="Quiz" class="form-control here" type="text" name="quiz" value="${question.quiz}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -110,20 +105,25 @@
                                     <label class="col-4 col-form-label">Media</label>                                    
                                     <div class="col-8">
                                         <font color = "red">${errormedia}</font>
-                                        <input placeholder="Enter your media share here" class="form-control here" type="text" name="media">
-                                                <p  class="form-group row">${question.media}<p>
+                                        <textarea class="form-control here" name="media" >${question.media}</textarea>
+                                        <p  class="form-group row">${question.media}<p>
                                     </div>
-                                    
+
                                 </div>
-                                    
+
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label">Explanation</label> 
                                     <font color = "red">${errorexplanation}</font>
                                     <div class="col-8">
-                                        <input placeholder="Explanation" class="form-control here" type="text" name="explanation"value="${question.explanation}">
+                                        <textarea name="explanation" class="form-control here">${question.explanation}</textarea>
                                     </div>
                                 </div>
-
+                                <div class="form-group row">
+                                    <div class="col-4"></div>
+                                    <div class="col-8">
+                                        <font color="red">${erroranswer}</font>
+                                    </div>
+                                </div>
                                 <c:forEach items="${list}" var="x">
                                     <div class="row">
                                         <div class="col-8">
@@ -152,13 +152,13 @@
                                             </select>
                                         </div>
                                         <div class="col-2">
-                                            <a class="btn btn-primary" href="QuestionDetail?op=removeanswer&i=${i}">Delete</a>
+                                            <a class="btn btn-primary" href="QuestionDetail?op=removeanswer&i=${i}&qId=${question.qId}">Delete</a>
                                         </div>
                                     </div>
                                 </c:forEach>
                                 <div class="form-group row">
                                     <div class="offset-4 col-12">
-                                        <a class="btn btn-primary" href="QuestionDetail?op=addanswer&i=${i}">Add</a>
+                                        <a class="btn btn-primary" href="QuestionDetail?op=addanswer&i=${i}&qId=${question.qId}">Add</a>
                                     </div>
                                 </div>
                                 <div class="form-group row">

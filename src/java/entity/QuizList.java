@@ -11,24 +11,26 @@ package entity;
  */
 public class QuizList {
     private int quizId;
-    private String title;
+    private String name;
     private String subject;
     private String category;
     private String level;
     private String type;
+    private String quesNum;
     private String passRate;
     private String expert;
 
     public QuizList() {
     }
 
-    public QuizList(int quizId, String title, String subject, String category, String level, String type, String passRate, String expert) {
+    public QuizList(int quizId, String name, String subject, String category, String level, String type, String quesNum, String passRate, String expert) {
         this.quizId = quizId;
-        this.title = title;
+        this.name = name;
         this.subject = subject;
         this.category = category;
         this.level = level;
         this.type = type;
+        this.quesNum = quesNum;
         this.passRate = passRate;
         this.expert = expert;
     }
@@ -41,12 +43,12 @@ public class QuizList {
         this.quizId = quizId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSubject() {
@@ -81,6 +83,14 @@ public class QuizList {
         this.type = type;
     }
 
+    public String getQuesNum() {
+        return quesNum;
+    }
+
+    public void setQuesNum(String quesNum) {
+        this.quesNum = quesNum;
+    }
+
     public String getPassRate() {
         return passRate;
     }
@@ -99,9 +109,12 @@ public class QuizList {
 
     @Override
     public String toString() {
-        return "QuizList{" + "quizId=" + quizId + ", title=" + title + ", subject=" + subject + ", category=" + category + ", level=" + level + ", type=" + type + ", passRate=" + passRate + ", expert=" + expert + '}';
+        return "QuizList{" + "quizId=" + quizId + ", name=" + name + ", subject=" + subject + ", category=" + category + ", level=" + level + ", type=" + type + ", quesNum=" + quesNum + ", passRate=" + passRate + ", expert=" + expert + '}';
     }
+
+   
     
+   
     
     
    

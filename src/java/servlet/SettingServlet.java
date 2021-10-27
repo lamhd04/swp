@@ -55,7 +55,7 @@ public class SettingServlet extends HttpServlet {
         SettingDAO sd = new SettingDAO();
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("acc");
-        if (acc.getPermission() == "Admin") {
+        if ("Admin".equals(acc.getPermission())) {
             String index = request.getParameter("index");
             if (index == null) {
                 index = "1";

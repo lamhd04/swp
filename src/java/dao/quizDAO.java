@@ -29,19 +29,23 @@ public class quizDAO {
     private ResultSet rs;
     private PreparedStatement ps;
 
-    public List<QuizList> paging(String col, int pageIndex, int pageSize, String order, String subject, String category, String type,String title) {
+    /*select * from (select QuizList.quizId,QuizList.name,Subject.title,QuizList.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname, 
+  ROW_NUMBER() over (order by quizId ) as STT from ((QuizList  join Account on QuizList.expert=Account.userId)join Subject on QuizList.subject=Subject.id)
+  where Subject.title like '%%' and QuizList.category like '%%' and QuizList.[type] like '%%' and QuizList.name like '%%') 
+                       as a where STT between (1-1)*1+1 and 1*2*/
+    public List<QuizList> paging(String col, int pageIndex, int pageSize, String order, String subject, String category, String type, String name) {
         List<QuizList> list = new ArrayList<QuizList>();
         try {
-            String query = "  select * from (select QuizList.quizId,QuizList.title,QuizList.subject,QuizList.category,QuizList.level,QuizList.type,QuizList.passRate,Account.fullname, \n"
-                    + "  ROW_NUMBER() over (order by "+col+" "+order+") as STT from QuizList  join Account on QuizList.expert=Account.userId\n"
-                    + "  where QuizList.[subject] like ? and QuizList.category like ? and QuizList.[type] like ? and QuizList.title like ?) \n"
+            String query = "  select * from (select QuizList.quizId,QuizList.name,Subject.title,QuizList.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname, \n"
+                    + "  ROW_NUMBER() over (order by " + col + " " + order + ") as STT from((QuizList  join Account on QuizList.expert=Account.userId)join Subject on QuizList.subject=Subject.id)\n"
+                    + "  where Subject.title like ? and QuizList.category like ? and QuizList.[type] like ? and QuizList.name like ?) \n"
                     + "  as a where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             ps.setString(1, "%" + subject + "%");
             ps.setString(2, "%" + category + "%");
             ps.setString(3, "%" + type + "%");
-            ps.setString(4, "%" + title + "%");
+            ps.setString(4, "%" + name + "%");
             ps.setInt(5, pageIndex);
             ps.setInt(6, pageSize);
             ps.setInt(7, pageIndex);
@@ -49,11 +53,12 @@ public class quizDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new QuizList(rs.getInt("quizId"),
+                        rs.getString("name"),
                         rs.getString("title"),
-                        rs.getString("subject"),
                         rs.getString("category"),
                         rs.getString("level"),
                         rs.getString("type"),
+                        rs.getString("quesNum"),
                         rs.getString("passRate"),
                         rs.getString("fullname")));
             }
@@ -80,9 +85,10 @@ public class quizDAO {
         }
         return count;
     }
+
     public void addQuiz(String title, String subject,
-            String category, String level,String type,String passRate,int expert) {
-        String sql = "insert into QuizList values (?,?,?,?,?,?,?)";
+            String category, String level, String type, int quesNum, String passRate, int expert) {
+        String sql = "insert into QuizList values (?,?,?,?,?,?,?,?)";
         try {
             conn = DBConnection.open();
 
@@ -92,8 +98,9 @@ public class quizDAO {
             ps.setString(3, category);
             ps.setString(4, level);
             ps.setString(5, type);
-            ps.setString(6, passRate);
-            ps.setInt(7, expert);
+            ps.setInt(6, quesNum);
+            ps.setString(7, passRate);
+            ps.setInt(8, expert);
             ps.executeUpdate();
         } catch (Exception e) {
         } finally {
@@ -101,22 +108,24 @@ public class quizDAO {
         }
 
     }
-    public QuizList getQuizDetail(String quizId){
-        QuizList quiz=new QuizList();
-        try{
+
+    public QuizList getQuizDetail(String quizId) {
+        QuizList quiz = new QuizList();
+        try {
             conn = DBConnection.open();
-            String sql = "select QuizList.quizId,QuizList.title,QuizList.subject,QuizList.category,QuizList.level,QuizList.type,QuizList.passRate,Account.fullname "
-                    + "from QuizList join Account on QuizList.expert=Account.userId where QuizList.quizId=?";
+            String sql = "select QuizList.quizId,QuizList.name,Subject.title,Subject.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname\n"
+                    + " from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.id) where QuizList.quizId=? ";
             ps = conn.prepareStatement(sql);
             ps.setString(1, quizId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 quiz.setQuizId(rs.getInt("quizId"));
-                quiz.setTitle(rs.getString("title"));
-                quiz.setSubject(rs.getString("subject"));
+                quiz.setName(rs.getString("name"));
+                quiz.setSubject(rs.getString("title"));
                 quiz.setCategory(rs.getString("category"));
                 quiz.setLevel(rs.getString("level"));
-                quiz.setType(rs.getString("type"));                
+                quiz.setType(rs.getString("type"));
+                quiz.setQuesNum(rs.getString("quesNum"));
                 quiz.setPassRate(rs.getString("passRate"));
                 quiz.setExpert(rs.getString("fullname"));
             }
@@ -126,9 +135,10 @@ public class quizDAO {
         }
         return quiz;
     }
+
     public void editQuiz(String title, String subject,
-            String category, String level, String type,String passRate,String qid) {
-        String query = "update QuizList set title=?,[subject]=?,category=?,[level]=?,[type]=?,passRate =? where quizId=?";
+            String category, String level, String type, String quesNum, String passRate, String qid) {
+        String query = "update QuizList set title=?,[subject]=?,category=?,[level]=?,[type]=?,quesNum=?,passRate =? where quizId=?";
         try {
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
@@ -137,8 +147,9 @@ public class quizDAO {
             ps.setString(3, category);
             ps.setString(4, level);
             ps.setString(5, type);
-            ps.setString(6, passRate);
-            ps.setString(7, qid);
+            ps.setString(6, quesNum);
+            ps.setString(7, passRate);
+            ps.setString(8, qid);
             ps.executeUpdate();
         } catch (Exception e) {
         } finally {
@@ -146,10 +157,12 @@ public class quizDAO {
         }
 
     }
+
     public static void main(String[] args) {
         quizDAO qd = new quizDAO();
-        QuizList list = qd.getQuizDetail("6");
-        System.out.println(list);
+        List<QuizList> list=qd.paging("quizid", 1, 6, "", "", "", "", "");
+        for (QuizList quizList : list) {
+            System.out.println(quizList);
+        }
     }
 }
-

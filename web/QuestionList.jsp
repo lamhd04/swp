@@ -15,14 +15,15 @@
 
         </head>
         <body>
-        <jsp:include page="Header.jsp" flush="true"></jsp:include>        
+        <jsp:include page="Header.jsp" flush="true"></jsp:include>
+                    
             <form id="myForm" action="QuestionPaging" style="margin-bottom: 20px;margin-top: 10px;" method="POST">
                 <div class="form-group row">
                     <div class="col-3">
                         <select onchange="getSub()" class="form-control here"  id="1" name="condition" style="height: 40px">
-                        <option value="Any">Any</option>
-                        <optgroup label="Category">
-                            <c:forEach items="${a.getSettingByType('quiz_category')}" var="x">
+                            <option value="Any">Any</option>
+                            <optgroup label="Category">
+                            <c:forEach items="${a.getSettingByType('category')}" var="x">
                                 <option  ${temp==x.settingValue ?"selected":""} value="cat${x.settingValue}">${x.settingValue}</option>
                             </c:forEach> 
                         </optgroup>
@@ -32,8 +33,8 @@
                             <option ${temp=='Hard' ?"selected":""} value="levelHard">Hard</option>
                         </optgroup >
                         <optgroup label="Status">
-                            <option ${temp=='Unpublished' ?"selected":""} value="statusUnpublished">Unpublished</option>
-                            <option ${temp=='Published' ?"selected":""} value="statusPublished">Published</option>
+                            <option ${temp=='Unpublished' ?"selected":""} value="statusUnpublished">Unpublish</option>
+                            <option ${temp=='Published' ?"selected":""} value="statusPublished">Publish</option>
                         </optgroup>
                     </select>
                 </div>
@@ -91,14 +92,13 @@
                     <td>${x.level}</td>
                     <td>${x.status}</td>
                     <td>
-                        <a href="QuestionControl?qId=${x.qId}&op=view">View</a>
+                        <a href="QuestionDetail?qId=${x.qId}&op=view">View</a>
                         &nbsp;&nbsp;
-
                         <c:if test="${x.status == 'Published'}">
-                            <a href="QuestionControl?qId=${x.qId}&op=deactivate">Unpublished</a>
+                            <a href="QuestionControl?qId=${x.qId}&op=deactivate">Unpublish</a>
                         </c:if>
                         <c:if test="${x.status == 'Unpublished'}">
-                            <a href="QuestionControl?qId=${x.qId}&op=activate">Published</a>
+                            <a href="QuestionControl?qId=${x.qId}&op=activate">Publish</a>
                         </c:if>
                     </td>
                 </tr>
@@ -122,6 +122,7 @@
                 </li>
             </ul>
         </nav>
+
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

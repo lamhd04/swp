@@ -17,8 +17,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Eduwise - Education HTML5 Template</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        	
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- Goole Font -->
         <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
@@ -71,11 +71,11 @@
                                     </c:if>
                                     <c:if test="${sessionScope.acc!=null}">
                                         <ul class="d-flex">                                       
-                                            
+
                                             <li class="nav-item"><a href="AccountControl?op=logout" class="nav-link join_now js-modal-show"><i class="flaticon-padlock"></i>Log Out</a></li>
                                         </ul>
                                     </c:if>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -89,24 +89,24 @@
                         <a class="navbar-brand" href="index-2.html"><img src="images/logo.png" alt="logo"></a>
                         <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav nav lavalamp ml-auto menu">
-                                <c:if test="${sessionScope.acc.permission == 'Admin'}">
-                                    <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Hello,${sessionScope.acc.fullname}</a>
-                                        <ul class="navbar-nav nav mx-auto">
-                                            <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Profile</a></li>
-                                            <li class="nav-item"><a href="AdminControl?op=settinglist" class="nav-link">SettingList</a></li>
-                                            <li class="nav-item"><a href="AdminControl?op=userlist" class="nav-link">UserList</a></li>
-                                            <li class="nav-item"><a href="AccountControl?op=logout" class="nav-link">Log out</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.acc.permission == 'User'}">
-                                    <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Hello,${sessionScope.acc.fullname}</a>
-                                        <ul class="navbar-nav nav mx-auto">
-                                            <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Profile</a></li>
-                                            <li class="nav-item"><a href="AccountControl?op=logout" class="nav-link">Log out</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${sessionScope.acc.permission == 'Admin'}">
+                                        <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Admin Menu</a>
+                                            <ul class="navbar-nav nav mx-auto">
+                                                <li class="nav-item"><a href="AdminControl?op=settinglist" class="nav-link">Setting List</a></li>
+                                                <li class="nav-item"><a href="AdminControl?op=userlist" class="nav-link">User List</a></li>
+                                            </ul>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${sessionScope.acc.permission == 'Expert'}">
+                                        <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Expert Menu</a>
+                                            <ul class="navbar-nav nav mx-auto">
+                                                <li class="nav-item"><a href="QuestionPaging" class="nav-link">Question List</a></li>
+                                                <li class="nav-item"><a href="QuizListServlet" class="nav-link">Quiz List</a></li>
+                                            </ul>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
                                 <li class="nav-item"><a href="Home.jsp" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
@@ -119,7 +119,7 @@
                                 <li class="nav-item"><a href="blog.html" class="nav-link">Document</a>
                                     <ul class="navbar-nav nav mx-auto">
                                         <li class="nav-item"><a href="DocumentControl" class="nav-link">Document List</a></li>
-                                        
+
                                     </ul> 
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Pages</a>
@@ -150,13 +150,13 @@
                                         <li class="nav-item"><a href="forgot-password.html" class="nav-link">Forgot Password</a></li>
                                     </ul>                            
                                 </li>     
-                                
+
                             </ul>
                         </div>
                     </nav><!-- END NAVBAR -->
                 </div> 
             </div>
 
-            
+
         </header>
 </html>

@@ -76,7 +76,8 @@ public class QuizDetail extends HttpServlet {
         String type=request.getParameter("type");
         String passRate=request.getParameter("passRate");
         String quizId=request.getParameter("quizId");
-        qd.editQuiz(title, subject, category, level, type, passRate, quizId);
+        String quesNum = request.getParameter("quesNum");
+        qd.editQuiz(title, subject, category, level, type,quesNum, passRate, quizId);
         response.sendRedirect("QuizListServlet");
         
        
