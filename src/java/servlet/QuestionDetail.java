@@ -7,6 +7,7 @@ package servlet;
 
 import dao.QuestionDAO;
 import dao.SettingDAO;
+import entity.Account;
 import entity.Answer;
 import entity.Question;
 import entity.Setting;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -53,6 +55,9 @@ public class QuestionDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+                HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        if(acc!=null){
         int qId = Integer.parseInt(request.getParameter("qId"));
         //int qId=1;
         QuestionDAO dao = new QuestionDAO();
@@ -86,6 +91,7 @@ public class QuestionDetail extends HttpServlet {
         request.setAttribute("currentlevel", q.getLevel());
         request.setAttribute("currentstatus", q.getStatus());
         request.getRequestDispatcher("QuestionDetail.jsp").forward(request, response);
+        }
     }
 
     /**

@@ -9,6 +9,7 @@ import dao.QuestionDAO;
 import dao.SettingDAO;
 import dao.SubjectDAO;
 import dao.quizDAO;
+import entity.Account;
 import entity.Answer;
 import entity.Question;
 import entity.QuizList;
@@ -31,6 +32,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -74,14 +76,18 @@ public class UploadFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        if (acc != null) {
             QuestionImport(request, response);
+        }
     }
 
     private void QuestionImport(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException, ServletException {
         Part file = request.getPart("file");
         String quizId = request.getParameter("quizId");
         quizDAO qd = new quizDAO();
-        QuizList qz=qd.getQuizDetail(quizId);
+        QuizList qz = qd.getQuizDetail(quizId);
         SubjectDAO sd = new SubjectDAO();
         String subcategory = request.getParameter("condition2");
         InputStreamReader inputStreamReader = new InputStreamReader(file.getInputStream());
@@ -100,7 +106,7 @@ public class UploadFileServlet extends HttpServlet {
                 q.setqId(dao.getMaxId() + 1);
                 q.setCategory(qz.getCategory());
                 q.setSubcategory(subcategory);
-                q.setSubject(sd.getByTitle(qz.getSubject()).getId()+"");
+                q.setSubject(sd.getByTitle(qz.getSubject()).getId() + "");
                 q.setStatus("Unpublished");
                 line = reader.readLine();
                 ArrayList<Answer> list = new ArrayList<Answer>();
