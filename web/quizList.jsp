@@ -58,7 +58,7 @@
                                     <div class="blog-img">
                                         <a href="QuizControl?quizId=${x.quizId}&op=view" title=""><img src="images/courses/courses_1.jpg" alt="" class="img-fluid"></a>
                                     </div>
-                                    <h3><a href="QuizControl?quizId=${x.quizId}&op=view" title="">${x.title}</a></h3> 
+                                    <h3><a href="QuizControl?quizId=${x.quizId}&op=view" title="">${x.name}</a></h3> 
                                 </div>
                                 <div class="blog_title">
                                     <ul class="post_bloger">
