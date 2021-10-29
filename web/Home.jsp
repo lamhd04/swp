@@ -12,7 +12,9 @@
         <title>JSP Page</title>
     </head>
         <body>
-        <jsp:include page="Header.jsp" flush="true"></jsp:include>
+        <jsp:include page="Header.jsp" flush="true">
+            <jsp:param name="active" value="home"/>
+        </jsp:include>
         <header class="header_inner about_page">
         <div class="intro_wrapper">
                 <div class="container">  

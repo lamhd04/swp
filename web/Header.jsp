@@ -107,9 +107,9 @@
                                         </li>
                                     </c:when>
                                 </c:choose>
-                                <li class="nav-item"><a href="Home.jsp" class="nav-link">Home</a>
+                                <li class="nav-item"><a href="Home.jsp" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
                                 </li>
-                                <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
+                                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                                 <li class="nav-item"><a href="course.html" class="nav-link">Courses</a>
                                     <ul class="navbar-nav nav mx-auto">
                                         <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
