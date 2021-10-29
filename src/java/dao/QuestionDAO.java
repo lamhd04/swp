@@ -46,9 +46,11 @@ public class QuestionDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, qId);
             rs = ps.executeQuery();
+            SubjectDAO dao = new SubjectDAO();
+            quizDAO dao1 = new quizDAO();
             while (rs.next()) {
-                q = new Question(rs.getInt("qId"), rs.getString("subject"), rs.getString("category"), rs.getString("subcategory"),
-                        rs.getString("level"), rs.getString("status"), rs.getString("quiz"), rs.getString("content"), rs.getString("media"), rs.getString("explanation"));
+                q = new Question(rs.getInt("qId"), dao.getById(rs.getInt("subject")).getTitle(), rs.getString("category"), rs.getString("subcategory"),
+                        rs.getString("level"), rs.getString("status"), dao1.getQuizDetail(rs.getInt("quiz") + "").getName(), rs.getString("content"), rs.getString("media"), rs.getString("explanation"));
                 q.setList(a);
             }
         } catch (SQLException ex) {
@@ -120,12 +122,12 @@ public class QuestionDAO {
             String sql = "insert into Question values (?,?,?,?,?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, q.getSubject());
+            ps.setInt(1, Integer.parseInt(q.getSubject()));
             ps.setString(2, q.getCategory());
             ps.setString(3, q.getSubcategory());
             ps.setString(4, q.getLevel());
             ps.setString(5, q.getStatus());
-            ps.setString(6, q.getQuiz());
+            ps.setInt(6, Integer.parseInt(q.getQuiz()));
             ps.setString(7, q.getContent());
             ps.setString(8, q.getMedia());
             ps.setString(9, q.getExplanation());
@@ -241,10 +243,12 @@ public class QuestionDAO {
             ps.setInt(4, pageIndex);
             ps.setInt(5, pageSize);
             rs = ps.executeQuery();
+            SubjectDAO dao = new SubjectDAO();
+            quizDAO dao1 = new quizDAO();
             while (rs.next()) {
                 Question q = null;
-                q = new Question(rs.getInt("qId"), rs.getString("subject"), rs.getString("category"), rs.getString("subcategory"),
-                        rs.getString("level"), rs.getString("status"), rs.getString("quiz"), rs.getString("content"), rs.getString("media"), rs.getString("explanation"));
+                q = new Question(rs.getInt("qId"), dao.getById(rs.getInt("subject")).getTitle(), rs.getString("category"), rs.getString("subcategory"),
+                        rs.getString("level"), rs.getString("status"), dao1.getQuizDetail(rs.getInt("quiz") + "").getName(), rs.getString("content"), rs.getString("media"), rs.getString("explanation"));
                 list.add(q);
             }
         } catch (SQLException ex) {
@@ -338,7 +342,6 @@ public class QuestionDAO {
     }
 
     public static void main(String[] args) {
-
 
     }
 

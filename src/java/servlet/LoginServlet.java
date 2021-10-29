@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         if (a == null || !a.getPassword().equals(password)) {
             request.setAttribute("msg", "Wrong email or password!");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } else if ("inactive".equals(a.getStatus())) {
+        } else if (a.getStatus().equals("inactive")) {
             request.setAttribute("msg", "Your email has not verified yet. Please check your email");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {

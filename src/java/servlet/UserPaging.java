@@ -109,6 +109,9 @@ public class UserPaging extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        if(acc!=null)
         processRequest(request, response);
     }
 
