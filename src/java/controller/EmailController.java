@@ -31,42 +31,42 @@ public class EmailController {
     String d_email = "lamndhe151284@fpt.edu.vn",
             d_password = "lam04122001",
             d_host = "smtp.gmail.com",
-            d_port = "465",
+            d_port = "587",
             m_subject = "Testing";
 
     // Those are the values that have the email information
-    public void Send(Account acc) {
-        String link = "http://localhost:8084/Project/signup/verify?email=" + acc.getEmail() + "&password=" + acc.getPassword()
-                + "&sex=" + acc.getUserTitle() + "&phone=" + acc.getPhone() + "&add=" + acc.getAddress() + "&op=verify" + "&name=" + acc.getFullname();
-        String m_text = "<table style=\"width: 100% !important\" >\n"
-                + "            <tbody>\n"
-                + "                <tr>\n"
-                + "                    <td>\n"
-                + "                        <div>\n"
-                + "                            <h2>Hello, " + acc.getFullname() + "</h2>\n"
-                + "                        </div>\n"
-                + "                        <div>\n"
-                + "                            You recently sign up for a Quizz account. Please click the link below to verify account. \n"
-                + "                        </div>\n"
-                + "                        <br>\n"
-                + "                        <a href=\"" + link + "\">Confirmation</a>\n"
-                + "                        <br>\n"
-                + "\n"
-                + "                        <div>\n"
-                + "                            This link will expire in 1 days after this email was sent.\n"
-                + "                        </div>\n"
-                + "\n"
-                + "                        <br>\n"
-                + "                        <div>\n"
-                + "                            Sincerely,\n"
-                + "                            <h4>The Quizz Practice</h4>\n"
-                + "                        </div>\n"
-                + "                    </td>\n"
-                + "                </tr>\n"
-                + "            </tbody>\n"
-                + "        </table>";
-        send(d_email, d_host, d_port, acc.getEmail(), m_subject, m_text);
-    }
+//    public void Send(Account acc) {
+//        String link = "http://localhost:8084/Project/signup/verify?email=" + acc.getEmail() + "&password=" + acc.getPassword()
+//                + "&sex=" + acc.getUserTitle() + "&phone=" + acc.getPhone() + "&add=" + acc.getAddress() + "&op=verify" + "&name=" + acc.getFullname();
+//        String m_text = "<table style=\"width: 100% !important\" >\n"
+//                + "            <tbody>\n"
+//                + "                <tr>\n"
+//                + "                    <td>\n"
+//                + "                        <div>\n"
+//                + "                            <h2>Hello, " + acc.getFullname() + "</h2>\n"
+//                + "                        </div>\n"
+//                + "                        <div>\n"
+//                + "                            You recently sign up for a Quizz account. Please click the link below to verify account. \n"
+//                + "                        </div>\n"
+//                + "                        <br>\n"
+//                + "                        <a href=\"" + link + "\">Confirmation</a>\n"
+//                + "                        <br>\n"
+//                + "\n"
+//                + "                        <div>\n"
+//                + "                            This link will expire in 1 days after this email was sent.\n"
+//                + "                        </div>\n"
+//                + "\n"
+//                + "                        <br>\n"
+//                + "                        <div>\n"
+//                + "                            Sincerely,\n"
+//                + "                            <h4>The Quizz Practice</h4>\n"
+//                + "                        </div>\n"
+//                + "                    </td>\n"
+//                + "                </tr>\n"
+//                + "            </tbody>\n"
+//                + "        </table>";
+//        send(d_email, d_host, d_port, acc.getEmail(), m_subject, m_text);
+//    }
 
     public void Send(String ToMail, int id, String name) {
         String link = "http://localhost:8084/Project/resetPass.jsp";
@@ -127,6 +127,7 @@ public class EmailController {
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             Transport.send(msg);
         } catch (Exception mex) {
+            mex.printStackTrace();
          return -1;
         }
         return 1;
@@ -142,7 +143,7 @@ public class EmailController {
 
     // Those are the values that have the email information
     public int sendVerifyAccount(Account acc) {
-        String link = "http://localhost:8080/Project/signup/verify?email=" + acc.getEmail();
+        String link = "http://localhost:8080/swp/signup/verify?email=" + acc.getEmail();
         String m_text = "<table style=\"width: 100% !important\" >\n"
                 + "            <tbody>\n"
                 + "                <tr>\n"

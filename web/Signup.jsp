@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>RegistrationForm_v1 by Colorlib</title>
+        <title>Signup</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- MATERIAL DESIGN ICONIC FONT -->
@@ -28,6 +28,7 @@
                 </div>
                 <form id="form" action="SignupServlet" method="POST" onsubmit="return onSubmitForm()">
                     <h3>Registration Form</h3>
+                                        <font color = "red">${common}</font>
                     <div class="form-wrapper">
                         <input type="text" placeholder="FullName" class="form-control" name ="name" required value="${name}">
 

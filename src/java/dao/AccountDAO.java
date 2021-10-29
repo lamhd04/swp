@@ -117,7 +117,6 @@ public class AccountDAO {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setIsVerified(rs.getInt("verified"));
                 user.setPermission(getSetting(rs.getInt("permission")));
                 return user;
             }
@@ -132,8 +131,8 @@ public class AccountDAO {
     public void addAcc(Account account) {
         try {
             conn = DBConnection.open();
-            String sql = "INSERT INTO [dbo].[Account]( fullname, userTitle, email, password, phone, address, permission,status, verified)"
-                    + " VALUES(?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO [dbo].[Account]( fullname, userTitle, email, password, phone, address, permission,status)"
+                    + " VALUES(?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
             int index = 0;
             ps.setString(++index, account.getFullname());
@@ -144,7 +143,6 @@ public class AccountDAO {
             ps.setString(++index, account.getAddress());
             ps.setInt(++index, 0);
             ps.setString(++index, account.getStatus());
-            ps.setInt(++index, account.getIsVerified());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -204,7 +202,7 @@ public class AccountDAO {
         try {
             conn = DBConnection.open();
             int i = getSetting(user.getPermission());
-            String sql = "update Account set fullname = ?, userTitle= ?,phone=?,address=?,permission=?,status=?, verified = ? where userId = ?";
+            String sql = "update Account set fullname = ?, userTitle= ?,phone=?,address=?,permission=?,status=? where userId = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, user.getFullname());
             ps.setString(2, user.getUserTitle());
@@ -212,9 +210,7 @@ public class AccountDAO {
             ps.setString(4, user.getAddress());
             ps.setInt(5, i);
             ps.setString(6, user.getStatus());
-            ps.setInt(7, user.getIsVerified());
-            ps.setInt(8, user.getUserId());
-            System.out.println(user.getIsVerified());
+            ps.setInt(7, user.getUserId());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

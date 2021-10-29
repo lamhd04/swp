@@ -32,9 +32,13 @@ public class VerifyAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
+        if(email == null){
+            response.sendRedirect("../Login.jsp");
+            return;
+        }
         AccountDAO accountDao = new AccountDAO();
         Account account = accountDao.getAccount(email);
-        account.setIsVerified(1);
+        account.setStatus("active");
         accountDao.editAccount(account);
         request.setAttribute("verifyed", "OK");
         request.getRequestDispatcher("../VerifySuccess.jsp").forward(request, response);

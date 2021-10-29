@@ -115,6 +115,7 @@ public class SignupServlet extends HttpServlet {
             //gửi mail để verify account
             int isSuccess = emailController.sendVerifyAccount(acc);
             if (isSuccess == -1) {
+                  request.setAttribute("common", "Signup fail ! Please contact to System admin for more detail");
                 check = 1;
             }
 
