@@ -163,7 +163,7 @@ public class PostDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getString(7),
+                        rs.getInt(7),
                         rs.getString(8),
                         rs.getDate(9),
                         rs.getString(10)));
@@ -191,7 +191,7 @@ public class PostDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getString(7),
+                        rs.getInt(7),
                         rs.getString(8),
                         rs.getDate(9),
                         rs.getString(10)));
@@ -218,7 +218,7 @@ public class PostDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getString(7),
+                        rs.getInt(7),
                         rs.getString(8),
                         rs.getDate(9),
                         rs.getString(10)));

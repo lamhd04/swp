@@ -73,12 +73,20 @@
         <servlet-class>servlet.QuizListServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PracticeDetail</servlet-name>
+        <servlet-class>servlet.PracticeDetail</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>QuizDetail</servlet-name>
         <servlet-class>servlet.QuizDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>VerifyPassordController</servlet-name>
         <servlet-class>servlet.VerifyAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getSubcategory</servlet-name>
+        <servlet-class>servlet.getSubcategory</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -87,6 +95,10 @@
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <url-pattern>/changepass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PracticeDetail</servlet-name>
+        <url-pattern>/PracticeDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
@@ -223,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>VerifyPassordController</servlet-name>
         <url-pattern>/signup/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getSubcategory</servlet-name>
+        <url-pattern>/getSubcategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
