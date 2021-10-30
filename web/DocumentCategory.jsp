@@ -15,7 +15,7 @@
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="Ecology Theme">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eduwise - Education HTML5 Template</title>
+        <title>Category</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <!-- Goole Font -->
         <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700" rel="stylesheet">
@@ -76,7 +76,7 @@
 
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                         <c:forEach var="list" items="${listDocCate}">
-                            <a href="DocumentDetailsServlet?id=${list.id}" >
+                            <a href="DocumentDetailsServlet?id=${list.docID}" >
                                 <div class="single_blog" style="margin-bottom: 30px; border: 1px solid #FFC321 ">
                                     <div class="blog_banner">
                                         <img src="${list.thumbnail}" alt="" class="img-fluid">
@@ -84,8 +84,8 @@
                                     <div class="post_content_wrapper">
                                         <div class="post_date"><p>Posted On : ${list.update_date}</p></div>
                                         <h3>${list.title}</h3>
-                                        <p>${list.brief_info}</p>
-
+                                        <p>${list.brief}</p>
+                                        <p style="color: green">${list.doc_cate}</p>
                                         <ul class="post_bloger">
                                             <li>BY : ${list.author}</li>                                        
                                         </ul>               
@@ -141,7 +141,7 @@
                                     <h3 class="title">All Categories</h3>
                                 </div>
                                 <div class="archives-items">
-                                    <c:forEach items="${a.getSettingByType('doccategory')}" var="cate">
+                                    <c:forEach items="${a.getSettingByType('doc_cate')}" var="cate">
                                         <ul class="list-unstyled">
                                             <li><a href="DocumentCategoryServlet?dcid=${cate.settingValue}" title="">${cate.settingValue} </a></li>
                                         </ul>
