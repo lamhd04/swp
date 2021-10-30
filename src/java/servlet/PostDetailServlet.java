@@ -38,7 +38,7 @@ public class PostDetailServlet extends HttpServlet {
         PostDAO pdao = new PostDAO();
         Post pt = pdao.getPostbyID(postid);
         List<PostCategory> listPC = pdao.getPostCategories();
-        request.setAttribute("post", pt);
+        request.setAttribute("pt", pt);
         request.setAttribute("listPC", listPC);
         request.getRequestDispatcher("PostDetail.jsp").forward(request, response);
     }
