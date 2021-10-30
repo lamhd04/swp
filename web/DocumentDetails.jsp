@@ -50,6 +50,15 @@
         <![endif]-->
         <jsp:useBean id="a" class="dao.SettingDAO" scope="request"></jsp:useBean>
         </head>
+        <style>
+        .download{margin-top: 15px;padding:12px 15px!important;color:#white!important;font-weight:700;font-size:14px;font-family:Open Sans,sans-serif;text-align:center;text-transform:uppercase;border-radius:3px;opacity:.95;border:0;letter-spacing:2px;transition:all .2s ease-out}
+
+.download {background-color:#3498DB;}
+.download a {color:white}
+.download:hover {background-color:#49DDAA;color:#fff;border-bottom:2px solid #1ABC84;opacity:1;}
+
+.download:before {;display:inline-block;font-weight:normal;vertical-align:top;margin-right:10px;width:16px;height:16px;line-height:24px;font-family:fontawesome;transition:all 0.5s ease-out;}
+        </style>
         <body>
         <jsp:include page="Header.jsp" flush="true"></jsp:include>
             <header class="header_inner blog_page">
@@ -89,10 +98,18 @@
                                         <span  class="date_event">${listDet.update_date}</span>
                                         <span>Author: ${listDet.author}</span>
                                     </div>
+                                    <p style="color: green">Category : ${listDet.doc_cate}</p>
                                     <div class="blog_post_content">
-                                        <p>${listDet.post_content} </p>
+                                        <p>${listDet.content} </p>
                                     </div>
                                 </div>
+                                <c:if test="${sessionScope.acc!=null}">
+                                    <button class="download">
+                                        <a href="pdf/${listDet.title}.pdf"                                       
+                                           download="${listDet.title}.pdf"> Download here
+                                        </a>
+                                    </button>  
+                                </c:if>
                             </div>   
                         </div>            
                     </c:forEach>
@@ -123,7 +140,7 @@
                                     <h3 class="title">Our Featured Document</h3>
                                 </div>
                                 <c:forEach items="${sessionScope.top5}" var="top">
-                                    <a href="DocumentDetailsServlet?id=${top.id}">
+                                    <a href="DocumentDetailsServlet?id=${top.docID}">
                                         <div class="single-post">
                                             <div class="recent_img">
                                                 <img src="${top.thumbnail}"  class="img-fluid">
@@ -144,7 +161,7 @@
                                     <h3 class="title">All Categories</h3>
                                 </div>
                                 <div class="archives-items">
-                                    <c:forEach items="${a.getSettingByType('doccategory')}" var="cate">
+                                    <c:forEach items="${a.getSettingByType('doc_cate')}" var="cate">
                                         <ul class="list-unstyled">
                                             <li><a href="DocumentCategoryServlet?dcid=${cate.settingValue}" title="">${cate.settingValue} </a></li>
                                         </ul>
@@ -157,7 +174,7 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
             </div> 
         </section><!-- End Event Details Wrapper -->
@@ -192,6 +209,6 @@
         ============================================================== -->
         <script type="text/javascript" src="js/demo.js"></script>
         <jsp:include page="Footer.jsp" flush="true"></jsp:include>
-        </body>
+    </body>
 
-    </html>
+</html>
