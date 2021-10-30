@@ -81,45 +81,31 @@
 
                         <div class="pagination_blog">
                             <ul>
-                                <li><a href="#">1</a></li>
-                                <li class="current"><a href="#">2</a></li>
-                                <li><a href="#" class=""><i class='flaticon-right-arrow'></i></a></li>
+                                <c:forEach begin="1" end="${endP}" var="i">
+                                    <li class="current"><a href="post?index=${i}">${i}</a></li>  
+                                    </c:forEach>
                             </ul>
                         </div>            
-                    </div> <!-- End Blog Right Side--->
+                    </div> 
+
 
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 blog_wrapper_right ">
                         <div class="blog-right-items">
                             <div class="become_a_teacher widget_single">
-                                <div class="form-full-box">
+                                <div class="form-full-box">                               
                                     <div class="form_title">
-                                        <h2>Become A Member</h2>
-                                        <p>Get Instant access to <span>5000+ </span>Video courses </p>
+                                        <h2>Search</h2>
                                     </div>
-                                    <form>
+                                    <form action="postsearch" method="post">
                                         <div class="register-form">
                                             <div class="row">
                                                 <div class="col-12 col-xs-12 col-md-12">
-                                                    <div class="form-group">
-                                                        <label><i class="fas fa-user"></i></label>
-                                                        <input class="form-control" name="name" placeholder="Write Your Name" required="" type="text">
+                                                    <div class="form-group">                                      
+                                                        <input class="form-control" name="searchTitle" placeholder="Write title you want to search..." required ="" type="text">
                                                     </div>
-                                                </div>
-
-                                                <div class="col-12 col-xs-12 col-md-12">
-                                                    <div class="form-group">
-                                                        <label><i class="flaticon-email"></i></label>
-                                                        <input class="form-control" name="email" placeholder="Write Your E-mail" required="" type="email">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-xs-12 col-md-12">
-                                                    <div class="form-group massage_text">
-                                                        <label><i class="flaticon-copywriting"></i></label>
-                                                        <textarea class="form-control" placeholder="Write Something Here" required="" ></textarea>
-                                                    </div>
-                                                </div>
+                                                </div>                                           
                                                 <div class="col-12 col-xs-12 col-md-12 register-btn-box">
-                                                    <button class="register-btn" type="submit">Send Now</button>
+                                                    <button class="register-btn" type="submit">Search</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,46 +113,23 @@
                                 </div>
                             </div>
 
-
                             <div class="recent_post_wrapper widget_single">
                                 <div class="items-title">
                                     <h3 class="title">Recent Post</h3>
                                 </div>
-                                <div class="single-post">
-                                    <div class="recent_img">
-                                        <a href="#" title=""><img src="images/blog/side_blog_1.jpg" alt="" class="img-fluid"></a>
-                                    </div>
-                                    <div class="post_title">
-                                        <a href="#" title="">Research of Learn training process</a>
-                                        <div class="post-date">
-                                            <span>May 29, 2019</span>
+                                <c:forEach items="${sessionScope.listRecent}" var="o">
+                                    <div class="single-post">
+                                        <div class="recent_img">
+                                            <a href="postdetail?postid=${o.postid}" title=""><img src="${o.thumbnail}" alt="" class="img-fluid"></a>
+                                        </div>
+                                        <div class="post_title">
+                                            <a href="postdetail?postid=${o.postid}" title="">${o.title}</a>
+                                            <div class="post-date">
+                                                <span>${o.time}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="single-post">
-                                    <div class="recent_img">
-                                        <a href="#" title=""><img src="images/blog/side_blog_2.jpg" alt="" class="img-fluid"></a>
-                                    </div>
-                                    <div class="post_title">
-                                        <a href="#" title="">How to Become Master In CSS within a Week.</a>
-                                        <div class="post-date">
-                                            <span>25 August, 2019</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="single-post">
-                                    <div class="recent_img">
-                                        <a href="#" title=""><img src="images/blog/side_blog_3.jpg" alt="" class="img-fluid"></a>
-                                    </div>
-                                    <div class="post_title">
-                                        <a href="#" title="">Students work together to solve a problem.</a>
-                                        <div class="post-date">
-                                            <span>25 August, 2019</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
 
                             <div class="archives widget_single">
