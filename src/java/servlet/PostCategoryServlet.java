@@ -41,6 +41,7 @@ public class PostCategoryServlet extends HttpServlet {
         request.setAttribute("listP", list);
         request.setAttribute("listPC", listPC);
         request.getRequestDispatcher("PostList.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
