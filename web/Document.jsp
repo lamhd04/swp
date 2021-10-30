@@ -18,7 +18,7 @@
             <meta name="keywords" content="HTML,CSS,XML,JavaScript">
             <meta name="author" content="Ecology Theme">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Eduwise - Education HTML5 Template</title>
+            <title>Document List</title>
             <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
             <!-- Goole Font -->
             <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700" rel="stylesheet">
@@ -73,7 +73,7 @@
                         <c:choose>
                             <c:when test="${!list.isEmpty()}">
                                 <c:forEach var="x" items="${list}">
-                                    <a href="DocumentDetailsServlet?id=${x.id}" >
+                                    <a href="DocumentDetailsServlet?id=${x.docID}" >
                                         <div class="single_blog" style="margin-bottom: 30px; border: 1px solid #FFC321 ">
                                             <div class="blog_banner">
                                                 <img src="${x.thumbnail}" alt="" class="img-fluid">
@@ -81,7 +81,8 @@
                                             <div class="post_content_wrapper">
                                                 <div class="post_date"><p>Posted On : ${x.update_date}</p></div>
                                                 <h3>${x.title}</h3>
-                                                <p>${x.brief_info}</p>
+                                                <p style="color: green">${x.doc_cate}</p>
+                                                <p>${x.brief}</p>
                                                 <ul class="post_bloger">
                                                     <li>BY : ${x.author}</li>                                        
                                                 </ul>               
@@ -124,7 +125,7 @@
                                     <h3 class="title">Featured Post</h3>
                                 </div>
                                 <c:forEach items="${sessionScope.top5}" var="top">
-                                    <a href="DocumentDetailsServlet?id=${top.id}">
+                                    <a href="DocumentDetailsServlet?id=${top.docID}">
                                         <div class="single-post">
                                             <div class="recent_img">
                                                 <img src="${top.thumbnail}"  class="img-fluid">
@@ -145,7 +146,7 @@
                                     <h3 class="title">All Categories</h3>
                                 </div>
                                 <div class="archives-items">
-                                    <c:forEach items="${a.getSettingByType('doccategory')}" var="cate">
+                                    <c:forEach items="${a.getSettingByType('doc_cate')}" var="cate">
                                         <ul class="list-unstyled">
                                             <li><a href="DocumentCategoryServlet?dcid=${cate.settingValue}" title="">${cate.settingValue} </a></li>
                                         </ul>
@@ -178,7 +179,7 @@
 
             <div class="pagination_blog">
                 <ul>
-                    <li><a href="${ur}1&docsearch=${docsearch}"></a><i class='flaticon-left-arrow-1'></i></li>
+                    <li><a href="${url}1&docsearch=${docsearch}"></a><i class='flaticon-left-arrow-1'></i></li>
                             <c:forEach begin="${x}" end="${y}" var="i">
                         <li><a href="${url}${i}&docsearch=${docsearch}">${i}</a></li>
                         </c:forEach> 
