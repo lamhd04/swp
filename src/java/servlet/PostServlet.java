@@ -34,11 +34,24 @@ public class PostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
         PostDAO pdao = new PostDAO();
-        List<Post> listP = pdao.getPosts();
+        int count = pdao.getTotalPost();
+        int endPage = count / 4;
+        if (count % 4 != 0) {
+            endPage++;
+        }
+        request.setAttribute("endP", endPage);
+        List<Post> list = pdao.pagingPost(index);
         List<PostCategory> listPC = pdao.getPostCategories();
-        request.setAttribute("listP", listP);
+        request.setAttribute("listP", list);
         request.setAttribute("listPC", listPC);
+        session.setAttribute("listRecent", pdao.getRecentPost());
         request.getRequestDispatcher("PostList.jsp").forward(request, response);
     }
 
