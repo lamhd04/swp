@@ -47,6 +47,11 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+            header .edu_nav nav .navbar li a{
+                padding: 28px
+            }
+        </style>
     </head>
     <body>
         <header class="header_inner about_page">
@@ -83,9 +88,9 @@
                 </div>
             </div>
 
-            <div class="edu_nav">
-                <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light bg-faded">
+            <div class="edu_nav" style="max-height: 100px;border-bottom: 2px solid">
+                <div class="container-fluid" style="max-height: 80px">
+                    <nav class="navbar navbar-expand-md navbar-light bg-faded" style="max-height: 80px">
                         <a class="navbar-brand" href="index-2.html"><img src="images/logo.png" alt="logo"></a>
                         <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav nav lavalamp ml-auto menu">
@@ -107,9 +112,9 @@
                                         </li>
                                     </c:when>
                                 </c:choose>
-                                <li class="nav-item"><a href="Home.jsp" class="nav-link">Home</a>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
                                 </li>
-                                <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
+                                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                                 <li class="nav-item"><a href="course.html" class="nav-link">Courses</a>
                                     <ul class="navbar-nav nav mx-auto">
                                         <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
@@ -124,7 +129,7 @@
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Pages</a>
                                     <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Courses</a>
+                                        <li class="nav-item"><a href="${pageContext.request.contextPath}/practice-list" class="nav-link dropdown_icon">Practice List</a>
                                             <ul class="navbar-nav nav mx-auto">
                                                 <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
                                                 <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
@@ -156,7 +161,6 @@
                     </nav><!-- END NAVBAR -->
                 </div> 
             </div>
-
 
         </header>
 </html>

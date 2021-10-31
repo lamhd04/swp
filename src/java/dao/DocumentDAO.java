@@ -176,13 +176,13 @@ public class DocumentDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Document doc = new Document();
-                doc.setId(rs.getInt("id"));
+                doc.setId(rs.getInt("docID"));
                 doc.setThumbnail(rs.getString("thumbnail"));
                 doc.setTitle(rs.getString("title"));
                 doc.setAuthor(rs.getString("author"));
                 doc.setUpdate_date(rs.getDate("update_date"));
-                doc.setBrief_info(rs.getString("brief_info"));
-                doc.setPost_content(rs.getString("post_content"));
+                 doc.setBrief_info(rs.getString("brief"));
+                doc.setPost_content(rs.getString("content"));
                 list.add(doc);
             }
         } catch (SQLException ex) {

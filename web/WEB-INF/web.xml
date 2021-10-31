@@ -80,6 +80,14 @@
         <servlet-name>VerifyPassordController</servlet-name>
         <servlet-class>servlet.VerifyAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>servlet.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PracticeListServlet</servlet-name>
+        <servlet-class>servlet.PracticeListServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -223,6 +231,14 @@
     <servlet-mapping>
         <servlet-name>VerifyPassordController</servlet-name>
         <url-pattern>/signup/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PracticeListServlet</servlet-name>
+        <url-pattern>/practice-list</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

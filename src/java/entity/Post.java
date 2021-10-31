@@ -21,13 +21,14 @@ public class Post {
     public int cId;
     public int author;
     public String featured;
-    public Date time;
+    public String time;
     public String status;
+    public String postCate;
 
     public Post() {
     }
 
-    public Post(int postid, String thumbnail, String title, String brief, String detail, int cId, int author, String featured, Date time, String status) {
+    public Post(int postid, String thumbnail, String title, String brief, String detail, int cId, int author, String featured, String time, String status) {
         this.postid = postid;
         this.thumbnail = thumbnail;
         this.title = title;
@@ -38,6 +39,14 @@ public class Post {
         this.featured = featured;
         this.time = time;
         this.status = status;
+    }
+
+    public String getPostCate() {
+        return postCate;
+    }
+
+    public void setPostCate(String postCate) {
+        this.postCate = postCate;
     }
 
     public int getPostid() {
@@ -112,12 +121,11 @@ public class Post {
         this.status = status;
     }
 
-
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

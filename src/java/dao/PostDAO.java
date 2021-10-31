@@ -43,10 +43,10 @@ public class PostDAO {
                 pt.setTitle(rs.getString("title"));
                 pt.setBrief(rs.getString("brief"));
                 pt.setDetail(rs.getString("detail"));
-                pt.setcId(rs.getInt("cid"));
+                pt.setPostCate(rs.getString("post_cate"));
                 pt.setAuthor(rs.getInt("author"));
                 pt.setFeatured(rs.getString("featured"));
-                pt.setTime(rs.getDate("time"));
+                pt.setTime(rs.getString("time"));
                 pt.setStatus(rs.getString("status"));
                 list.add(pt);
             }
@@ -94,7 +94,7 @@ public class PostDAO {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getDate(9),
+                        rs.getString(9),
                         rs.getString(10)));
             }
         } catch (SQLException ex) {
@@ -121,7 +121,7 @@ public class PostDAO {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getDate(9),
+                        rs.getString(9),
                         rs.getString(10));
             }
         } catch (SQLException ex) {

@@ -5,22 +5,22 @@
  */
 package servlet;
 
-import dao.AccountDAO;
-import entity.Account;
+import dao.TestDAO;
+import entity.TestDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HaGau
+ * @author admin
  */
-public class LoginServlet extends HttpServlet {
-
+public class PracticeListServlet extends HttpServlet {
+ private static final int PAGE_SIZE = 7;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,22 +32,35 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        String email = (String) request.getParameter("email");
-        String password = request.getParameter("password");
-        AccountDAO dao = new AccountDAO();
-        Account a = dao.getAccount(email);
-        if (a == null || !a.getPassword().equals(password)) {
-            request.setAttribute("msg", "Wrong email or password!");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } else if (a.getStatus().equals("inactive")) {
-            request.setAttribute("msg", "Your email has not verified yet. Please check your email");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } else {
-            session.setAttribute("acc", a);
-            response.sendRedirect("home");
+        int index = 1;
+
+        String indexParam = request.getParameter("index");
+        try {
+            index = Integer.parseInt(indexParam);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
+        TestDAO testDao = new TestDAO();
+        List<TestDTO> data = testDao.getTest(index, PAGE_SIZE, 1);
+        int countData = testDao.count();
+        int totalPage = calculateTotalPage(countData);
+        System.out.println(totalPage);
+        request.setAttribute("index", index);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("data", data);
+        request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
+    }
+    private int calculateTotalPage(int total) {
+        int totalPage = 0;
+        if (total == 0) {
+            return 0;
+        }
+        totalPage = total / PAGE_SIZE;
+
+        if (totalPage * PAGE_SIZE != total) {
+            totalPage += 1;
+        }
+        return totalPage;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +75,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("Login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

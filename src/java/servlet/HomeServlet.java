@@ -5,21 +5,25 @@
  */
 package servlet;
 
-import dao.AccountDAO;
-import entity.Account;
+import dao.DocumentDAO;
+import dao.ExamDAO;
+import dao.PostDAO;
+import entity.Document;
+import entity.Exam;
+import entity.Post;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HaGau
+ * @author admin
  */
-public class LoginServlet extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,22 +36,15 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        String email = (String) request.getParameter("email");
-        String password = request.getParameter("password");
-        AccountDAO dao = new AccountDAO();
-        Account a = dao.getAccount(email);
-        if (a == null || !a.getPassword().equals(password)) {
-            request.setAttribute("msg", "Wrong email or password!");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } else if (a.getStatus().equals("inactive")) {
-            request.setAttribute("msg", "Your email has not verified yet. Please check your email");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } else {
-            session.setAttribute("acc", a);
-            response.sendRedirect("home");
-        }
+        PostDAO dao = new PostDAO();
+        List<Post> post = dao.getPosts().subList(2, 4);
+        request.setAttribute("post", post);
+        List<Exam> exam = new ExamDAO().getExam(5);
+        request.setAttribute("exam", exam);
+
+        List<Document> document = new DocumentDAO().getTopDocument().subList(0, 3);
+        request.setAttribute("document", document);
+        request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +59,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("Login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
