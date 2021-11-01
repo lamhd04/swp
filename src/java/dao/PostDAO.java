@@ -165,7 +165,7 @@ public class PostDAO {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getDate(9),
+                        rs.getString(9),
                         rs.getString(10)));
             }
         }  catch (SQLException ex) {
@@ -193,7 +193,7 @@ public class PostDAO {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getDate(9),
+                        rs.getString(9),
                         rs.getString(10)));
             }
         }  catch (SQLException ex) {
@@ -220,7 +220,7 @@ public class PostDAO {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getDate(9),
+                        rs.getString(9),
                         rs.getString(10)));
             }
         }  catch (SQLException ex) {
