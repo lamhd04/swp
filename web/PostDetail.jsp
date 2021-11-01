@@ -6,8 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
         <!-- Required meta tags -->
         <meta charset="UTF-8">
@@ -15,6 +15,7 @@
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="Ecology Theme">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eduwise - Education HTML5 Template</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <!-- Goole Font -->
         <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700" rel="stylesheet">
@@ -52,141 +53,103 @@
                     <div class="row">        
                         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="blog_post">
-                                <h3>${post.title}</h3>
-                                <div class="post_by d-flex">
-                                    <span>By - <a href="#" title="" class="bloger_name">${post.author}</a></span>
-                                    <span>Posted On : ${post.time}</span>                        
-                                    <span><a href="#" title="">${detail.cId}</a></span>
+                                <h3>${pt.title}</h3>
+                            <div class="post_by d-flex">
+                                <span>By - <a href="#" title="" class="bloger_name">${pt.author}</a></span>
+                                <span>Posted On : ${pt.time}</span>                        
+                                <span><a href="#" title="">${pt.cId}</a></span>
+                            </div>
+                            <img src="${pt.thumbnail}" alt="" class="img-fluid">
+                            <div class="postpage_content_wrapper">
+                                <div class="social_wrapper">
+                                    <h4>Share</h4>
+                                    <ul class="social_items list-unstyled">
+                                        <li><a href="#"><i class="fab fa-facebook-f fb_icon"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter tw_icon"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in link_icon"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-instagram in_icon"></i></a></li>
+                                    </ul>
                                 </div>
-                                <img src="${post.thumbnail}" alt="" class="img-fluid">
-                                <div class="postpage_content_wrapper">
-                                    <div class="social_wrapper">
-                                        <h4>Share</h4>
-                                        <ul class="social_items list-unstyled">
-                                            <li><a href="#"><i class="fab fa-facebook-f fb_icon"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter tw_icon"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-linkedin-in link_icon"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-instagram in_icon"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="blog_post_content">
-                                    </div>
+                                <div class="blog_post_content">
+                                    <p>${pt.detail}</p>                                                                                                                  
                                 </div>
-                            </div>               
-                        </div> <!-- End Blog Left Side-->
+                            </div>
+                        </div>               
+                    </div> <!-- End Blog Left Side-->
 
-                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 blog_wrapper_right ">
-                            <div class="blog-right-items">
-
-                                <div class="become_a_teacher widget_single">
-                                    <div class="form-full-box">
-                                        <div class="form_title">
-                                            <h2>Become A Membar</h2>
-                                            <p>Get Instant access to <span>5000+ </span>Video courses </p>
-                                        </div>
-                                        <form>
-                                            <div class="register-form">
-                                                <div class="row">
-                                                    <div class="col-12 col-xs-12 col-md-12">
-                                                        <div class="form-group">
-                                                            <label><i class="fas fa-user"></i></label>
-                                                            <input class="form-control" name="name" placeholder="Write Your Name" required="" type="text">
-                                                        </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 blog_wrapper_right ">
+                        <div class="blog-right-items">
+                            <div class="become_a_teacher widget_single">
+                                <div class="form-full-box">                               
+                                    <div class="form_title">
+                                        <h2>Search</h2>
+                                    </div>
+                                    <form action="postsearch" method="post">
+                                        <div class="register-form">
+                                            <div class="row">
+                                                <div class="col-12 col-xs-12 col-md-12">
+                                                    <div class="form-group">                                      
+                                                        <input class="form-control" name="searchTitle" placeholder="Write title you want to search..." required ="" type="text">
                                                     </div>
-
-                                                    <div class="col-12 col-xs-12 col-md-12">
-                                                        <div class="form-group">
-                                                            <label><i class="flaticon-email"></i></label>
-                                                            <input class="form-control" name="email" placeholder="Write Your E-mail" required="" type="email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-xs-12 col-md-12">
-                                                        <div class="form-group massage_text">
-                                                            <label><i class="flaticon-copywriting"></i></label>
-                                                            <textarea class="form-control"  placeholder="Write Something Here" required="" ></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-xs-12 col-md-12 register-btn-box">
-                                                        <button class="register-btn" type="submit">Send Now</button>
-                                                    </div>
+                                                </div>                                           
+                                                <div class="col-12 col-xs-12 col-md-12 register-btn-box">
+                                                    <button class="register-btn" type="submit">Search</button>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                    </form>
                                 </div>
-
-
-                                <div class="recent_post_wrapper widget_single">
-                                    <div class="items-title">
-                                        <h3 class="title">Recent Post</h3>
-                                    </div>
-                                    <div class="single-post">
-                                        <div class="recent_img">
-                                            <a href="#" title=""><img src="images/blog/side_blog_1.jpg" alt="" class="img-fluid"></a>
-                                        </div>
-                                        <div class="post_title">
-                                            <a href="#" title="">How to Become Master In CSS within qa Week.</a>
-                                            <div class="post-date">
-                                                <span>May 29, 2019</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="single-post">
-                                        <div class="recent_img">
-                                            <a href="#" title=""><img src="images/blog/side_blog_2.jpg" alt="" class="img-fluid"></a>
-                                        </div>
-                                        <div class="post_title">
-                                            <a href="#" title="">Connecting volunteers & nonprofitsz worldwide.</a>
-                                            <div class="post-date">
-                                                <span>25 August, 2019</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="single-post">
-                                        <div class="recent_img">
-                                            <a href="#" title=""><img src="images/blog/side_blog_3.jpg" alt="" class="img-fluid"></a>
-                                        </div>
-                                        <div class="post_title">
-                                            <a href="#" title="">Research of Learn training process</a>
-                                            <div class="post-date">
-                                                <span>25 August, 2019</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="recent_post_wrapper widget_single">
+                                <div class="items-title">
+                                    <h3 class="title">Recent Post</h3>
                                 </div>
-
-                                <div class="archives widget_single">
-                                    <div class="items-title">
-                                        <h3 class="title">All Categories</h3>
+                                <c:forEach items="${sessionScope.listRecent}" var="o">
+                                    <div class="single-post">
+                                        <div class="recent_img">
+                                            <a href="postdetail?postid=${o.postid}" title=""><img src="${o.thumbnail}" alt="" class="img-fluid"></a>
+                                        </div>
+                                        <div class="post_title">
+                                            <a href="postdetail?postid=${o.postid}" title="">${o.title}</a>
+                                            <div class="post-date">
+                                                <span>${o.time}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <c:forEach items="${listPC}" var="o">
+                                </c:forEach>
+                            </div>
+
+                            <div class="archives widget_single">
+                                <div class="items-title">
+                                    <h3 class="title">All Categories</h3>
+                                </div>
+                                <c:forEach items="${listPC}" var="o">
                                     <div class="archives-items">
                                         <ul class="list-unstyled">
                                             <li><a href="postcategory?cid=${o.cid}" title="">${o.cname}</a></li>
                                         </ul>
                                     </div>
                                 </c:forEach>
-                            </div>                                
+                            </div>  
                         </div>
-                    </div> 
-                    </section>
+                    </div><!-- ./ End  Blog Right Side-->
+                </div>
+            </div> 
+        </section>
+        <jsp:include page="Footer.jsp" flush="true"></jsp:include>
+        <!-- JavaScript -->
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>     
+        <script src="js/owl.carousel.min.js"></script>   
+        <script src="js/slick.min.js"></script>   
+        <script src="js/jquery.meanmenu.min.js"></script>    
+        <script src="js/wow.min.js"></script> 
+        <!-- Counter Script -->
+        <script src="js/waypoints.min.js"></script>
+        <script src="js/jquery.counterup.min.js"></script>
+        <script src="js/custom.js"></script> 
+    </body>
 
-                    <jsp:include page="Footer.jsp" flush="true"></jsp:include>
-                    <!-- JavaScript -->
-                    <script src="js/jquery-3.2.1.min.js"></script>
-                    <script src="js/popper.min.js"></script>
-                    <script src="js/bootstrap.min.js"></script>
-                    <script src="js/jquery.magnific-popup.min.js"></script>     
-                    <script src="js/owl.carousel.min.js"></script>   
-                    <script src="js/slick.min.js"></script>   
-                    <script src="js/jquery.meanmenu.min.js"></script>    
-                    <script src="js/wow.min.js"></script> 
-                    <!-- Counter Script -->
-                    <script src="js/waypoints.min.js"></script>
-                    <script src="js/jquery.counterup.min.js"></script>
-                    <script src="js/custom.js"></script> 
-                    </body>
-
-                    </html>
+</html>

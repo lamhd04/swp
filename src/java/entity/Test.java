@@ -5,32 +5,58 @@
  */
 package entity;
 
+
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDateTime;
+
 /**
  *
- * @author Admin
+ * @author User
  */
 public class Test {
-    private int id;
-    private int subjectId;
+    private int testId;
+    private String subject;
     private String type;
-    private String startTime;
+    private String starttime;
     private int duration;
-    private float result;
+    private double result;
+    private String tag;
+    private int ques_numb;
+    private String ques_cate;
+    private String ques_subcate;
 
-    public int getId() {
-        return id;
+    public Test() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Test(int testId, String subject, String type, String starttime, int duration, double result, String tag, int ques_numb, String ques_cate, String ques_subcate) {
+        this.testId = testId;
+        this.subject = subject;
+        this.type = type;
+        this.starttime = starttime;
+        this.duration = duration;
+        this.result = result;
+        this.tag = tag;
+        this.ques_numb = ques_numb;
+        this.ques_cate = ques_cate;
+        this.ques_subcate = ques_subcate;
     }
 
-    public int getSubjectId() {
-        return subjectId;
+    public int getTestId() {
+        return testId;
     }
 
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+
     }
 
     public String getType() {
@@ -41,12 +67,12 @@ public class Test {
         this.type = type;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getStarttime() {
+        return starttime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
     }
 
     public int getDuration() {
@@ -57,13 +83,44 @@ public class Test {
         this.duration = duration;
     }
 
-    public float getResult() {
+    public double getResult() {
         return result;
     }
 
-    public void setResult(float result) {
+    public void setResult(double result) {
         this.result = result;
     }
-    
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public int getQues_numb() {
+        return ques_numb;
+    }
+
+    public void setQues_numb(int ques_numb) {
+        this.ques_numb = ques_numb;
+    }
+
+    public String getQues_cate() {
+        return ques_cate;
+    }
+
+    public void setQues_cate(String ques_cate) {
+        this.ques_cate = ques_cate;
+    }
+
+    public String getQues_subcate() {
+        return ques_subcate;
+    }
+
+    public void setQues_subcate(String ques_subcate) {
+        this.ques_subcate = ques_subcate;
+    }
     
 }

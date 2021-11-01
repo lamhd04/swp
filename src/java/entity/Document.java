@@ -12,34 +12,37 @@ import java.sql.Date;
  * @author hungl
  */
 public class Document {
-    private int id;
+    private int docID;
     private String thumbnail;
     private String title;
     private String author;
     private Date update_date;
-    private String brief_info;
-    private String post_content;
+    private String brief;
+    private String content;
+    private String doc_cate;
 
     public Document() {
     }
 
-    public Document(int id, String thumbnail, String title, String author, Date update_date, String brief_info, String post_content) {
-        this.id = id;
+    public Document(int docID, String thumbnail, String title, String author, Date update_date, String brief, String content, String doc_cate) {
+        this.docID = docID;
         this.thumbnail = thumbnail;
         this.title = title;
         this.author = author;
         this.update_date = update_date;
-        this.brief_info = brief_info;
-        this.post_content = post_content;
+        this.brief = brief;
+        this.content = content;
+        this.doc_cate = doc_cate;
     }
     
+    
 
-    public int getId() {
-        return id;
+    public int getDocID() {
+        return docID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDocID(int docID) {
+        this.docID = docID;
     }
 
     public String getThumbnail() {
@@ -74,26 +77,32 @@ public class Document {
         this.update_date = update_date;
     }
 
-    public String getBrief_info() {
-        return brief_info;
+    public String getBrief() {
+        return brief;
     }
 
-    public void setBrief_info(String brief_info) {
-        this.brief_info = brief_info;
+    public void setBrief(String brief) {
+        this.brief = brief;
     }
 
-    public String getPost_content() {
-        return post_content;
+    public String getContent() {
+        return content;
     }
 
-    public void setPost_content(String post_content) {
-        this.post_content = post_content;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return "Document{" + "id=" + id + ", thumbnail=" + thumbnail + ", title=" + title + ", author=" + author + ", update_date=" + update_date + ", brief_info=" + brief_info + ", post_content=" + post_content + '}';
+    public String getDoc_cate() {
+        return doc_cate;
     }
+
+    public void setDoc_cate(String doc_cate) {
+        this.doc_cate = doc_cate;
+    }
+
+    
+    
 
     
     

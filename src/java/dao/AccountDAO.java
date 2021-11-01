@@ -150,7 +150,29 @@ public class AccountDAO {
             DBConnection.close(conn, stmt);
         }
     }
-
+public boolean getAuthorization(String url, Account acc) {
+        List<Integer> i=new ArrayList<Integer>();
+        try {
+            conn = DBConnection.open();
+            String sql = "Select * from [Authorization] where url = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, url);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                i.add(rs.getInt("permission"));
+            }
+            if (i.contains(getSetting(acc.getPermission()))) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return false;
+    }
     public String getSetting(int permission) {
         String role = null;
         try {

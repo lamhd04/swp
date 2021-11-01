@@ -43,13 +43,13 @@ public class DocumentDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Document doc = new Document();
-                doc.setId(rs.getInt("id"));
+                doc.setDocID(rs.getInt("docID"));
                 doc.setThumbnail(rs.getString("thumbnail"));
                 doc.setTitle(rs.getString("title"));
                 doc.setAuthor(rs.getString("author"));
                 doc.setUpdate_date(rs.getDate("update_date"));
-                doc.setBrief_info(rs.getString("brief_info"));
-                doc.setPost_content(rs.getString("post_content"));
+                doc.setBrief(rs.getString("brief"));
+                doc.setContent(rs.getString("post"));
                 list.add(doc);
             }
         } catch (SQLException ex) {
@@ -64,18 +64,19 @@ public class DocumentDAO {
         List<Document> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "select * from Document where doccategory = '" + category+"'";            
+            String sql = "select * from Document where doc_cate = '" + category+"'";            
             ps = conn.prepareStatement(sql);            
             rs = ps.executeQuery();
             while (rs.next()) {
                 Document doc = new Document();
-                doc.setId(rs.getInt("id"));
+                doc.setDocID(rs.getInt("docID"));
                 doc.setThumbnail(rs.getString("thumbnail"));
                 doc.setTitle(rs.getString("title"));
                 doc.setAuthor(rs.getString("author"));
                 doc.setUpdate_date(rs.getDate("update_date"));
-                doc.setBrief_info(rs.getString("brief_info"));
-                doc.setPost_content(rs.getString("post_content"));
+                doc.setBrief(rs.getString("brief"));
+                doc.setContent(rs.getString("content"));
+                doc.setDoc_cate(rs.getString("doc_cate"));
                 list.add(doc);
             }
         } catch (SQLException ex) {
@@ -90,18 +91,19 @@ public class DocumentDAO {
         List<Document> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "Select * from Document where id = " + id;
+            String sql = "Select * from Document where docID = " + id;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Document doc = new Document();
-                doc.setId(rs.getInt("id"));
+                doc.setDocID(rs.getInt("docID"));
                 doc.setThumbnail(rs.getString("thumbnail"));
                 doc.setTitle(rs.getString("title"));
                 doc.setAuthor(rs.getString("author"));
                 doc.setUpdate_date(rs.getDate("update_date"));
-                doc.setBrief_info(rs.getString("brief_info"));
-                doc.setPost_content(rs.getString("post_content"));
+                doc.setBrief(rs.getString("brief"));
+                doc.setContent(rs.getString("content"));
+                doc.setDoc_cate(rs.getString("doc_cate"));
                 list.add(doc);
             }
         } catch (SQLException ex) {
@@ -128,13 +130,14 @@ public class DocumentDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Document doc = new Document();
-                doc.setId(rs.getInt("id"));
+                doc.setDocID(rs.getInt("docID"));
                 doc.setThumbnail(rs.getString("thumbnail"));
                 doc.setTitle(rs.getString("title"));
                 doc.setAuthor(rs.getString("author"));
                 doc.setUpdate_date(rs.getDate("update_date"));
-                doc.setBrief_info(rs.getString("brief_info"));
-                doc.setPost_content(rs.getString("post_content"));
+                doc.setBrief(rs.getString("brief"));
+                doc.setContent(rs.getString("content"));
+                doc.setDoc_cate(rs.getString("doc_cate"));
                 list.add(doc);
             }
         } catch (SQLException ex) {
@@ -176,13 +179,13 @@ public class DocumentDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Document doc = new Document();
-                doc.setId(rs.getInt("docID"));
+                doc.setDocID(rs.getInt("docID"));
                 doc.setThumbnail(rs.getString("thumbnail"));
                 doc.setTitle(rs.getString("title"));
                 doc.setAuthor(rs.getString("author"));
                 doc.setUpdate_date(rs.getDate("update_date"));
-                 doc.setBrief_info(rs.getString("brief"));
-                doc.setPost_content(rs.getString("content"));
+                doc.setBrief(rs.getString("brief"));
+                doc.setContent(rs.getString("content"));
                 list.add(doc);
             }
         } catch (SQLException ex) {
@@ -202,3 +205,4 @@ public class DocumentDAO {
         }
     
 }
+
