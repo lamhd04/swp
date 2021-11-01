@@ -85,17 +85,16 @@
         <servlet-class>servlet.VerifyAccountController</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>servlet.HomeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PracticeListServlet</servlet-name>
         <servlet-class>servlet.PracticeListServlet</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>getSubcategory</servlet-name>
         <servlet-class>servlet.getSubcategory</servlet-class>
->>>>>>> cb17f0627b17feeb8cb8204a109d1b4a54a771dc
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -246,17 +245,16 @@
         <url-pattern>/signup/verify</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PracticeListServlet</servlet-name>
         <url-pattern>/practice-list</url-pattern>
-=======
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>getSubcategory</servlet-name>
         <url-pattern>/getSubcategory</url-pattern>
->>>>>>> cb17f0627b17feeb8cb8204a109d1b4a54a771dc
     </servlet-mapping>
     <session-config>
         <session-timeout>

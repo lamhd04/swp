@@ -26,7 +26,6 @@
             }
         </style>
     </head>
-<<<<<<< HEAD
     <body>
         <jsp:include page="Header.jsp" flush="true">
             <jsp:param name="active" value="home"/>
@@ -48,23 +47,6 @@
                         <c:forEach var="item" items="${document}">
                             <div class="item ${count == 1 ? 'active' :''}">
                                 <img src="${item.getThumbnail()}" alt="Los Angeles" style="width:100%;height: 300px;">
-=======
-        <body>
-        <jsp:include page="Header.jsp" flush="true">
-            <jsp:param name="active" value="home"/>
-        </jsp:include>
-        <header class="header_inner about_page">
-        <div class="intro_wrapper">
-                <div class="container">  
-                    <div class="row">        
-                        <div class="col-sm-12 col-md-8 col-lg-8">
-                            <div class="intro_text">
-                                <h1>About Page</h1>
-                                <div class="pages_links">
-                                    <a href="Home.jsp" title="">Home</a>
-                                    <a href="#" title="" class="active">About Page</a>
-                                </div>
->>>>>>> cb17f0627b17feeb8cb8204a109d1b4a54a771dc
                             </div>
                             <c:set var="count" value="${count + 1}"/>
                         </c:forEach>

@@ -112,11 +112,7 @@
                                         </li>
                                     </c:when>
                                 </c:choose>
-<<<<<<< HEAD
                                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
-=======
-                                <li class="nav-item"><a href="Home.jsp" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
->>>>>>> cb17f0627b17feeb8cb8204a109d1b4a54a771dc
                                 </li>
                                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                                 <li class="nav-item"><a href="course.html" class="nav-link">Courses</a>
