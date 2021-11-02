@@ -65,6 +65,14 @@
         <servlet-class>servlet.DocumentCategoryServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SliderServlet</servlet-name>
+        <servlet-class>servlet.SliderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SliderListServlet</servlet-name>
+        <servlet-class>servlet.SliderListServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>QuizControl</servlet-name>
         <servlet-class>controller.QuizControl</servlet-class>
     </servlet>
@@ -203,6 +211,14 @@
     <servlet-mapping>
         <servlet-name>DocumentCategoryServlet</servlet-name>
         <url-pattern>/DocumentCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderServlet</servlet-name>
+        <url-pattern>/SliderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderListServlet</servlet-name>
+        <url-pattern>/SliderListServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>SubjectServlet</servlet-name>
