@@ -113,7 +113,13 @@ public class PracticeDetail extends HttpServlet {
             check=1;
             ques_numb=0;
             request.setAttribute("errorques_numb", "question number cannot be more than "+q);
-        }         
+        }  
+        float pass_rate = Float.parseFloat(request.getParameter("pass_rate"));
+        if(pass_rate>100||pass_rate<0){
+            check=1;
+            request.setAttribute("errorpass_rate", "pass rate must between 0 and 100");
+            pass_rate=0;
+        }
         Test t = new Test();
         t.setDuration(duration);
         t.setQues_cate(ques_cate);
@@ -122,9 +128,12 @@ public class PracticeDetail extends HttpServlet {
         t.setStarttime(get);
         t.setType(type);
         t.setSubject(subject);
+        t.setPass_rate(pass_rate);
         TestDAO dao = new TestDAO();
         if (check == 0) {
             dao.addTest(t);
+        }else{
+            request.setAttribute("erroradd", "Practice was not added please check the add practice pop up for more information");
         }
         request.setAttribute("testadd", t);
         request.getRequestDispatcher("PracticeDetail.jsp").forward(request, response);

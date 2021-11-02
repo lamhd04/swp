@@ -41,7 +41,7 @@ public class TestDAO {
             while (rs.next()) {
                 t.setTestId(rs.getInt("testId"));
                 t.setDuration(rs.getInt("duration"));
-                t.setStarttime(rs.getDate(sql).toString());
+                t.setStarttime(rs.getString("starttime"));
                 t.setType(rs.getString("type"));
                 t.setSubject(dao.getById(rs.getInt("subId")).getTitle());
                 t.setTag(rs.getString("tag"));
@@ -58,9 +58,9 @@ public class TestDAO {
         return t;
     }
 
-    public void addTest(Test t) {
+public void addTest(Test t) {
         try {
-            String sql = "insert into Test values (?,?,'" + t.getStarttime() + "',?,?,?,?,?,?)";
+            String sql = "insert into Test values (?,?,'"+t.getStarttime()+"',?,?,?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(t.getSubject()));
@@ -71,6 +71,7 @@ public class TestDAO {
             ps.setInt(6, t.getQues_numb());
             ps.setString(7, t.getQues_cate());
             ps.setString(8, t.getQues_subcate());
+            ps.setFloat(9, t.getPass_rate());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

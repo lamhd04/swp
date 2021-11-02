@@ -22,6 +22,7 @@
                     <div class="row">        
                         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="blog_post">
+                                <font color = "red">${erroradd}</font>
                                 <div class="post_by d-flex">
                                     <span>Type:${test.type}</span>                        
                             </div>
@@ -106,8 +107,13 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Question Subcategory</label>
-                                            <select class="form-control here" id="sub" name="ques_subcate" style="height: 40px">
+                                            <select onclick="getSub()" class="form-control here" id="sub" name="ques_subcate" style="height: 40px">
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Pass Rate</label><br>
+                                            <font color = "red">${errorpass_rate}</font>
+                                            <input value="${testadd.pass_rate}" name="pass_rate" type="number" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

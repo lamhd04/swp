@@ -5,7 +5,6 @@
  */
 package entity;
 
-
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
@@ -25,11 +24,12 @@ public class Test {
     private int ques_numb;
     private String ques_cate;
     private String ques_subcate;
+    private float pass_rate;
 
     public Test() {
     }
 
-    public Test(int testId, String subject, String type, String starttime, int duration, double result, String tag, int ques_numb, String ques_cate, String ques_subcate) {
+    public Test(int testId, String subject, String type, String starttime, int duration, double result, String tag, int ques_numb, String ques_cate, String ques_subcate, float pass_rate) {
         this.testId = testId;
         this.subject = subject;
         this.type = type;
@@ -40,6 +40,7 @@ public class Test {
         this.ques_numb = ques_numb;
         this.ques_cate = ques_cate;
         this.ques_subcate = ques_subcate;
+        this.pass_rate = pass_rate;
     }
 
     public int getTestId() {
@@ -56,7 +57,6 @@ public class Test {
 
     public void setSubject(String subject) {
         this.subject = subject;
-
     }
 
     public String getType() {
@@ -122,5 +122,18 @@ public class Test {
     public void setQues_subcate(String ques_subcate) {
         this.ques_subcate = ques_subcate;
     }
+
+    public float getPass_rate() {
+        return pass_rate;
+    }
+
+    public void setPass_rate(float pass_rate) {
+        this.pass_rate = pass_rate;
+    }
+
+    
+    
+
+    
     
 }

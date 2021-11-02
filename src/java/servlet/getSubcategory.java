@@ -34,6 +34,7 @@ public class getSubcategory extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String cate = request.getParameter("category");
+        
         SettingDAO s = new SettingDAO();
         List<Setting> subcat = s.getSettingByType(cate);
         try (PrintWriter out = response.getWriter()) {
