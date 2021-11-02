@@ -115,12 +115,9 @@
                                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
                                 </li>
                                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                                <li class="nav-item"><a href="course.html" class="nav-link">Courses</a>
-                                    <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
-                                        <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
-                                    </ul> 
-                                </li>
+                                <c:if test="${sessionScope.acc!=null}">
+                                <li class="nav-item"><a href="SliderListServlet" class="nav-link">Slider</a></li>
+                                    </c:if>
                                 <li class="nav-item"><a href="blog.html" class="nav-link">Document</a>
                                     <ul class="navbar-nav nav mx-auto">
                                         <li class="nav-item"><a href="DocumentControl" class="nav-link">Document List</a></li>
