@@ -110,22 +110,22 @@ public class Authorization implements Filter {
 
         Throwable problem = null;
         try {
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpSession session = req.getSession();
-            Account acc = (Account) session.getAttribute("acc");
-            String url = req.getServletPath();
-            if (url.contains(".jsp")||url.equals("/login")||url.equals("Home.jsp")||url.contains(".woff")
-                    ||url.contains(".ttf")) {
+//            HttpServletRequest req = (HttpServletRequest) request;
+//            HttpSession session = req.getSession();
+//            Account acc = (Account) session.getAttribute("acc");
+//            String url = req.getServletPath();
+//            if (url.contains(".jsp")||url.equals("/login")||url.equals("Home.jsp")||url.contains(".woff")
+//                    ||url.contains(".ttf")) {
                 chain.doFilter(request, response);
-            }
-            else if (acc != null) {
-                AccountDAO ad = new AccountDAO();
-                if (ad.getAuthorization(url, acc)) {
-                    chain.doFilter(request, response);
-                }
-            } else {
-                request.getRequestDispatcher("Home.jsp").forward(request, response);
-            }
+//            }
+//            else if (acc != null) {
+//                AccountDAO ad = new AccountDAO();
+//                if (ad.getAuthorization(url, acc)) {
+//                    chain.doFilter(request, response);
+//                }
+//            } else {
+//                request.getRequestDispatcher("Home.jsp").forward(request, response);
+//            }
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then

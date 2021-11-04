@@ -6,6 +6,8 @@
 package servlet;
 
 import dao.SettingDAO;
+import dao.quizDAO;
+import entity.QuizList;
 import entity.Setting;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-public class getSubcategory extends HttpServlet {
+public class getQuizBySubject extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +35,13 @@ public class getSubcategory extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String cate = request.getParameter("category");
+        String cate = request.getParameter("subject");
         
-        SettingDAO s = new SettingDAO();
-        List<Setting> subcat = s.getSettingByType(cate);
+        quizDAO s = new quizDAO();
+        List<QuizList> subcat = s.getAll(Integer.parseInt(cate));
         try (PrintWriter out = response.getWriter()) {
-            for (Setting setting : subcat) {
-                out.println("<option  ${test.ques_subcate=="+ setting.getSettingValue() + "?\"selected\":\"\"} value=\"" + setting.getSettingValue() + "\">" + setting.getSettingValue() + "</option>");
+            for (QuizList setting : subcat) {
+                out.println("<option value=\"" + setting.getQuizId() + "\">" + setting.getName() + "</option>");
             }
 
         }

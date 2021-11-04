@@ -41,9 +41,9 @@ public class TestDAO {
             while (rs.next()) {
                 t.setTestId(rs.getInt("testId"));
                 t.setDuration(rs.getInt("duration"));
-                t.setStarttime(rs.getString("starttime"));
+                t.setStarttime(rs.getString("start_time"));
                 t.setType(rs.getString("type"));
-                t.setSubject(dao.getById(rs.getInt("subId")).getTitle());
+                t.setSubject(dao.getById(rs.getInt("subID")).getTitle());
                 t.setTag(rs.getString("tag"));
                 t.setQues_numb(rs.getInt("ques_numb"));
                 t.setQues_cate(rs.getString("ques_cate"));
@@ -71,7 +71,6 @@ public void addTest(Test t) {
             ps.setInt(6, t.getQues_numb());
             ps.setString(7, t.getQues_cate());
             ps.setString(8, t.getQues_subcate());
-            ps.setFloat(9, t.getPass_rate());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,7 +107,6 @@ public void addTest(Test t) {
                 test.setStartTime(rs.getString("start_time"));
                 test.setDuration(rs.getInt("duration"));
                 test.setResult(rs.getFloat("result"));
-                test.setPassRate(rs.getFloat("pass_rate"));
                 result.add(test);
             }
         } catch (SQLException ex) {

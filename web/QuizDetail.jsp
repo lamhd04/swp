@@ -47,7 +47,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><span>Import Question</span></a>
+                        
                     </div>
 
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 blog_wrapper_right ">
@@ -153,37 +153,7 @@
                 </div>
             </div>
         </section>
-        <div id="addEmployeeModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">						
-                        <h4 class="modal-title">Question Import</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <a class="modal-body" href="import.txt" download="QuestionImportTemplate.txt">Download Template</a>
-                    <form action="UploadFileServlet" style="margin-bottom: 20px;margin-top: 10px;" enctype="multipart/form-data" method="POST">
-                        <div class="modal-body row">
-                            <div class="col-10">
-                                <select class="form-control here" name="condition2" style="height: 40px">
-                                    <c:forEach items="${a.getSettingByType(quizDetail.category)}" var="x">
-                                        <option  ${temp==x.settingValue ?"selected":""} value="${x.settingValue}">${x.settingValue}</option>
-                                    </c:forEach> 
-                                </select>                              
-                            </div>
-                            <input type="text" name="quizId" value="${b.getQuizDetail(quizDetail.quizId).quizId}" hidden>
-                        </div>
-                        <div class="modal-body row">
-                            <div class="col-9">
-                                <input type="file" name="file">
-                            </div>         
-                        </div>
-                        <center>
-                            <input class="btn btn-primary"  type="submit" value="enter" style="height: 40px ;width:66px; text-align: center;">
-                        </center>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
 
 
         <script src="js/manager.js" type="text/javascript"></script>

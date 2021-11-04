@@ -108,6 +108,30 @@ public class SubjectDAO {
         }
         return list;
     }
+        public List<Subject> getByStatus() {
+        List<Subject> list = new ArrayList<>();
+        try {
+            conn = DBConnection.open();
+            String sql = "select * from Subject where status='published'";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();           
+            while (rs.next()) {
+                list.add(new Subject(rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("status"),
+                        rs.getBoolean("featured"),
+                        rs.getString("category"),
+                        rs.getString("name"),
+                        rs.getString("description")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SubjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
 
     public int totalSubjects(SubjectSearch param) {
 

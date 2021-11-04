@@ -53,7 +53,7 @@
                             <td>${item.getStartTime()}</td>
                             <td>${item.getDuration()}</td>
                             <td>${item.getResult()} | <span style="color: ${item.getResult() >= item.getPassRate() ? 'green' : 'red'}"> ${item.getResult() >= item.getPassRate() ? 'pass' :'fail'}</span></td>
-                            <td><a href="#">view detail</a></td>
+                            <td><a href="PracticeDetail?testId=${item.getId()}">view detail</a></td>
                         </tr> 
                     </c:forEach>                  
                 </tbody>

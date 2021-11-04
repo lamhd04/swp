@@ -58,10 +58,13 @@ public class PracticeDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //int testId=Integer.parseInt(request.getParameter("testId"));
-        int testId = 1;
+        String id = request.getParameter("testId");
+        int testId=0;
+        if(id!=null)
+        testId=Integer.parseInt(id);
+        //int testId = 1;
         TestDAO dao = new TestDAO();
-        Test t = dao.getTest(testId);
+        Test t = dao.getTest(testId);     
         if (!"add".equals(request.getParameter("op"))) {
             request.setAttribute("test", t);
         }
@@ -80,25 +83,9 @@ public class PracticeDetail extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int check = 0;
-        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd k:m");
         String type = request.getParameter("type");
         String subject = request.getParameter("subject");
-        LocalDateTime starttime = null;
-        String get = request.getParameter("starttime");
-        get=get.replaceAll("T", " ");
-        starttime = LocalDateTime.parse(get, formatter);
-        if (starttime.isBefore(java.time.LocalDateTime.now())) {
-            check = 1;
-            get="";
-            request.setAttribute("errorstarttime", "Start time must be after current time");
-        }
-        int duration = Integer.parseInt(request.getParameter("duration"));
-        if (duration / 60 > 12) {
-            duration=0;
-            check = 1;
-            request.setAttribute("errorduration", "exam cannot be that long");
-        }
+        String starttime = java.time.LocalDateTime.now().toString();
         String ques_cate = request.getParameter("ques_cate");
         String ques_subcate = request.getParameter("ques_subcate");
         int ques_numb = Integer.parseInt(request.getParameter("ques_numb"));
@@ -114,28 +101,22 @@ public class PracticeDetail extends HttpServlet {
             ques_numb=0;
             request.setAttribute("errorques_numb", "question number cannot be more than "+q);
         }  
-        float pass_rate = Float.parseFloat(request.getParameter("pass_rate"));
-        if(pass_rate>100||pass_rate<0){
-            check=1;
-            request.setAttribute("errorpass_rate", "pass rate must between 0 and 100");
-            pass_rate=0;
-        }
+        int duration = ques_numb*2;
         Test t = new Test();
         t.setDuration(duration);
         t.setQues_cate(ques_cate);
         t.setQues_numb(ques_numb);
         t.setQues_subcate(ques_subcate);
-        t.setStarttime(get);
+        t.setStarttime(starttime);
         t.setType(type);
         t.setSubject(subject);
-        t.setPass_rate(pass_rate);
         TestDAO dao = new TestDAO();
         if (check == 0) {
             dao.addTest(t);
         }else{
-            request.setAttribute("erroradd", "Practice was not added please check the add practice pop up for more information");
+            t.setTestId(0);
         }
-        request.setAttribute("testadd", t);
+        request.setAttribute("test", t);
         request.getRequestDispatcher("PracticeDetail.jsp").forward(request, response);
     }
 

@@ -58,9 +58,6 @@ public class QuestionPaging extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        if(acc!=null)
         doPost(request, response);
     }
 
@@ -83,9 +80,8 @@ public class QuestionPaging extends HttpServlet {
         }
         request.setAttribute("search", username);
         SubjectDAO sbd = new SubjectDAO();
-//        SubjectSearch sbs = new SubjectSearch();
-//        List<Subject> lsb=sbd.getAll();
-//        request.setAttribute("lsb", lsb);
+        List<Subject> lsb=sbd.getByStatus();
+        request.setAttribute("lsb", lsb);
         String pageind = request.getParameter("pageindex");
         if (pageind == null) {
             pageind = "1";
@@ -126,8 +122,7 @@ public class QuestionPaging extends HttpServlet {
         if (condition2 != null && condition2.contains("subcat")) {
             String temp2 = condition2.substring(6);
             qs.setSubcategory(condition2);
-            request.setAttribute("temp2", temp2);
-            
+            request.setAttribute("temp2", temp2);           
         }
 
         int pageindex = Integer.parseInt(pageind);

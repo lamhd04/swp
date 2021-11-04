@@ -69,6 +69,35 @@ public class quizDAO {
         return list;
     }
 
+    public List<QuizList> getAll(int sub) {
+        List<QuizList> list = new ArrayList<QuizList>();
+        try {
+            String query = "select QuizList.quizId,QuizList.name,Subject.title,Subject.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname\n"
+                    + " from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.id) where QuizList.subject=? ";
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, sub);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                QuizList quiz = new QuizList();
+                quiz.setQuizId(rs.getInt("quizId"));
+                quiz.setName(rs.getString("name"));
+                quiz.setSubject(rs.getString("title"));
+                quiz.setCategory(rs.getString("category"));
+                quiz.setLevel(rs.getString("level"));
+                quiz.setType(rs.getString("type"));
+                quiz.setQuesNum(rs.getString("quesNum"));
+                quiz.setPassRate(rs.getString("passRate"));
+                quiz.setExpert(rs.getString("fullname"));
+                list.add(quiz);
+            }
+        } catch (Exception e) {
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
+
     public int quizCount() {
         int count = 0;
         try {
@@ -160,7 +189,7 @@ public class quizDAO {
 
     public static void main(String[] args) {
         quizDAO qd = new quizDAO();
-        List<QuizList> list=qd.paging("quizid", 1, 6, "", "", "", "", "");
+        List<QuizList> list = qd.paging("quizid", 1, 6, "", "", "", "", "");
         for (QuizList quizList : list) {
             System.out.println(quizList);
         }

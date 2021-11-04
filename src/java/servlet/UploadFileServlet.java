@@ -76,39 +76,47 @@ public class UploadFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        if (acc != null) {
             QuestionImport(request, response);
-        }
     }
 
     private void QuestionImport(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException, ServletException {
         Part file = request.getPart("file");
-        String quizId = request.getParameter("quizId");
+        String quizId = request.getParameter("quiz");
         quizDAO qd = new quizDAO();
         QuizList qz = qd.getQuizDetail(quizId);
-        SubjectDAO sd = new SubjectDAO();
-        String subcategory = request.getParameter("condition2");
+        String subject = request.getParameter("subject");
+        String category = request.getParameter("ques_cate");
+        String subcategory = request.getParameter("ques_subcate");
         InputStreamReader inputStreamReader = new InputStreamReader(file.getInputStream());
         BufferedReader reader = new BufferedReader(inputStreamReader);
         QuestionDAO dao = new QuestionDAO();
+        int check=0;
+        int rowcount=0;
+        List<Integer> errorline= new ArrayList<Integer>();
         try {
             String line = reader.readLine();
+            rowcount++;
             while (line != null && !line.equals("")) {
                 Question q = new Question();
                 String[] words = line.split("[|]");
                 q.setContent(words[0]);
                 q.setLevel(qz.getLevel());
                 q.setQuiz(quizId);
+                if(words[1].length()>1){
+                    check=1;
+                    request.setAttribute("errorexplanation","explanation must be under 1000 characters");
+                    errorline.add(rowcount);
+                    request.setAttribute("errorline", errorline);
+                }
                 q.setExplanation(words[1]);
                 q.setMedia(words[2]);
                 q.setqId(dao.getMaxId() + 1);
-                q.setCategory(qz.getCategory());
+                q.setCategory(category);
                 q.setSubcategory(subcategory);
-                q.setSubject(sd.getByTitle(qz.getSubject()).getId() + "");
+                q.setSubject(subject);
                 q.setStatus("Unpublished");
                 line = reader.readLine();
+                rowcount++;
                 ArrayList<Answer> list = new ArrayList<Answer>();
                 while (!line.equals("end")) {
                     int key = 0;
@@ -116,10 +124,13 @@ public class UploadFileServlet extends HttpServlet {
                     key = 1;
                     list.add(new Answer(q.getqId(), line, key));
                     line = reader.readLine();
+                    rowcount++;
                 }
                 q.setList(list);
+                if(check==0)
                 dao.addQuestion(q);
                 line = reader.readLine();
+                rowcount++;
             }
         } catch (IOException ex) {
 
@@ -129,7 +140,7 @@ public class UploadFileServlet extends HttpServlet {
                 // file.close();
             } catch (IOException ex) {
             }
-            response.sendRedirect("QuizListServlet");
+            request.getRequestDispatcher("QuestionList.jsp").forward(request, response);
         }
     }
 
