@@ -81,6 +81,43 @@
         <servlet-class>servlet.QuizListServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostCategoryServlet</servlet-name>
+        <servlet-class>servlet.PostCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailServlet</servlet-name>
+        <servlet-class>servlet.PostDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostSearch</servlet-name>
+        <servlet-class>servlet.PostSearch</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostManagerServlet</servlet-name>
+        <servlet-class>servlet.PostManagerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostAddServlet</servlet-name>
+        <servlet-class>servlet.PostAddServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDeleteServlet</servlet-name>
+        <servlet-class>servlet.PostDeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostLoadServlet</servlet-name>
+        <servlet-class>servlet.PostLoadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostEditServlet</servlet-name>
+        <servlet-class>servlet.PostEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+    <servlet>
         <servlet-name>PracticeDetail</servlet-name>
         <servlet-class>servlet.PracticeDetail</servlet-class>
     </servlet>
@@ -267,6 +304,42 @@
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+        servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostCategoryServlet</servlet-name>
+        <url-pattern>/postcategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailServlet</servlet-name>
+        <url-pattern>/postdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostSearch</servlet-name>
+        <url-pattern>/postsearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostManagerServlet</servlet-name>
+        <url-pattern>/postmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostAddServlet</servlet-name>
+        <url-pattern>/postadd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDeleteServlet</servlet-name>
+        <url-pattern>/postdelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostLoadServlet</servlet-name>
+        <url-pattern>/postload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostEditServlet</servlet-name>
+        <url-pattern>/postedit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PracticeListServlet</servlet-name>
