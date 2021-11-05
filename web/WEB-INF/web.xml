@@ -145,6 +145,10 @@
         <servlet-name>getQuizBySubject</servlet-name>
         <servlet-class>servlet.getQuizBySubject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LessonList</servlet-name>
+        <servlet-class>servlet.LessonList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -352,6 +356,10 @@
     <servlet-mapping>
         <servlet-name>getQuizBySubject</servlet-name>
         <url-pattern>/getQuizBySubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonList</servlet-name>
+        <url-pattern>/LessonList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
