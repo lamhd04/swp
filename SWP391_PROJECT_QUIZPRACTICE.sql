@@ -20,7 +20,7 @@ constraint [PK_userID] primary key (userID)
 
 insert into Account values (1,'admin','Mr','lamndhe151284@fpt.edu.vn','111111','0375596151','Hai Duong',1,'active')
 insert into Account values (2,N'Phạm Hùng Hà','Mr','haphhe151269@fpt.edu.vn','011201','0396314096',N'Hải Dương',3,'active')
-insert into Account values (3,N'Lê Mạnh Hùng','Mr','hungle19052001@gmail.com','190501','0867680175',N'Thanh Hóa',0,'active')
+insert into Account values (3,N'Lê Mạnh Hùng','Mr','hungle19052001@gmail.com','190501','0867680175',N'Thanh Hóa',3,'active')
 insert into Account values (4,N'Trịnh Anh Quân','Mr','quantahe151524@fpt.edu.vn','280701','0867680175',N'Hà Nội',0,'active')
 insert into Account values (5,N'Lê Hữu Phúc','Mr','phuclhhe151336@fpt.edu.vn','030701','0867680175',N'Hà Nội',0,'active')
 insert into Account values (6,N'a duoi','Mr','nguyendailam05@gmail.com','04122001','0867680175',N'Hà Nội',0,'inactive')
@@ -146,21 +146,34 @@ brief nvarchar(4000),
 content ntext not null,
 doc_cate nvarchar(50),
 author int not null,
-update_date date,
-constraint [FK_doc_author] foreign key (author) references Account(userId)
+update_date date
 )
 
-insert into Document values(1,'pic\education-la-gi-1-1008x570.jpg','Quiz1','This is Quiz1 brief_info','This is Quiz1 post_content','DocumentCate1',3,'2021-5-19')
-insert into Document values(2,'pic\Education-la-gi-2-e1623658098277.jpg','Quiz2','This is Quiz2 brief_info','This is Quiz2 post_content','DocumentCate2',3,'2018-3-29')
-insert into Document values(3,'pic\Picture1-6.jpg','Quiz3','This is Quiz3 brief_info','This is Quiz3 post_content','DocumentCate3',3,'2021-4-20')
-insert into Document values(4,'pic\Education-in-Spain-1-1920x1080.jpg','Quiz4','This is Quiz4 brief_info','This is Quiz4 post_content','DocumentCate1',4,'2020-9-9')
-insert into Document values(5,'pic\edu.jpg','Quiz5','This is Quiz5 brief_info','This is Quiz5 post_content','DocumentCate2',2,'2021-7-15')
-insert into Document values(6,'pic\pic/dreamstime_s_74311588.jpg','Quiz6','This is Quiz6 brief_info','This is Quiz6 post_content','DocumentCate3',5,'2018-2-23')
-insert into Document values(7,'pic\30c65f19-8e87-457c-b22a-cb32f44f4dd0.jpg','Quiz7','This is Quiz7 brief_info','This is Quiz7 post_content','DocumentCate1',2,'2020-6-28')
-insert into Document values(8,'pic\Picture1-6.jpg','Quiz8','This is Quiz8 brief_info','This is Quiz8 post_content','DocumentCate3',3,'2021-10-24')
-insert into Document values(9,'pic\pic/education2.jpg','Quiz9','This is Quiz9 brief_info','This is Quiz9 post_content','DocumentCate1',3,'2017-10-15')
-insert into Document values(10,'pic\education-la-gi-1-1008x570.jpg','Quiz10','This is Quiz10 brief_info','This is Quiz10 post_content','DocumentCate3',4,'2020-8-12')
+insert into Document values('pic/education-la-gi-1-1008x570.jpg','Quiz1','Le Manh Hung','2021-5-19','This is Quiz1 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate1')
+insert into Document values('pic/Education-la-gi-2-e1623658098277.jpg','Quiz2','Nguyen Thi Cuc','2018-3-29','This is Quiz2 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate2')
+insert into Document values('pic/Picture1-6.jpg','Quiz3','Le Duy Hai','2021-4-20','This is Quiz3 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate3')
+insert into Document values('pic/Education-in-Spain-1-1920x1080.jpg','Quiz4','Nguyen Dai Lam','2020-9-9','This is Quiz4 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate1')
+insert into Document values('pic/edu.jpeg','Quiz5','Le Huu Phuc','2021-7-15','This is Quiz5 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate2')
+insert into Document values('pic/dreamstime_s_74311588.jpg','Quiz6','Trinh Anh Quan','2018-2-23','This is Quiz6 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate3')
+insert into Document values('pic/30c65f19-8e87-457c-b22a-cb32f44f4dd0.jpeg','Quiz7','Pham Hung Ha','2020-6-28','This is Quiz6 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate1')
+insert into Document values('pic/Picture1-6.jpg','Quiz8','Le Duy Hung','2021-10-24','This is Quiz8 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate3')
+insert into Document values('pic/education2.jpg','Quiz9','Le Manh Hung','2017-10-15','This is Quiz9 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate1')
+insert into Document values('pic/education-la-gi-1-1008x570.jpg','Quiz10','Le Duy Hung','2020-8-12','This is Quiz10 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate3')
 --select * from Document
+
+insert into Setting([type],settingValue,settingOrder,[status]) values('doc_cate','DocumentCate1',1,'active')
+insert into Setting([type],settingValue,settingOrder,[status]) values('doc_cate','DocumentCate2',2,'active')
+insert into Setting([type],settingValue,settingOrder,[status]) values('doc_cate','DocumentCate3',3,'active')
 
 --Subject
 create table [Subject]
@@ -329,6 +342,13 @@ note ntext,
 [status] varchar(10),
 constraint [PK_sliderID] primary key (sliderID)
 )
+
+insert into Slider values('Slider1','pic/slider1.jpg','s1','note of slider1','active')
+insert into Slider values('Slider2','pic/slider2.jpg','s2','note of slider2','active')
+insert into Slider values('Slider3','pic/slider3.jpg','s3','note of slider3','active')
+insert into Slider values('Slider4','pic/slider4.jpg','s4','note of slider4','active')
+insert into Slider values('Slider5','pic/slider5.jpg','s5','note of slider5','active')
+insert into Slider values('Slider6','pic/slider6.jpg','s6','note of slider6','active')
 
 --Exam
 create table Exam
