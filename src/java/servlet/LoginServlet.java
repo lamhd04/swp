@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             session.setAttribute("acc", a);
-            response.sendRedirect("home");
+            response.sendRedirect("Home.jsp");
         }
     }
 
@@ -62,7 +62,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("Login.jsp").forward(request, response);
+       //request.getRequestDispatcher("Login.jsp").forward(request, response);
+       processRequest(request, response);
     }
 
     /**
