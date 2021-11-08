@@ -37,7 +37,7 @@ public class quizDAO {
         List<QuizList> list = new ArrayList<QuizList>();
         try {
             String query = "  select * from (select QuizList.quizId,QuizList.name,Subject.title,QuizList.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname, \n"
-                    + "  ROW_NUMBER() over (order by " + col + " " + order + ") as STT from((QuizList  join Account on QuizList.expert=Account.userId)join Subject on QuizList.subject=Subject.id)\n"
+                    + "  ROW_NUMBER() over (order by " + col + " " + order + ") as STT from((QuizList  join Account on QuizList.expert=Account.userId)join Subject on QuizList.subject=Subject.subID)\n"
                     + "  where Subject.title like ? and QuizList.category like ? and QuizList.[type] like ? and QuizList.name like ?) \n"
                     + "  as a where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
@@ -73,7 +73,7 @@ public class quizDAO {
         List<QuizList> list = new ArrayList<QuizList>();
         try {
             String query = "select QuizList.quizId,QuizList.name,Subject.title,Subject.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname\n"
-                    + " from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.id) where QuizList.subject=? ";
+                    + " from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.subID) where QuizList.subject=? ";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             ps.setInt(1, sub);
@@ -143,7 +143,7 @@ public class quizDAO {
         try {
             conn = DBConnection.open();
             String sql = "select QuizList.quizId,QuizList.name,Subject.title,Subject.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname\n"
-                    + " from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.id) where QuizList.quizId=? ";
+                    + " from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.subID) where QuizList.quizId=? ";
             ps = conn.prepareStatement(sql);
             ps.setString(1, quizId);
             rs = ps.executeQuery();

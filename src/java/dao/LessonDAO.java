@@ -42,7 +42,7 @@ public class LessonDAO {
             if (qs.getSearchcontent() != null) {
                 content = qs.getSearchcontent();
             }
-            if (qs.getStatus() != null) {
+            if (qs.getStatus() != null&&!qs.getStatus().equals("")) {
                 status = " and status='" + qs.getStatus() + "'";
             }
             if (qs.getSubject() != 0) {
@@ -108,15 +108,14 @@ public class LessonDAO {
         ResultSet rs;
         PreparedStatement ps;
         try {
-            String sql = "insert into Lesson values (?,?,?,?,?,?)";
+            String sql = "insert into Lesson values (?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, l.getLessonId());
-            ps.setInt(2, Integer.parseInt(l.getSubject()));
-            ps.setString(3, l.getTitle());
-            ps.setString(4, l.getStatus());
-            ps.setString(5, l.getBrief());
-            ps.setString(6, l.getContent());
+            ps.setInt(1, Integer.parseInt(l.getSubject()));
+            ps.setString(2, l.getTitle());
+            ps.setString(3, l.getStatus());
+            ps.setString(4, l.getBrief());
+            ps.setString(5, l.getContent());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(LessonDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,7 +162,7 @@ public class LessonDAO {
             if (qs.getSearchcontent() != null) {
                 content = qs.getSearchcontent();
             }
-            if (qs.getStatus() != null) {
+            if (qs.getStatus() != null&&!qs.getStatus().equals("")) {
                 status = " and status='" + qs.getStatus() + "'";
             }
             if (qs.getSubject() != 0) {

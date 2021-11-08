@@ -66,7 +66,7 @@ public class SubjectDAO {
 
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Subject(rs.getInt("id"),
+                list.add(new Subject(rs.getInt("subID"),
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("status"),
@@ -92,7 +92,7 @@ public class SubjectDAO {
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                list.add(new Subject(rs.getInt("id"),
+                list.add(new Subject(rs.getInt("subID"),
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("status"),
@@ -116,7 +116,7 @@ public class SubjectDAO {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();           
             while (rs.next()) {
-                list.add(new Subject(rs.getInt("id"),
+                list.add(new Subject(rs.getInt("subID"),
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("status"),
@@ -176,12 +176,12 @@ public class SubjectDAO {
     public Subject getById(int subjectId) {
         try {
             conn = DBConnection.open();
-            String sql = "select * from [Subject] where id = ?";
+            String sql = "select * from [Subject] where subID = ?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, subjectId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return new Subject(rs.getInt("id"),
+                return new Subject(rs.getInt("subID"),
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("status"),
@@ -205,7 +205,7 @@ public class SubjectDAO {
             ps.setString(1, title);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return new Subject(rs.getInt("id"),
+                return new Subject(rs.getInt("subID"),
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("status"),

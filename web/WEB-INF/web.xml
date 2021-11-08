@@ -156,6 +156,10 @@
         <servlet-name>LessonList</servlet-name>
         <servlet-class>servlet.LessonList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LessonDetail</servlet-name>
+        <servlet-class>servlet.LessonDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -367,6 +371,10 @@
     <servlet-mapping>
         <servlet-name>LessonList</servlet-name>
         <url-pattern>/LessonList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonDetail</servlet-name>
+        <url-pattern>/LessonDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

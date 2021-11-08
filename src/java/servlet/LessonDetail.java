@@ -5,24 +5,20 @@
  */
 package servlet;
 
+import dao.LessonDAO;
+import entity.Lesson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.LessonSearch;
-import dao.LessonDAO;
-import dao.QuestionDAO;
-import entity.Lesson;
-import entity.Question;
-import java.util.List;
 
 /**
  *
  * @author User
  */
-public class LessonList extends HttpServlet {
+public class LessonDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,7 +47,18 @@ public class LessonList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        String id = request.getParameter("qId");
+        int testId = 0;
+        if (id != null) {
+            testId = Integer.parseInt(id);
+        }
+        //int testId = 1;
+        LessonDAO dao = new LessonDAO();
+        Lesson t = dao.getLesson(testId);
+        if (!"add".equals(request.getParameter("op"))) {
+            request.setAttribute("lesson", t);
+        }
+        request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);
     }
 
     /**
@@ -65,58 +72,40 @@ public class LessonList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search");
-        request.setAttribute("search", search);
-        LessonSearch ls = new LessonSearch();
-        ls.setSearchcontent(search);
-        String subject = request.getParameter("subject");
-        request.setAttribute("subject", subject);
-        int sub = 0;
-        if (subject != null&&!subject.equals("")) {
-            sub = Integer.parseInt(subject);
-        }
-        ls.setSubject(sub);
+        int check=0;
+        String id = request.getParameter("lessonId");
+        String sub = request.getParameter("subject");
+        String title = request.getParameter("title");
         String status = request.getParameter("status");
-        request.setAttribute("status", status);
-        ls.setStatus(status);
-        String pageind = request.getParameter("pageindex");
-        if (pageind == null) {
-            pageind = "1";
+        String brief = request.getParameter("brief");
+        String content = request.getParameter("content");
+        if(title.length()>100){
+            check=1;
+            request.setAttribute("errortitle", "title must be under 100 characters");
         }
-        LessonDAO ld = new LessonDAO();
-        int pageindex = Integer.parseInt(pageind);
-        int pagenum = ld.lessonCount(ls);
-        int pagesize = 12;
-        int endpage = pagenum / pagesize;
-        if (pagenum % pagesize != 0) {
-            endpage++;
+        if(brief.length()>100){
+            check=1;
+            request.setAttribute("errorbrief", "brief must be under 100 characters");
         }
-        List<Lesson> list = ld.search(pageindex, pagesize, ls);
-        request.setAttribute("pageindex", pageindex);
-        request.setAttribute("list", list);
-        request.setAttribute("pagesize", pagesize);
-        request.setAttribute("end", endpage);
-        request.setAttribute("url", "LessonList?pageindex=");
-        int x = 0;
-        int y = 0;
-        if (pageindex < 3 && endpage > 4) {
-            x = 1;
-            y = 5;
-        } else if (endpage < 5) {
-            x = 1;
-            y = endpage;
-        } else if (pageindex > endpage - 3) {
-            x = endpage - 4;
-            y = endpage;
-        } else {
-            x = pageindex - 2;
-            y = pageindex + 2;
+        Lesson l = new Lesson();
+        l.setBrief(brief);
+        l.setContent(content);
+        l.setStatus(status);
+        l.setSubject(sub);
+        l.setTitle(title);
+        if(check==0){
+            LessonDAO dao = new LessonDAO();
+            if(id==null){               
+            dao.addLesson(l);
+            }else{
+                l.setLessonId(Integer.parseInt(id));
+               dao.updateLesson(l);
+               request.setAttribute("lesson", l);
+            }            
         }
-
-        request.setAttribute("finish", y);
-        request.setAttribute("start", x);
-        request.getRequestDispatcher("LessonList.jsp").forward(request, response);
+        request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);
     }
+    
 
     /**
      * Returns a short description of the servlet.

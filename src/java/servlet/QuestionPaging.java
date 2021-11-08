@@ -79,9 +79,6 @@ public class QuestionPaging extends HttpServlet {
             username = "";
         }
         request.setAttribute("search", username);
-        SubjectDAO sbd = new SubjectDAO();
-        List<Subject> lsb=sbd.getByStatus();
-        request.setAttribute("lsb", lsb);
         String pageind = request.getParameter("pageindex");
         if (pageind == null) {
             pageind = "1";

@@ -22,14 +22,14 @@
             <div class="form-group row">
                 <div class="col-3">
                     <select  class="form-control here"  name="status" style="height: 40px">
-                        <option value="Any">Any</option>
+                        <option value="">Any</option>
                         <option ${status=='unpublished' ?"selected":""} value="unpublished">Unpublish</option>
                     <option ${status=='published' ?"selected":""} value="published">Publish</option>
                 </select>
             </div>  
             <div  class="col-3">
                 <select class="form-control here" name="subject" style="height: 40px">
-                    <option value="Any">Any</option>
+                    <option value="">Any</option>
                     <c:forEach items="${bc.byStatus}" var="x">
                         <option ${subject==x.id ?"selected":""} value="${x.id}">${x.title}</option>                                
                     </c:forEach>

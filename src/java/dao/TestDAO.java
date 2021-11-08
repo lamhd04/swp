@@ -82,7 +82,7 @@ public void addTest(Test t) {
     public List<TestDTO> getTest(int pageIndex, int pageNum, int userId) {
         List<TestDTO> result = new ArrayList<>();
         String sql = "SELECT * FROM\n"
-                + "(SELECT ROW_NUMBER() OVER(ORDER BY testID) rowNum,t.testID,t.type, s.name as subjectName, t.start_time, t.duration,t.result, t.pass_rate  FROM [dbo].[Test] t\n"
+                + "(SELECT ROW_NUMBER() OVER(ORDER BY testId) rowNum,t.testId,t.type, s.name as subjectName, t.start_time, t.duration,t.result  FROM [dbo].[Test] t\n"
                 + "JOIN [dbo].[Subject] s ON s.subID =  t.subID\n"
                 + ") temp\n"
                 + "where temp.rowNum >= ? AND temp.rowNum < ?";
@@ -101,7 +101,7 @@ public void addTest(Test t) {
             System.out.println(start);
             while (rs.next()) {
                 TestDTO test = new TestDTO();
-                test.setId(rs.getInt("testID"));
+                test.setId(rs.getInt("testId"));
                 test.setType(rs.getString("type"));
                 test.setSubjectName(rs.getString("subjectName"));
                 test.setStartTime(rs.getString("start_time"));
