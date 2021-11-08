@@ -85,7 +85,7 @@ public class PracticeDetail extends HttpServlet {
         int check = 0;
         String type = request.getParameter("type");
         String subject = request.getParameter("subject");
-        String starttime = java.time.LocalDateTime.now().toString();
+        String starttime = java.time.LocalDate.now().toString();
         String ques_cate = request.getParameter("ques_cate");
         String ques_subcate = request.getParameter("ques_subcate");
         int ques_numb = Integer.parseInt(request.getParameter("ques_numb"));

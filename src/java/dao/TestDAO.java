@@ -60,7 +60,7 @@ public class TestDAO {
 
 public void addTest(Test t) {
         try {
-            String sql = "insert into Test values (?,?,'"+t.getStarttime()+"',?,?,?,?,?,?,?)";
+            String sql = "insert into Test values (?,?,'"+t.getStarttime()+"',?,?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(t.getSubject()));
