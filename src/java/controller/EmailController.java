@@ -5,6 +5,10 @@
  */
 package controller;
 
+import dao.ExpireMailDAO;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import entity.Account;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -98,6 +102,11 @@ public class EmailController {
                 + "            </tbody>\n"
                 + "        </table>";
         send(d_email, d_host, d_port, ToMail, m_subject, m_text);
+        ExpireMailDAO emdao = new ExpireMailDAO();
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, 1);
+        SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+         emdao.addEmail(id, Date.valueOf(sm.format(c.getTime())));
     }
 
     public int send(String from, String host, String port, String to, String subject, String text) {
