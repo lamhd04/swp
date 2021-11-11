@@ -4,6 +4,10 @@
     Author     : hungl
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="dao.ExpireMailDAO"%>
+<%@page import="java.sql.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -89,6 +93,13 @@
     </style>
     <body>
         <div id="wrapper">
+            <%
+                SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+                ExpireMailDAO emdao = new ExpireMailDAO();
+                Date dateExpire = emdao.getdueDate(Integer.parseInt(request.getParameter("id")));
+                Calendar now = Calendar.getInstance();
+                if (Date.valueOf(sm.format(now.getTime())).compareTo(dateExpire) <= 0) {
+            %>
             <form action="ResetPasswordServlet?id=<%= request.getParameter("id")%>" method="post" id="form-rp">
                 <h1 class="form-heading">Repassword</h1>
                 <font style="color:red">${Errorpassword}</font>
@@ -105,6 +116,16 @@
                 </div>
                 <input type="submit" value="Send" class="form-submit">
             </form>
+            <%
+            } else {
+            %>
+            <form>
+            <h1 style="color: white">Mail is expired! Please request to send mail again.</h1>                       
+            <h2 style="text-align: center"> <a style="text-decoration: none;color: wheat" href="Login.jsp"> Back to Login</a></h2>
+            </form>>
+            <%
+                }
+            %>
         </div>
 
     </body>
