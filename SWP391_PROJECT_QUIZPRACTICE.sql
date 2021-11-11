@@ -423,3 +423,9 @@ insert into Exam values ('Multiple Choice Exam','https://phungthaihoc.com/wp-con
 insert into Exam values ('Listening Exam','https://www.rhumsaintaubin.com/wp-content/uploads/2021/07/eq.jpg',26,'Listening Test 1','ahvbjaslnugsahojcqkcnoa','Assigned','2021-02-12')
 --select * from Exam
 
+create table ExpireMail
+(
+id int not null foreign key references Account(userId),
+dueDate Date not null
+)
+
