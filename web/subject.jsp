@@ -14,9 +14,11 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     </head>
     <body>
-        <jsp:include page="Header.jsp" flush="true"></jsp:include>
-            <form action="subjects" style="margin-bottom: 20px;margin-top: 10px;padding-left: 1rem">
-                Title: <input type="text" name="title" value="${param.title}" />
+        <jsp:include page="Header.jsp" flush="true">
+            <jsp:param name="active" value="subject"/>
+        </jsp:include>
+        <form action="subjects" style="margin-bottom: 20px;margin-top: 10px;padding-left: 1rem">
+            Title: <input type="text" name="title" value="${param.title}" />
             Author: <input type="text" name="author" value="${param.author}" />
             Status:
             <select name="status" style="">

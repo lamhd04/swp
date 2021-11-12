@@ -7,12 +7,13 @@ package entity;
 
 /**
  *
- * @author Admin
+ * @author admin
  */
-public class Exam {
+public class Category {
     private int id;
-    private String thumbnail;
-    private String title;
+    private String name;
+    private String type;
+
     public int getId() {
         return id;
     }
@@ -21,20 +22,21 @@ public class Exam {
         this.id = id;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getName() {
+        return name;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTitle() {
-        return title;
+    public String getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(String type) {
+        this.type = type;
     }
+    
     
 }

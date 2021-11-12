@@ -5,28 +5,19 @@
  */
 package servlet;
 
-import dao.CategoryDao;
-import dao.DocumentDAO;
-import dao.ExamDAO;
-import dao.PostDAO;
-import entity.Category;
-import entity.Document;
-import entity.Exam;
-import entity.Post;
+import dao.ClassDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.Constant;
 
 /**
  *
  * @author admin
  */
-public class HomeServlet extends HttpServlet {
+public class ClassRemoveSubjectServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,25 +30,19 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostDAO dao = new PostDAO();
-        //top 3 hot post (by rating)
-        List<Post> post = dao.getTop3HotPost();
-        request.setAttribute("post", post);
-
-        //top 5 lastest post
-        List<Post> topLastestPost = dao.getRecentPost();
-        request.setAttribute("lastestPost", topLastestPost);
-        //top 3 lastest exam
-        ExamDAO exDao = new ExamDAO();
-        List<Exam> exam = exDao.getTop3Exam();
-        request.setAttribute("exam", exam);
-        CategoryDao cateDao = new CategoryDao();
-        List<Category> examCate = cateDao.getByType(Constant.Category.EXAM);
-        request.setAttribute("exCate", examCate);
-        System.out.println(exam.get(0).getTitle());
-        List<Document> document = new DocumentDAO().getTopDocument().subList(0, 3);
-        request.setAttribute("document", document);
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ClassRemoveSubjectServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ClassRemoveSubjectServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +57,20 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int classId = Integer.parseInt(request.getParameter("classId"));
+            int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+            int removed = new ClassDao().removeSubject(subjectId, classId);
+            if (removed == 1) {
+                request.setAttribute("message", "success");
+            } else {
+                request.setAttribute("message", "fail");
+            }
+            request.setAttribute("classId", classId);
+            request.getRequestDispatcher("../EditClassSubject.jsp").forward(request, response);
+        } catch (Exception e) {
+            response.sendRedirect("../class");
+        }
     }
 
     /**

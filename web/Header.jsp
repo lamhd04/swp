@@ -24,23 +24,23 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/assets/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/bootstrap.min.css">
         <!-- Font awsome CSS -->
-        <link rel="stylesheet" href="css/assets/font-awesome.min.css">    
-        <link rel="stylesheet" href="css/assets/flaticon.css">
-        <link rel="stylesheet" href="css/assets/magnific-popup.css">    
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/font-awesome.min.css">    
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/flaticon.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/magnific-popup.css">    
         <!-- owl carousel -->
-        <link rel="stylesheet" href="css/assets/owl.carousel.css">
-        <link rel="stylesheet" href="css/assets/owl.theme.css">     
-        <link rel="stylesheet" href="css/assets/animate.css"> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/owl.carousel.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/owl.theme.css">     
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/animate.css"> 
         <!-- Slick Carousel -->
-        <link rel="stylesheet" href="css/assets/slick.css">  
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/slick.css">  
         <!-- Mean Menu-->
-        <link rel="stylesheet" href="css/assets/meanmenu.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/meanmenu.css">
         <!-- main style-->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/responsive.css">
-        <link rel="stylesheet" href="css/demo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/demo.css">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -91,7 +91,7 @@
             <div class="edu_nav" style="max-height: 100px;border-bottom: 2px solid">
                 <div class="container-fluid" style="max-height: 80px">
                     <nav class="navbar navbar-expand-md navbar-light bg-faded" style="max-height: 80px">
-                        <a class="navbar-brand" href="index-2.html"><img src="images/logo.png" alt="logo"></a>
+                        <a class="navbar-brand" href="index-2.html"><img src="${pageContext.request.contextPath}/images/logo.png" alt="logo"></a>
                         <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav nav lavalamp ml-auto menu">
                                 <c:choose>
@@ -123,6 +123,9 @@
                                         <li class="nav-item"><a href="DocumentControl" class="nav-link">Document List</a></li>
 
                                     </ul> 
+                                </li>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/class" class="nav-link ${param.active == 'class'? 'active':''}">Classes</a>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/subjects" class="nav-link ${param.active == 'subject'? 'active':''}">Subjects</a>
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Pages</a>
                                     <ul class="navbar-nav nav mx-auto">

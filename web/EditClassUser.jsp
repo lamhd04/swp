@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Practice</title>
+        <title>Class</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -24,36 +24,61 @@
             @media (min-width: 768px){
                 .container{margin-top: 10px}
             }
+            form{
+                display: block;
+                text-align: center;
+                margin-top: 8px;
+                margin-bottom: 25px
+            }
+            form input[type=text] {
+                padding: 7px 0px;
+                width: 77%;
+                margin-top: 18px;
+                font-size: 20px;
+                color: black
+            }
+            button {
+                padding: 7px 4px;
+                font-size: 20px;
+                border: 1px solid #999999;
+            }
         </style>
     </head>
     <body>
+
         <jsp:include page="Header.jsp" flush="true">
-            <jsp:param name="active" value="home"/>
+            <jsp:param name="active" value="class"/>
         </jsp:include>
+        <c:if test="${message !=null && message !=''}">
+            <script type="text/javascript">
+                var message = '${message}';
+                alert(message);
+            </script>
+        </c:if>
         <div class="container-fluid" style="width: 95%">
-            <h4>>>YOUR PRACTICE:</h4>
+            <form action="${pageContext.request.contextPath}/class/edit-user" method="POST" >
+                <input type="text" name="email" value="${keyword}" placeholder="enter email to add..." required/>
+                <input type="hidden" name="classId" value="${classId}"/>
+                <button>Add</button>
+            </form>
             <table class="table" style="margin-top: 10px">
                 <thead>
                     <tr>
                         <th style="width: 5%">ID</th>
-                        <th style="width: 15%">SUBJECT</th>
-                        <th style="width: 15%">TYPE</th>
-                        <th style="width: 15%">START-TIME</th>
-                        <th  style="width: 15%">DURATION</th>
-                        <th style="width: 15%">RESULT</th>
-                        <th style="width: 7%"></th>
+                        <th style="width: 40%">Full Name</th>
+                        <th style="width: 30%">Email</th>
+                        <th style="width: 10%"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="item" items="${data}">
                         <tr>
-                            <td>${item.getId()}</td>
-                            <td>${item.getSubjectName()}</td>
-                            <td>${item.getType()}</td>
-                            <td>${item.getStartTime()}</td>
-                            <td>${item.getDurationText()}</td>
-                            <td>${item.getResult()} | <span style="color: ${item.getResult() >= item.getPassRate() ? 'green' : 'red'}"> ${item.getResult() >= item.getPassRate() ? 'pass' :'fail'}</span></td>
-                            <td><a href="${pageContext.request.contextPath}/PracticeDetail?testId=${item.getId()}">view detail</a></td>
+                            <td>${item.getUserId()}</td>
+                            <td>${item.getFullname()}</td>
+                            <td>${item.getEmail()}</td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/class/remove-user?classId=${classId}&email=${item.getEmail()}">Remove</a>
+                            </td>
                         </tr> 
                     </c:forEach>                  
                 </tbody>
@@ -61,7 +86,7 @@
             <c:if test="${totalPage > 1}">
                 <ul class="pagination">
                     <c:forEach var="i" begin="1" end="${totalPage}" step="1">
-                        <li class="${i == index ?'active' :''}"><a href="${pageContext.request.contextPath}/practice-list?index=${i}">${i}</a></li>
+                        <li class="${i == index ?'active' :''}"><a href="${pageContext.request.contextPath}/class?index=${i}">${i}</a></li>
                         </c:forEach>
                 </ul>
             </c:if>

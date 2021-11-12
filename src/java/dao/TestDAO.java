@@ -32,16 +32,16 @@ public class TestDAO {
     public Test getTest(int testId) {
         Test t = new Test();
         try {
-            String sql = "select * from Test where testId=?";
+            String sql = "select * from Test where testID=?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, testId);
             rs = ps.executeQuery();
             SubjectDAO dao = new SubjectDAO();
-            while (rs.next()) {
-                t.setTestId(rs.getInt("testId"));
+            if (rs.next()) {
+                t.setTestId(rs.getInt("testID"));
                 t.setDuration(rs.getInt("duration"));
-                t.setStarttime(rs.getString("start_time"));
+                t.setStarttime(rs.getDate("start_time").toString());
                 t.setType(rs.getString("type"));
                 t.setSubject(dao.getById(rs.getInt("subID")).getTitle());
                 t.setTag(rs.getString("tag"));
@@ -58,9 +58,9 @@ public class TestDAO {
         return t;
     }
 
-public void addTest(Test t) {
+    public void addTest(Test t) {
         try {
-            String sql = "insert into Test values (?,?,'"+t.getStarttime()+"',?,?,?,?,?,?)";
+            String sql = "insert into Test values (?,?,'" + t.getStarttime() + "',?,?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(t.getSubject()));
@@ -107,6 +107,8 @@ public void addTest(Test t) {
                 test.setStartTime(rs.getString("start_time"));
                 test.setDuration(rs.getInt("duration"));
                 test.setResult(rs.getFloat("result"));
+                test.setPassRate(rs.getFloat("pass_rate"));
+                test.setDurationText(getDurationText(test.getDuration()));
                 result.add(test);
             }
         } catch (SQLException ex) {
@@ -120,6 +122,13 @@ public void addTest(Test t) {
 
         }
         return result;
+    }
+
+    private String getDurationText(int duration) {
+        int h = duration / 3600;
+        int m = (duration - h * 3600) / 60;
+        int s = duration - h * 3600 - m * 60;
+        return h + "h" + m + "m" + s + "s";
     }
 
     public int count() {

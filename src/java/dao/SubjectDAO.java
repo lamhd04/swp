@@ -35,7 +35,7 @@ public class SubjectDAO {
             conn = DBConnection.open();
             String sql = "select * from [Subject]\n"
                     + "where 1=1 @@@\n"
-                    + "order by id\n"
+                    + "order by subID\n"
                     + "offset (?-1)*? row fetch next ? row only";
             List<Object> params = new ArrayList<>();
             StringBuilder condition = new StringBuilder();
@@ -71,7 +71,7 @@ public class SubjectDAO {
                         rs.getString("author"),
                         rs.getString("status"),
                         rs.getBoolean("featured"),
-                        rs.getString("category"),
+                        rs.getString("sub_cate"),
                         rs.getString("name"),
                         rs.getString("description")));
             }
@@ -90,7 +90,7 @@ public class SubjectDAO {
             String sql = "select * from Subject";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 list.add(new Subject(rs.getInt("subID"),
                         rs.getString("title"),
@@ -108,20 +108,21 @@ public class SubjectDAO {
         }
         return list;
     }
-        public List<Subject> getByStatus() {
+
+    public List<Subject> getByStatus() {
         List<Subject> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
             String sql = "select * from Subject where status='published'";
             ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();           
+            rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Subject(rs.getInt("subID"),
                         rs.getString("title"),
                         rs.getString("author"),
                         rs.getString("status"),
                         rs.getBoolean("featured"),
-                        rs.getString("category"),
+                        rs.getString("sub_cate"),
                         rs.getString("name"),
                         rs.getString("description")));
             }
@@ -181,14 +182,17 @@ public class SubjectDAO {
             ps.setInt(1, subjectId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return new Subject(rs.getInt("subID"),
-                        rs.getString("title"),
-                        rs.getString("author"),
-                        rs.getString("status"),
-                        rs.getBoolean("featured"),
-                        rs.getString("category"),
-                        rs.getString("name"),
-                        rs.getString("description"));
+                Subject subject = new Subject();
+                subject.setId(rs.getInt("subID"));
+                subject.setTitle(rs.getString("title"));
+                subject.setAuthor(rs.getString("author"));
+                subject.setStatus(rs.getString("status"));
+                subject.setFeatured(rs.getString("featured").equals("1"));
+                subject.setCategory(rs.getString("sub_cate"));
+                subject.setName(rs.getString("name"));
+                subject.setDescription(rs.getString("description"));
+                return subject;
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(SubjectDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,7 +201,8 @@ public class SubjectDAO {
         }
         return null;
     }
-        public Subject getByTitle(String title) {
+
+    public Subject getByTitle(String title) {
         try {
             conn = DBConnection.open();
             String sql = "select * from [Subject] where title = ?";
@@ -261,10 +266,10 @@ public class SubjectDAO {
             String sql = "UPDATE [dbo].[Subject]\n"
                     + "   SET [status] = ?\n"
                     + "      ,[featured] = ?\n"
-                    + "      ,[category] = ?\n"
+                    + "      ,[sub_cate] = ?\n"
                     + "      ,[name] = ?\n"
                     + "      ,[description] = ?\n"
-                    + " WHERE id=?";
+                    + " WHERE subID=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, subject.getStatus());
             ps.setBoolean(2, subject.isFeatured());
@@ -280,6 +285,39 @@ public class SubjectDAO {
             DBConnection.close(conn, stmt);
         }
         return count > 0;
+    }
+
+    public List<Subject> getByClassId(int classId) {
+        String sql = "SELECT * FROM class_subject\n"
+                + "JOIN Subject \n"
+                + "ON Subject.subID = class_subject.subID\n"
+                + "WHERE class_subject.class_id = ?";
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<Subject> result = new ArrayList<>();
+        try {
+            conn = DBConnection.open();
+            stm = conn.prepareStatement(sql);
+            stm.setInt(1, classId);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Subject subject = new Subject(rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("status"),
+                        rs.getBoolean("featured"),
+                        rs.getString("sub_cate"),
+                        rs.getString("name"),
+                        rs.getString("description"));
+                result.add(subject);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SubjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stm);
+        }
+        return result;
     }
 
 }

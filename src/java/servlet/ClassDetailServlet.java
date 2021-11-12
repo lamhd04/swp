@@ -5,28 +5,24 @@
  */
 package servlet;
 
-import dao.CategoryDao;
-import dao.DocumentDAO;
-import dao.ExamDAO;
-import dao.PostDAO;
-import entity.Category;
-import entity.Document;
-import entity.Exam;
-import entity.Post;
+import dao.ClassDao;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.Constant;
+import utils.RequestHelper;
 
 /**
  *
  * @author admin
  */
-public class HomeServlet extends HttpServlet {
+public class ClassDetailServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,25 +35,17 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostDAO dao = new PostDAO();
-        //top 3 hot post (by rating)
-        List<Post> post = dao.getTop3HotPost();
-        request.setAttribute("post", post);
-
-        //top 5 lastest post
-        List<Post> topLastestPost = dao.getRecentPost();
-        request.setAttribute("lastestPost", topLastestPost);
-        //top 3 lastest exam
-        ExamDAO exDao = new ExamDAO();
-        List<Exam> exam = exDao.getTop3Exam();
-        request.setAttribute("exam", exam);
-        CategoryDao cateDao = new CategoryDao();
-        List<Category> examCate = cateDao.getByType(Constant.Category.EXAM);
-        request.setAttribute("exCate", examCate);
-        System.out.println(exam.get(0).getTitle());
-        List<Document> document = new DocumentDAO().getTopDocument().subList(0, 3);
-        request.setAttribute("document", document);
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
+        Integer id = RequestHelper.paramToIntegerValue(request, "id");
+        if (id == null) {
+            response.sendRedirect("../");
+            return;
+        }
+        ClassDao classDao = new ClassDao();
+        List<Account> teachers = classDao.getAllTeacher();
+        request.setAttribute("teachers", teachers);
+        request.setAttribute("data", classDao.getById(id));
+        teachers.forEach(x -> System.out.println(x.getUserId()));
+        request.getRequestDispatcher("../ClassDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -86,7 +74,23 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Map<String, String[]> param = request.getParameterMap();
+        for (String x : param.keySet()) {
+            System.out.println(x + " = " + param.get(x)[0]);
+        }
+        int id = Integer.parseInt(request.getParameter("id"));
+        String className = request.getParameter("className");
+        int owner = Integer.parseInt(request.getParameter("owner"));
+        String status = request.getParameter("status");
+        ClassDao classDao = new ClassDao();
+        classDao.update(className, owner, status, id);
+        List<Account> teachers = classDao.getAllTeacher();
+        request.setAttribute("teachers", teachers);
+        request.setAttribute("data", classDao.getById(id));
+        System.out.println(classDao.getById(id).getOwnerId());
+        teachers.forEach(x -> System.out.println(x.getUserId()));
+        request.setAttribute("msg", "success");
+        request.getRequestDispatcher("../ClassDetail.jsp").forward(request, response);
     }
 
     /**

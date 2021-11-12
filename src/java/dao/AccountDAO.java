@@ -90,7 +90,7 @@ public class AccountDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
                 user.setPermission(getSetting(rs.getInt("permission")));
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,7 +109,7 @@ public class AccountDAO {
             ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
-                 user.setStatus(rs.getString("status"));               
+                user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUserTitle(rs.getString("userTitle"));
@@ -150,8 +150,9 @@ public class AccountDAO {
             DBConnection.close(conn, stmt);
         }
     }
-public boolean getAuthorization(String url, Account acc) {
-        List<Integer> i=new ArrayList<Integer>();
+
+    public boolean getAuthorization(String url, Account acc) {
+        List<Integer> i = new ArrayList<Integer>();
         try {
             conn = DBConnection.open();
             String sql = "Select * from [Authorization] where url = ?";
@@ -173,6 +174,7 @@ public boolean getAuthorization(String url, Account acc) {
         }
         return false;
     }
+
     public String getSetting(int permission) {
         String role = null;
         try {
@@ -243,7 +245,7 @@ public boolean getAuthorization(String url, Account acc) {
             ps.setInt(4, pageIndex);
             ps.setInt(5, pageSize);
             rs = ps.executeQuery();
-            while (rs.next()) {              
+            while (rs.next()) {
                 Account user = new Account();
                 user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
@@ -253,7 +255,7 @@ public boolean getAuthorization(String url, Account acc) {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setPermission(rs.getString("permission"));                
+                user.setPermission(rs.getString("permission"));
                 list.add(user);
             }
             for (int i = 0; i < list.size(); i++) {
@@ -286,4 +288,38 @@ public boolean getAuthorization(String url, Account acc) {
 
     }
 
+    public List<Account> getStudentByClassId(int classId) {
+        String sql = "				select * from Account\n"
+                + "				join class_student\n"
+                + "				on class_student.userID = Account.userID\n"
+                + "				join Class\n"
+                + "				on Class.classID = class_student.class_id\n"
+                + "				where Class.classID = ?";
+        Connection conn = null;
+        PreparedStatement stm = null;;
+        ResultSet rs = null;
+        List<Account> result = new ArrayList<>();
+        try {
+            conn = dbconnection.DBConnection.open();
+            stm = conn.prepareStatement(sql);
+            stm.setInt(1, classId);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Account user = new Account();
+                user.setStatus(rs.getString("status"));
+                user.setUserId(rs.getInt("userId"));
+                user.setFullname(rs.getString("fullname"));
+                user.setUserTitle(rs.getString("userTitle"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setPermission(rs.getString("permission"));
+                result.add(user);
+
+            }
+        } catch (Exception e) {
+        }
+        return result;
+    }
 }

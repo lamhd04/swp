@@ -160,6 +160,34 @@
         <servlet-name>LessonDetail</servlet-name>
         <servlet-class>servlet.LessonDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CLassListServlet</servlet-name>
+        <servlet-class>servlet.CLassListServlet</servlet-class>
+    </servlet>
+    <servlet> 
+        <servlet-name>ClassDetailServlet</servlet-name>
+        <servlet-class>servlet.ClassDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditClassUserServlet</servlet-name>
+        <servlet-class>servlet.EditClassUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditClassSubject</servlet-name>
+        <servlet-class>servlet.EditClassSubject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClassRemoveUserController</servlet-name>
+        <servlet-class>servlet.ClassRemoveUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClassRemoveSubjectServlet</servlet-name>
+        <servlet-class>servlet.ClassRemoveSubjectServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddClassServlet</servlet-name>
+        <servlet-class>servlet.AddClassServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -375,6 +403,34 @@
     <servlet-mapping>
         <servlet-name>LessonDetail</servlet-name>
         <url-pattern>/LessonDetail</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>CLassListServlet</servlet-name>
+        <url-pattern>/class</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassDetailServlet</servlet-name>
+        <url-pattern>/class/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditClassUserServlet</servlet-name>
+        <url-pattern>/class/edit-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditClassSubject</servlet-name>
+        <url-pattern>/class/edit-subject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassRemoveUserController</servlet-name>
+        <url-pattern>/class/remove-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassRemoveSubjectServlet</servlet-name>
+        <url-pattern>/class/remove-subject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddClassServlet</servlet-name>
+        <url-pattern>/class/add</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

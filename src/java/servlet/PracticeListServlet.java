@@ -89,7 +89,9 @@ public class PracticeListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      String keyword = request.getParameter("keyword");
+        TestDAO testDao = new TestDAO();
+        //List<TestDTO> data = testDao.getTest(index, PAGE_SIZE, 1);
     }
 
     /**

@@ -5,14 +5,7 @@
  */
 package servlet;
 
-import dao.CategoryDao;
-import dao.DocumentDAO;
-import dao.ExamDAO;
-import dao.PostDAO;
-import entity.Category;
-import entity.Document;
-import entity.Exam;
-import entity.Post;
+import dao.ClassDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,13 +13,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.Constant;
+import entity.Class;
+import java.util.HashMap;
+import java.util.Map;
+import utils.PagingHelper;
+import utils.RequestHelper;
 
 /**
  *
  * @author admin
  */
-public class HomeServlet extends HttpServlet {
+public class CLassListServlet extends HttpServlet {
+
+    private static final int PAGE_SIZE = 5;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,25 +38,29 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostDAO dao = new PostDAO();
-        //top 3 hot post (by rating)
-        List<Post> post = dao.getTop3HotPost();
-        request.setAttribute("post", post);
+        String className = request.getParameter("keyword");
+        int pageIndex = 1;
+        String indexParam = request.getParameter("index");
+        try {
+            pageIndex = Integer.parseInt(indexParam);
+        } catch (NumberFormatException e) {
 
-        //top 5 lastest post
-        List<Post> topLastestPost = dao.getRecentPost();
-        request.setAttribute("lastestPost", topLastestPost);
-        //top 3 lastest exam
-        ExamDAO exDao = new ExamDAO();
-        List<Exam> exam = exDao.getTop3Exam();
-        request.setAttribute("exam", exam);
-        CategoryDao cateDao = new CategoryDao();
-        List<Category> examCate = cateDao.getByType(Constant.Category.EXAM);
-        request.setAttribute("exCate", examCate);
-        System.out.println(exam.get(0).getTitle());
-        List<Document> document = new DocumentDAO().getTopDocument().subList(0, 3);
-        request.setAttribute("document", document);
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
+        }
+        //attribute list
+        Map<String, Object> attributes = new HashMap<>();
+        //neu className bang null thi gan className = "" (empty)
+        className = (className == null) ? "" : className;
+        ClassDao classDao = new ClassDao();
+        List<Class> classes = classDao.getByClassName(pageIndex, PAGE_SIZE, className);
+        int totalData = classDao.countByClassName(className);
+        int totalPage = PagingHelper.calculateTotalPage(totalData, PAGE_SIZE);
+        attributes.put("data", classes);
+        attributes.put("keyword", className);
+        attributes.put("totalPage", totalPage);
+
+        //add attributes to request
+        RequestHelper.setAttributes(attributes, request);
+        request.getRequestDispatcher("ClassList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

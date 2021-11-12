@@ -18,6 +18,15 @@ public class TestDTO {
     private int duration;
     private float result;
     private float passRate;
+    private String durationText;
+
+    public String getDurationText() {
+        return durationText;
+    }
+
+    public void setDurationText(String durationText) {
+        this.durationText = durationText;
+    }
 
     public int getId() {
         return id;

@@ -5,29 +5,25 @@
  */
 package servlet;
 
-import dao.CategoryDao;
-import dao.DimensionDAO;
-import dao.PricePackageDAO;
-import dao.SubjectDAO;
-import entity.Category;
-import entity.Dimension;
-import entity.PricePackage;
-import entity.Subject;
+import dao.AccountDAO;
+import dao.ClassDao;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.Constant;
+import utils.RequestHelper;
 
 /**
  *
- * @author lhquan1
+ * @author admin
  */
-public class SubjectOverViewlServlet extends HttpServlet {
+public class AddClassServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,14 +39,15 @@ public class SubjectOverViewlServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int subjectId = Integer.parseInt(request.getParameter("subjectId"));
-            CategoryDao cateDao = new CategoryDao();
-            List<Category> cateList = cateDao.getByType(Constant.Category.SUBJECT);
-            Subject subject = new SubjectDAO().getById(subjectId);
-
-            request.setAttribute("subject", subject);
-            request.setAttribute("cateList", cateList);
-            request.getRequestDispatcher("subjectDetail.jsp").forward(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddClassServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddClassServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -66,7 +63,10 @@ public class SubjectOverViewlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ClassDao classDao = new ClassDao();
+        List<Account> teachers = classDao.getAllTeacher();
+        request.setAttribute("ownerList", teachers);
+        request.getRequestDispatcher("../AddClass.jsp").forward(request, response);
     }
 
     /**
@@ -80,27 +80,31 @@ public class SubjectOverViewlServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Map<String, String[]> param = request.getParameterMap();
-
-        for (String key : param.keySet()) {
-            System.out.println(key + " = " + param.get(key)[0]);
+        try {
+            String clasName = request.getParameter("className");
+            String status = request.getParameter("status");
+            String owner = request.getParameter("owner");
+            RequestHelper.displayParam(request);
+            ClassDao classDao = new ClassDao();
+            entity.Class data = new entity.Class();
+            data.setClassName(clasName);
+            data.setStatus(status);
+            data.setOwnerId(Integer.parseInt(owner));
+            data.setCreatedDate(new Date(System.currentTimeMillis()).toString());
+            data.setId(classDao.countClass() + 1);
+            boolean existClassName = classDao.checkExistClassName(clasName);
+            List<Account> teachers = classDao.getAllTeacher();
+            request.setAttribute("ownerList", teachers);
+            if (existClassName) {
+                request.setAttribute("message", "exist");
+            } else {
+                classDao.insertClass(data);
+                request.setAttribute("message", "success");
+            }
+        } catch (Exception e) {
+            request.setAttribute("message", "fail");
         }
-        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
-
-        Subject oldSubject = new SubjectDAO().getById(subjectId);
-        String name = request.getParameter("name");
-        String category = request.getParameter("category");
-        String description = request.getParameter("description");
-        String status = request.getParameter("status");
-        String featured = request.getParameter("featured");
-        oldSubject.setName(name);
-        oldSubject.setCategory(category);
-        oldSubject.setDescription(description);
-        oldSubject.setStatus(status);
-        oldSubject.setFeatured(featured  == null ? false : true);
-        boolean check = new SubjectDAO().update(oldSubject);
-        response.sendRedirect("subjects");
-
+        request.getRequestDispatcher("../AddClass.jsp").forward(request, response);
     }
 
     /**

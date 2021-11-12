@@ -71,7 +71,6 @@ public class EmailController {
 //                + "        </table>";
 //        send(d_email, d_host, d_port, acc.getEmail(), m_subject, m_text);
 //    }
-
     public void Send(String ToMail, int id, String name) {
         String link = "http://localhost:8084/Project/resetPass.jsp";
         String m_text = "<table style=\"width: 100% !important\" >\n"
@@ -137,7 +136,7 @@ public class EmailController {
             Transport.send(msg);
         } catch (Exception mex) {
             mex.printStackTrace();
-         return -1;
+            return -1;
         }
         return 1;
     }
@@ -180,6 +179,33 @@ public class EmailController {
                 + "                </tr>\n"
                 + "            </tbody>\n"
                 + "        </table>";
-     return   send(d_email, d_host, d_port, acc.getEmail(), m_subject, m_text);
+        return send(d_email, d_host, d_port, acc.getEmail(), m_subject, m_text);
+    }
+
+    // Those are the values that have the email information
+    public int sendClassAction(Account acc, String message) {
+        String link = "http://localhost:8080/swp/signup/verify?email=" + acc.getEmail();
+        String m_text = "<table style=\"width: 100% !important\" >\n"
+                + "            <tbody>\n"
+                + "                <tr>\n"
+                + "                    <td>\n"
+                + "                        <div>\n"
+                + "                            <h2>Hello, " + acc.getFullname() + "</h2>\n"
+                + "                        </div>\n"
+                + "                        <div>\n"
+                + "                           " + message + "\n"
+                + "                        </div>\n"
+                + "                        <br>\n"
+                + "\n"
+                + "                        <br>\n"
+                + "                        <div>\n"
+                + "                            Sincerely,\n"
+                + "                            <h4>The Quizz Practice</h4>\n"
+                + "                        </div>\n"
+                + "                    </td>\n"
+                + "                </tr>\n"
+                + "            </tbody>\n"
+                + "        </table>";
+        return send(d_email, d_host, d_port, acc.getEmail(), m_subject, m_text);
     }
 }

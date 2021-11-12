@@ -58,10 +58,7 @@ public class PracticeDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("testId");
-        int testId=0;
-        if(id!=null)
-        testId=Integer.parseInt(id);
+        int testId=Integer.parseInt(request.getParameter("testId"));
         //int testId = 1;
         TestDAO dao = new TestDAO();
         Test t = dao.getTest(testId);     
