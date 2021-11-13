@@ -28,11 +28,11 @@ public class SliderDAO {
     private ResultSet rs;
     private PreparedStatement ps;
 
-    public List<Slider> getSliders() {
+    public List<Slider> getAllSliders() {
         List<Slider> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "Select * from Slider";
+            String sql = "Select * from Slider where status = 'active'";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
