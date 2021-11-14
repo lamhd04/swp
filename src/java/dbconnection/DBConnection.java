@@ -20,10 +20,9 @@ public class DBConnection {
 
     public static Connection open() {
         try {
-            //1. Đăng ký driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+           Class.forName("com.mysql.jdbc.Driver");
             //2. Tạo và mở kết nối
-            return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SWP391_Prj_QuizPrac","sa","12");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/swp391_quizpractice","root","hung190501");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
