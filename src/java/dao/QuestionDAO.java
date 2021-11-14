@@ -30,13 +30,6 @@ import model.QuestionSearch;
  *
  * @author User
  */
-public class QuestionDAO {
-
-    private Connection conn;
-    private Statement stmt;
-    private ResultSet rs;
-    private PreparedStatement ps;
-
     public class QuestionDAO {
 
     private Connection conn;

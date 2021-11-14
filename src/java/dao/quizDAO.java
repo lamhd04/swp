@@ -167,7 +167,7 @@ public class quizDAO {
 
     public void editQuiz(String title, String subject,
             String category, String level, String type, String quesNum, String passRate, String qid) {
-        String query = "update QuizList set title=?,[subject]=?,category=?,[level]=?,[type]=?,quesNum=?,passRate =? where quizId=?";
+        String query = "update QuizList set title=?,subject=?,category=?,level=?,type=?,quesNum=?,passRate =? where quizId=?";
         try {
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
