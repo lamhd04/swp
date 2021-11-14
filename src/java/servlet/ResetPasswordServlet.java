@@ -81,7 +81,7 @@ public class ResetPasswordServlet extends HttpServlet {
         Account acc = dao.getAccount(id);
         if (acc != null) {
             acc.setPassword(npass);
-            dao.editAccount(acc);
+            dao.editUserPass(acc);
         }
         request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
