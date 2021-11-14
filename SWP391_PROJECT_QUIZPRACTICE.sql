@@ -148,17 +148,17 @@ name nvarchar(70),
 description text,
 category nvarchar(50),
 author int not null,
-featured varchar(1000),
+featured bit,
 status varchar(10),
 constraint PK_subID primary key (subID),
 constraint FK_sub_author foreign key (author) references Account(userId)
 );
 
-insert into Subject(subID,title,name,description,category,author,featured,status) values (1,'t1','a1','description1','c1',1,'featured_1','published');
-insert into Subject(subID,title,name,description,category,author,featured,status) values (2,'t2','a2','description2','c2',2,'featured_2','published');
-insert into Subject(subID,title,name,description,category,author,featured,status) values (3,'t3','a3','description3','c3',5,'featured_3','published');
-insert into Subject(subID,title,name,description,category,author,featured,status) values (4,'t4','a4','description4','c4',3,'featured_4','published');
-insert into Subject(subID,title,name,description,category,author,featured,status) values (5,'t5','a5','description5','c5',4,'featured_5','published');
+insert into Subject(subID,title,name,description,category,author,featured,status) values (1,'t1','a1','description1','c1',1,1,'published');
+insert into Subject(subID,title,name,description,category,author,featured,status) values (2,'t2','a2','description2','c2',2,1,'published');
+insert into Subject(subID,title,name,description,category,author,featured,status) values (3,'t3','a3','description3','c3',5,0,'published');
+insert into Subject(subID,title,name,description,category,author,featured,status) values (4,'t4','a4','description4','c4',3,0,'published');
+insert into Subject(subID,title,name,description,category,author,featured,status) values (5,'t5','a5','description5','c5',4,0,'published');
 
 create table Test
 (
