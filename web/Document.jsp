@@ -45,29 +45,13 @@
         </head>
         <body>
         <jsp:include page="Header.jsp" flush="true"></jsp:include>
-            <header class="header_inner blog_page">
-                <div class="intro_wrapper">
-                    <div class="container">  
-                        <div class="row">        
-                            <div class="col-sm-12 col-md-8 col-lg-8">
-                                <div class="intro_text">
-                                    <h1>Document List</h1>
-                                    <div class="pages_links">
-                                        <a href="#" title="">Home</a>
-                                        <a href="DocumentControl" title="" class="active">Document</a>
-                                    </div>
-                                </div>
-                            </div>              
-
-                        </div>
-                    </div> 
-                </div> 
-            </header>
+            
             <section class="blog_wrapper">
             <c:if test="${docsearch != ''}">
                 <p class=" col-12 col-sm-12 col-md-4 col-lg-4" style="font-size: 20px;text-align: center;font-weight: bold;color: black">Result for: ${docsearch}</p>
             </c:if>
-            <div class="container">  
+            <div class="container">
+                <h1>List Of Document</h1>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8">  
                         <c:choose>
