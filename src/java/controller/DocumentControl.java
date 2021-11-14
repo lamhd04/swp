@@ -57,7 +57,7 @@ public class DocumentControl extends HttpServlet {
         int pageindex = Integer.parseInt(pageind);
         
         
-        int pagenum = ddao.getDocuments(docSearch).size();
+        int pagenum = ddao.documentCount(docSearch);
         int pagesize = 4;
         int endpage = pagenum / pagesize;
         if (pagenum % pagesize != 0) {
