@@ -36,10 +36,10 @@ public class DocumentDAO {
         List<Document> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "select * from Document where title like ? order by update_date desc ";
-            
+            String sql = "select * from Document where title like '%"+title+"%' order by update_date desc ";
+                       
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + title + "%");
+            //ps.setString(1, "'%" + title + "%'");       
             rs = ps.executeQuery();
             while (rs.next()) {
                 Document doc = new Document();
@@ -58,6 +58,25 @@ public class DocumentDAO {
             DBConnection.close(conn, stmt);
         }
         return list;
+    }
+    
+    public int documentCount(String username) {
+        int count = 0;
+        try {
+            String query = "select count(*) from Document where title like ? ";
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%"+username+"%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return count;
+
     }
     
     public List<Document> getDocumentByCategory(String category) {
@@ -118,7 +137,7 @@ public class DocumentDAO {
     public List<Document> searchDocument(String type, String title, int pageIndex, int pageSize, String order,String condition) {
         List<Document> list = new ArrayList<Document>();
         try {
-            String query = "select * from (select ROW_NUMBER() over (order by " + type + " " + order + ") as STT,* from Document \n"
+            String query = "select * from (select ROW_NUMBER() over (order by " + type + " " + order + ") as STT,docID,thumbnail,title,brief,content,doc_cate,author,update_date from Document \n"
                     + "where title like ? "+condition+" ) as x where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
@@ -151,7 +170,7 @@ public class DocumentDAO {
     public List<Setting> getSettingByType(String type) {
         List<Setting> list = new ArrayList<Setting>();
         try {
-            String sql = "select * from Setting where [type]= ?";
+            String sql = "select * from Setting where type= ?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setString(1, type);
@@ -173,7 +192,7 @@ public class DocumentDAO {
         List<Document> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "select top(5)* from Document order by title ";
+            String sql = "select * from Document order by title limit 5";
             
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -196,13 +215,6 @@ public class DocumentDAO {
         return list;
     }
 
-    public static void main(String[] args) {
-        DocumentDAO d = new DocumentDAO();
-        List<Document> list = d.getTopDocument();
-        for (Document document : list) {
-            System.out.println(document);
-        }
-        }
+    
     
 }
-
