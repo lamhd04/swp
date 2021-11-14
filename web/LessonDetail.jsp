@@ -28,6 +28,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
+                                <c:if test="${requestScope.lesson.lessonId>0}">
                                     <div class="col-md-8">
                                         <h4>Lesson Detail</h4>
                                         <hr>
@@ -35,12 +36,19 @@
                                     <div class="col-md-4">
                                         <a class="btn btn-success" href="LessonDetail">Add New</a>
                                     </div>
-                                </div>                                   
-                                <div class="row">
+                                </c:if>
+                                <c:if test="${requestScope.lesson.lessonId<1}">
                                     <div class="col-md-12">
-                                        <form action="LessonDetail" method="post"> 
-                                            <div class="form-group row">
-                                                <font color = "red">${errortitle}</font>
+                                        <h4>Lesson Detail</h4>
+                                        <hr>
+                                    </div>
+                                </c:if>
+                            </div>                                   
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="LessonDetail" method="POST"> 
+                                        <div class="form-group row">
+                                            <font color = "red">${errortitle}</font>
                                             <label class="col-4 col-form-label">Title</label> 
                                             <div class="col-8">
                                                 <input name="title" placeholder="Title" class="form-control here" type="text" value="${lesson.title}" required>
@@ -58,7 +66,7 @@
                                             <div class="col-8">
                                                 <select class="form-control here" name="subject" style="height: 40px" required>
                                                     <c:forEach items="${bc.byStatus}" var="x">
-                                                        <option  value="${x.id}">${x.title}</option>
+                                                        <option ${lesson.subject==x.title?"selected":""}  value="${x.id}">${x.title}</option>
                                                     </c:forEach> 
                                                 </select>
                                             </div>
@@ -73,15 +81,19 @@
                                         <div class="form-group row">
                                             <label class="col-4 col-form-label">Content</label> 
                                             <div class="col-8">
-                                                <textarea id="editor" name="content" class="form-control here" required>${lesson.content}</textarea>
-                                            </div>
-                                        </div>                                      
-                                        <div class="form-group row">
-                                            <div class="offset-4 col-8">
-                                                <input name="submit" type="submit" class="btn btn-primary" value="Submit">
+                                                <font color = "red">${errorcontent}</font>
+                                                <textarea id="editor" name="content" class="form-control here" >${lesson.content}</textarea>
                                             </div>
                                         </div>
                                         <input type="text" value="${lesson.lessonId}" name="lessonId" hidden>
+                                        <div class="form-group row">
+                                            <div class="offset-4 col-8">
+                                                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+                                        <center>
+                                            <font color = "green">${alert}</font>
+                                        </center>                                     
                                     </form>
                                 </div>
                             </div>

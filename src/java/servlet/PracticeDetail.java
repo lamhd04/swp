@@ -113,6 +113,8 @@ public class PracticeDetail extends HttpServlet {
         TestDAO dao = new TestDAO();
         if (check == 0) {
             dao.addTest(t);
+            request.setAttribute("alert", "Success");
+            request.getRequestDispatcher("PracticeDetail").forward(request, response);
         }else{
             t.setTestId(0);
         }

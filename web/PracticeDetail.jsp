@@ -86,7 +86,7 @@
                                         </c:if>
                                         <div class="form-group row">
                                             <label class="col-4 col-form-label ">Question Number</label>
-                                            
+
                                             <div class="col-8">
                                                 <font color = "red">${errorques_numb}</font>
                                                 <input ${requestScope.test.testId>0? "readonly":"required"} value="${test.ques_numb}" name="ques_numb" type="number" class="form-control" >
@@ -140,12 +140,12 @@
                                                         <input  value="${test.result}" type="text" class="form-control" readonly>
                                                     </div>
                                                 </div>
-                                                    <center>
-                                                <a class="btn btn-success" href="PracticeDetail">Add</a>
+                                                <center>
+                                                    <a class="btn btn-success" href="PracticeDetail">Add</a>
                                                 </center>
                                             </c:otherwise>
                                         </c:choose>
-
+                                        <font color = "green">${alert}</font>
                                     </form>
                                 </div>
                             </div>

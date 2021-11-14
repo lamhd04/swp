@@ -6,6 +6,7 @@
 package servlet;
 
 import dao.LessonDAO;
+import dao.SubjectDAO;
 import entity.Lesson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,13 +52,15 @@ public class LessonDetail extends HttpServlet {
         int testId = 0;
         if (id != null) {
             testId = Integer.parseInt(id);
-        }
-        //int testId = 1;
-        LessonDAO dao = new LessonDAO();
-        Lesson t = dao.getLesson(testId);
-        if (!"add".equals(request.getParameter("op"))) {
+            LessonDAO dao = new LessonDAO();
+            Lesson t = dao.getLesson(testId);
+            request.setAttribute("lesson", t);
+        }else{
+            Lesson t = new Lesson();
+            t.setLessonId(0);
             request.setAttribute("lesson", t);
         }
+        //int testId = 1;
         request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);
     }
 
@@ -72,40 +75,51 @@ public class LessonDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int check=0;
+        int check = 0;
         String id = request.getParameter("lessonId");
         String sub = request.getParameter("subject");
         String title = request.getParameter("title");
         String status = request.getParameter("status");
         String brief = request.getParameter("brief");
         String content = request.getParameter("content");
-        if(title.length()>100){
-            check=1;
+        if (title.length() > 100) {
+            check = 1;
             request.setAttribute("errortitle", "title must be under 100 characters");
         }
-        if(brief.length()>100){
-            check=1;
+        if (brief.length() > 100) {
+            check = 1;
             request.setAttribute("errorbrief", "brief must be under 100 characters");
         }
+        if("".equals(content)){
+            check=1;
+            request.setAttribute("errorcontent", "content cannot be empty");
+        }
+        SubjectDAO dao1 = new SubjectDAO();
         Lesson l = new Lesson();
         l.setBrief(brief);
         l.setContent(content);
         l.setStatus(status);
         l.setSubject(sub);
         l.setTitle(title);
-        if(check==0){
+        if (check == 0) {
             LessonDAO dao = new LessonDAO();
-            if(id==null){               
-            dao.addLesson(l);
-            }else{
+            if ("0".equals(id)) {
+                dao.addLesson(l);
+                l.setSubject(dao1.getById(Integer.parseInt(sub)).getTitle());
+                request.setAttribute("alert", "Success");
+                request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);
+            } else {
                 l.setLessonId(Integer.parseInt(id));
-               dao.updateLesson(l);
-               request.setAttribute("lesson", l);
-            }            
+                dao.updateLesson(l);
+                l.setSubject(dao1.getById(Integer.parseInt(sub)).getTitle());
+                request.setAttribute("lesson", l);
+            }
+        }
+        else{
+            request.setAttribute("lesson", l);
         }
         request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);
     }
-    
 
     /**
      * Returns a short description of the servlet.
