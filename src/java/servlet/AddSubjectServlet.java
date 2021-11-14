@@ -67,7 +67,7 @@ public class AddSubjectServlet extends HttpServlet {
         String author = request.getParameter("author");
         String name = request.getParameter("name");
         String category = request.getParameter("category");
-        String featured = request.getParameter("featured");
+        boolean featured = Boolean.parseBoolean(request.getParameter("featured"));
         String status = request.getParameter("status");
         String description = request.getParameter("description");
         
