@@ -125,6 +125,22 @@
         <servlet-class>servlet.PostEditServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ExamServlet</servlet-name>
+        <servlet-class>servlet.ExamServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExamDetailServlet</servlet-name>
+        <servlet-class>servlet.ExamDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExamCategoryServlet</servlet-name>
+        <servlet-class>servlet.ExamCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExamSearch</servlet-name>
+        <servlet-class>servlet.ExamSearch</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PracticeDetail</servlet-name>
         <servlet-class>servlet.PracticeDetail</servlet-class>
     </servlet>
@@ -423,6 +439,22 @@
     <servlet-mapping>
         <servlet-name>ClassRemoveUserController</servlet-name>
         <url-pattern>/class/remove-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExamServlet</servlet-name>
+        <url-pattern>/exam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExamDetailServlet</servlet-name>
+        <url-pattern>/examdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExamCategoryServlet</servlet-name>
+        <url-pattern>/examcategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExamSearch</servlet-name>
+        <url-pattern>/examsearch</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ClassRemoveSubjectServlet</servlet-name>
