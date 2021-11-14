@@ -107,6 +107,7 @@
                                         <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Expert Menu</a>
                                             <ul class="navbar-nav nav mx-auto">
                                                 <li class="nav-item"><a href="QuestionPaging" class="nav-link">Question List</a></li>
+                                                <li class="nav-item"><a href="LessonList" class="nav-link">Lesson List</a></li>
                                                 <li class="nav-item"><a href="QuizListServlet" class="nav-link">Quiz List</a></li>
                                             </ul>
                                         </li>
