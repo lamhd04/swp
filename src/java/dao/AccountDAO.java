@@ -228,6 +228,23 @@ public boolean getAuthorization(String url, Account acc) {
             DBConnection.close(conn, stmt);
         }
     }
+    
+    public void editUserPass(Account user) {
+        try {
+            conn = DBConnection.open();
+           
+            String sql = "update Account set password=? where userId = ?;";
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, user.getPassword());
+            ps.setInt(2, user.getUserId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+    }
 
     public List<Account> search(String type, String name, int pageIndex, int pageSize, String order, String condition) {
         List<Account> list = new ArrayList<Account>();
