@@ -77,7 +77,7 @@ public class SliderDAO {
     }
 
     public void editSlider(Slider s) {
-        String sql = "update Slider set title = ?, [image] = ?, backlink = ?, note = ?, [status] = ? where sliderID = ?";
+        String sql = "update Slider set title = ?, image = ?, backlink = ?, note = ?, status = ? where sliderID = ?";
         try {
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
@@ -134,7 +134,7 @@ public class SliderDAO {
         return list;
     }
     
-    public List<Slider> getSubjectByPage(List<Slider> list, int start, int end) {
+    public List<Slider> getSliderByPage(List<Slider> list, int start, int end) {
         List<Slider> t = new ArrayList<>(); 
         for (int i = start; i < end; i++) {
             t.add(list.get(i));
@@ -142,18 +142,12 @@ public class SliderDAO {
         return t;
     }
 
-    public List<Slider> getSliders123(String search,String status ) {
+    public List<Slider> getSliders(String search,String status ) {
         List<Slider> list = new ArrayList<>();
         try {
             int count = 1;
             conn = DBConnection.open();
-            String sql = "SELECT TOP (1000) [sliderID]\n"
-                    + "      ,[title]\n"
-                    + "      ,[image]\n"
-                    + "      ,[backlink]\n"
-                    + "      ,[note]\n"
-                    + "      ,[status]\n"
-                    + "  FROM [SWP391_Prj_QuizPrac].[dbo].[Slider]\n"
+            String sql = "SELECT * FROM swp391_quizpractice.slider\n"
                     + "  where 1=1 ";
             if(status.length() > 0){
                 sql += "and status = ? ";
@@ -188,13 +182,6 @@ public class SliderDAO {
         return list;
     }
 
-    public static void main(String[] args) {
-        SliderDAO s = new SliderDAO();
-        List<Slider> list = s.getSliders123("1", "");
-        for (Slider slider : list) {
-            System.out.println(slider);
-        }
-
-    }
+    
 
 }
