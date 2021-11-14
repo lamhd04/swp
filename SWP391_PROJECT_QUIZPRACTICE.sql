@@ -90,6 +90,9 @@ insert into Setting(settingID,type,settingValue,settingOrder,status) values (28,
 insert into Setting(settingID,type,settingValue,settingOrder,status) values (29,'test_type','Free Test',1,'active');
 insert into Setting(settingID,type,settingValue,settingOrder,status) values (30,'test_type','Quiz Practice',2,'active');
 insert into Setting(settingID,type,settingValue,settingOrder,status) values (31,'test_type','Simulation Test',3,'active');
+insert into Setting values(32,'doc_cate','DocumentCategory1',1,'active');
+insert into Setting values(33,'doc_cate','DocumentCategory2',2,'active');
+insert into Setting values(34,'doc_cate','DocumentCategory3',3,'active');
 
 create table Post
 (
@@ -117,27 +120,36 @@ insert into Post(thumbnail,title,brief,detail,post_cate,author,featured,time,sta
 
 create table Document
 (
-docID int not null,
+docID int AUTO_INCREMENT primary key,
 thumbnail varchar(1000) not null,
 title nvarchar(70) not null,
+author nvarchar(50) not null,
+update_date Date not null,
 brief nvarchar(4000), 
 content text not null,
-doc_cate nvarchar(50),
-author int not null,
-update_date date,
-constraint FK_doc_author foreign key (author) references Account(userId)
+doc_cate nvarchar(50)
 );
 
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(1,'pic\education-la-gi-1-1008x570.jpg','Quiz1','This is Quiz1 brief_info','This is Quiz1 post_content','DocumentCate1',3,'2021-5-19');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(2,'pic\Education-la-gi-2-e1623658098277.jpg','Quiz2','This is Quiz2 brief_info','This is Quiz2 post_content','DocumentCate2',3,'2018-3-29');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(3,'pic\Picture1-6.jpg','Quiz3','This is Quiz3 brief_info','This is Quiz3 post_content','DocumentCate3',3,'2021-4-20');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(4,'pic\Education-in-Spain-1-1920x1080.jpg','Quiz4','This is Quiz4 brief_info','This is Quiz4 post_content','DocumentCate1',4,'2020-9-9');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(5,'pic\edu.jpg','Quiz5','This is Quiz5 brief_info','This is Quiz5 post_content','DocumentCate2',2,'2021-7-15');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(6,'pic\pic/dreamstime_s_74311588.jpg','Quiz6','This is Quiz6 brief_info','This is Quiz6 post_content','DocumentCate3',5,'2018-2-23');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(7,'pic\30c65f19-8e87-457c-b22a-cb32f44f4dd0.jpg','Quiz7','This is Quiz7 brief_info','This is Quiz7 post_content','DocumentCate1',2,'2020-6-28');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(8,'pic\Picture1-6.jpg','Quiz8','This is Quiz8 brief_info','This is Quiz8 post_content','DocumentCate3',3,'2021-10-24');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(9,'pic\pic/education2.jpg','Quiz9','This is Quiz9 brief_info','This is Quiz9 post_content','DocumentCate1',3,'2017-10-15');
-insert into Document(docID,thumbnail,title,brief,content,doc_cate,author,update_date) values(10,'pic\education-la-gi-1-1008x570.jpg','Quiz10','This is Quiz10 brief_info','This is Quiz10 post_content','DocumentCate3',4,'2020-8-12');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/education-la-gi-1-1008x570.jpg','Quiz1','Le Manh Hung','2021-5-19','This is Quiz1 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate1');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/Education-la-gi-2-e1623658098277.jpg','Quiz2','Nguyen Thi Cuc','2018-3-29','This is Quiz2 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate2');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/Picture1-6.jpg','Quiz3','Le Duy Hai','2021-4-20','This is Quiz3 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate3');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/Education-in-Spain-1-1920x1080.jpg','Quiz4','Nguyen Dai Lam','2020-9-9','This is Quiz4 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate1');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/edu.jpeg','Quiz5','Le Huu Phuc','2021-7-15','This is Quiz5 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate2');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/dreamstime_s_74311588.jpg','Quiz6','Trinh Anh Quan','2018-2-23','This is Quiz6 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate3');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/30c65f19-8e87-457c-b22a-cb32f44f4dd0.jpeg','Quiz7','Pham Hung Ha','2020-6-28','This is Quiz6 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate1');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/Picture1-6.jpg','Quiz8','Le Duy Hung','2021-10-24','This is Quiz8 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate3');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/education2.jpg','Quiz9','Le Manh Hung','2017-10-15','This is Quiz9 brief_info','Simply put, the work of most organizations would slow to a crawl without functioning IT systems. You’d be hard-pressed to find a business that doesn’t at least partially rely on computers and the networks that connect them. Maintaining a standard level of service, security and connectivity is a huge task, but it’s not the only priority or potential challenge on their plates.
+More and more companies want to implement more intuitive and sophisticated solutions. “IT can provide the edge a company needs to outsmart, outpace and out-deliver competitors,” says Edward Kiledjian, a Chief Information Security Officer and technology blogger. Let’s take a look at the needs that current and future IT specialists will be working on','DocumentCate1');
+insert into Document(thumbnail,title,author,update_date,brief,content,doc_cate) values('pic/education-la-gi-1-1008x570.jpg','Quiz10','Le Duy Hung','2020-8-12','This is Quiz10 brief_info',' it can be hard to separate worthwhile content from all the noise. So the BizTech team has crawled the web and put together this list of the 50 Must-Read IT Blogs for your convenience. 
+Our list is a mix of independent, media, analyst and vendor blogs. You’ll recognize some big names, and you’ll find some unfamiliar names too (and if we’ve overlooked one of your favorite blogs, feel free to tell us in the comment section). Known or unknown, all of the blogs on this list have valuable content to contribute to the IT discussion.','DocumentCate3');
 
 
 create table Subject
@@ -326,12 +338,12 @@ status varchar(10),
 constraint PK_sliderID primary key (sliderID)
 );
 
-insert into Slider(title,image,backlink,note,status) values('Slider1','pic/slider1.jpg','s1','note of slider1','active');
-insert into Slider(title,image,backlink,note,status) values('Slider2','pic/slider2.jpg','s2','note of slider2','active');
-insert into Slider(title,image,backlink,note,status) values('Slider3','pic/slider3.jpg','s3','note of slider3','active');
-insert into Slider(title,image,backlink,note,status) values('Slider4','pic/slider4.jpg','s4','note of slider4','active');
-insert into Slider(title,image,backlink,note,status) values('Slider5','pic/slider5.jpg','s5','note of slider5','active');
-insert into Slider(title,image,backlink,note,status) values('Slider6','pic/slider6.jpg','s6','note of slider6','active');
+insert into Slider(title,image,backlink,note,status) values('Slider1','pic/slider1.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=1','note of slider1','active');
+insert into Slider(title,image,backlink,note,status) values('Slider2','pic/slider2.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=2','note of slider2','active');
+insert into Slider(title,image,backlink,note,status) values('Slider3','pic/slider3.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=3','note of slider3','active');
+insert into Slider(title,image,backlink,note,status) values('Slider4','pic/slider4.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=5','note of slider4','active');
+insert into Slider(title,image,backlink,note,status) values('Slider5','pic/slider5.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=9','note of slider5','active');
+insert into Slider(title,image,backlink,note,status) values('Slider6','pic/slider6.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=7','note of slider6','active');
 
 create table Authorization(
 permission int not null,
@@ -406,9 +418,10 @@ insert into Exam(title,thumbnail,exam_cate,brief,content,type,date) values ('Rea
 insert into Exam(title,thumbnail,exam_cate,brief,content,type,date) values ('Multiple Choice Exam','https://phungthaihoc.com/wp-content/uploads/2020/03/resultados-test_9.jpg',28,N'Multiple choice test là gì?',N'Multiple choice tests are assessment tools used to objectively measure an individuals personality traits, aptitude, intelligence, abilities and behavioral style.','Assigned','2021-04-12');
 insert into Exam(title,thumbnail,exam_cate,brief,content,type,date) values ('Listening Exam','https://www.rhumsaintaubin.com/wp-content/uploads/2021/07/eq.jpg',26,'Listening Test 1','ahvbjaslnugsahojcqkcnoa','Assigned','2021-02-12');
 
+
 create table ExpireMail
 (
-id int not null, 
+id int not null ,
 dueDate Date not null,
-foreign key (id) references Account(userId)
-)
+FOREIGN KEY (id) REFERENCES Account(userId)
+);
