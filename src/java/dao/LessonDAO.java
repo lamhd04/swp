@@ -48,7 +48,7 @@ public class LessonDAO {
             if (qs.getSubject() != 0) {
                 subject = " and subID='" + qs.getSubject() + "'";
             }
-            String query = "select * from (select ROW_NUMBER() over (order by lessonId asc) as STT,* from Lesson \n"
+            String query = "select * from (select ROW_NUMBER() over (order by lessonId asc) as STT,lessonId,subID,title,status,brief,content from Lesson \n"
                     + "where (content like ? or brief like ?)" + status + subject + ") as x where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
