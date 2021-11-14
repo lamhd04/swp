@@ -115,7 +115,9 @@ public class Authorization implements Filter {
             Account acc = (Account) session.getAttribute("acc");
             String url = req.getServletPath();
             if (url.equals("/login")||url.equals("/Login.jsp")||url.equals("/Home.jsp")||url.contains(".woff")
-                    ||url.contains(".ttf")||url.contains(".png")||url.contains(".jpg")||url.contains(".css")
+                    ||url.contains(".ttf")||url.contains(".png")||url.contains(".jpg")||url.contains(".jpeg")||url.contains(".css")||url.contains(".css")
+		||url.contains(".js")||url.contains("/DocumentControl")||url.contains("/DocumentDetailsServlet")||
+                url.contains("/ResetPasswordServlet")||url.contains("/DocumentCategoryServlet")
                     ||(url.contains(".js")&&!url.contains(".jsp"))) {
 
                 chain.doFilter(request, response);
