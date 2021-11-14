@@ -32,7 +32,7 @@ public class AccountDAO {
         List<Account> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "Select * from [Project].[dbo].[Account]";
+            String sql = "Select * from Account";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -90,7 +90,7 @@ public class AccountDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
                 user.setPermission(getSetting(rs.getInt("permission")));
-
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,12 +104,12 @@ public class AccountDAO {
         Account user = new Account();
         try {
             conn = DBConnection.open();
-            String sql = "select * from Account where email=?";
+            String sql = "select * from Account where email=?;";
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
-                user.setStatus(rs.getString("status"));
+                user.setStatus(rs.getString("status"));               
                 user.setUserId(rs.getInt("userId"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUserTitle(rs.getString("userTitle"));
@@ -131,7 +131,7 @@ public class AccountDAO {
     public void addAcc(Account account) {
         try {
             conn = DBConnection.open();
-            String sql = "INSERT INTO [dbo].[Account]( fullname, userTitle, email, password, phone, address, permission,status)"
+            String sql = "INSERT INTO Account( fullname, userTitle, email, password, phone, address, permission,status)"
                     + " VALUES(?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
             int index = 0;
@@ -150,12 +150,11 @@ public class AccountDAO {
             DBConnection.close(conn, stmt);
         }
     }
-
-    public boolean getAuthorization(String url, Account acc) {
-        List<Integer> i = new ArrayList<Integer>();
+public boolean getAuthorization(String url, Account acc) {
+        List<Integer> i=new ArrayList<Integer>();
         try {
             conn = DBConnection.open();
-            String sql = "Select * from [Authorization] where url = ?";
+            String sql = "Select * from Authorization where url = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, url);
             rs = ps.executeQuery();
@@ -174,11 +173,10 @@ public class AccountDAO {
         }
         return false;
     }
-
     public String getSetting(int permission) {
         String role = null;
         try {
-            String sql1 = "select * from Setting where [type]='user_role' and settingOrder=?";
+            String sql1 = "select * from Setting where type='user_role' and settingOrder=?";
             ps = conn.prepareStatement(sql1);
             ps.setInt(1, permission);
             rs = ps.executeQuery();
@@ -195,7 +193,7 @@ public class AccountDAO {
     public int getSetting(String settingValue) {
         int i = 0;
         try {
-            String sql = "select * from Setting where [type]='user_role' and settingValue=?";
+            String sql = "select * from Setting where type='user_role' and settingValue=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, settingValue);
             rs = ps.executeQuery();
@@ -235,7 +233,7 @@ public class AccountDAO {
         List<Account> list = new ArrayList<Account>();
         try {
 
-            String query = "select * from (select ROW_NUMBER() over (order by " + type + " " + order + ") as STT,* from Account \n"
+            String query = "select * from (select ROW_NUMBER() over (order by " + type + " " + order + ") as STT,userId,fullname,userTitle,email,password,phone,address,permission,status from Account \n"
                     + "where fullname like ? " + condition + ") as x where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
@@ -245,7 +243,7 @@ public class AccountDAO {
             ps.setInt(4, pageIndex);
             ps.setInt(5, pageSize);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            while (rs.next()) {              
                 Account user = new Account();
                 user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
@@ -255,7 +253,7 @@ public class AccountDAO {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setPermission(rs.getString("permission"));
+                user.setPermission(rs.getString("permission"));                
                 list.add(user);
             }
             for (int i = 0; i < list.size(); i++) {
@@ -272,7 +270,7 @@ public class AccountDAO {
     public int accountCount(String username, String condition) {
         int count = 0;
         try {
-            String query = "select count(*) from dbo.Account where fullname like ? " + condition + "";
+            String query = "select count(*) from Account where fullname like ? " + condition + "";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             ps.setString(1, "%" + username + "%");
