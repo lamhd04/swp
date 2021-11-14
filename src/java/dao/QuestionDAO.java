@@ -37,6 +37,13 @@ public class QuestionDAO {
     private ResultSet rs;
     private PreparedStatement ps;
 
+    public class QuestionDAO {
+
+    private Connection conn;
+    private Statement stmt;
+    private ResultSet rs;
+    private PreparedStatement ps;
+
     public Question getQuestion(int qId) {
         Question q = null;
         try {
@@ -69,7 +76,7 @@ public class QuestionDAO {
             ps.setInt(1, qId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                a.add(new Answer(rs.getInt("qId"), rs.getString("answer"), rs.getInt("key")));
+                a.add(new Answer(rs.getInt("qId"), rs.getString("answer"), rs.getInt("key_ao")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -233,7 +240,7 @@ public class QuestionDAO {
             if (qs.getSubject() != null) {
                 subject = " and subject='" + qs.getSubject() + "'";
             }
-            String query = "select * from (select ROW_NUMBER() over (order by qId asc) as STT,* from Question \n"
+            String query = "select * from (select ROW_NUMBER() over (order by qId asc) as STT,qId,subject,category,subcategory,level,status,quiz,content,media,explanation from Question \n"
                     + "where content like ? " + category + subcategory + level + status + subject + ") as x where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
