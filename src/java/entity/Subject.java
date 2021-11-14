@@ -15,7 +15,7 @@ public class Subject {
     private String title;
     private String author;
     private String status;
-    private String featured;
+    private boolean featured;
     private String category;
     private String name;
     private String description;
@@ -23,7 +23,7 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(int id, String title, String author, String status, String featured, String category, String name, String description) {
+    public Subject(int id, String title, String author, String status, boolean featured, String category, String name, String description) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -33,7 +33,7 @@ public class Subject {
         this.name = name;
         this.description = description;
     }
-     public Subject(String title, String author, String status, String featured, String category, String name, String description) {
+     public Subject(String title, String author, String status, boolean featured, String category, String name, String description) {
         this.title = title;
         this.author = author;
         this.status = status;
@@ -75,11 +75,11 @@ public class Subject {
         this.status = status;
     }
 
-    public String isFeatured() {
+    public boolean isFeatured() {
         return featured;
     }
 
-    public void setFeatured(String featured) {
+    public void setFeatured(boolean featured) {
         this.featured = featured;
     }
 
