@@ -102,7 +102,7 @@ public class UploadFileServlet extends HttpServlet {
                 q.setContent(words[0]);
                 q.setLevel(qz.getLevel());
                 q.setQuiz(quizId);
-                if(words[1].length()>1){
+                if(words[1].length()>1000){
                     check=1;
                     request.setAttribute("errorexplanation","explanation must be under 1000 characters");
                     errorline.add(rowcount);
@@ -120,9 +120,9 @@ public class UploadFileServlet extends HttpServlet {
                 ArrayList<Answer> list = new ArrayList<Answer>();
                 while (!line.equals("end")) {
                     int key = 0;
-                    if (line.contains("(key)"));
+                    if (line.contains("(key)"))
                     key = 1;
-                    list.add(new Answer(q.getqId(), line, key));
+                    list.add(new Answer(q.getqId(), line.substring(0, line.length()-5), key));
                     line = reader.readLine();
                     rowcount++;
                 }

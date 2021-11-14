@@ -184,7 +184,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label ">Quiz</label>
                                     <div class="col-8">
-                                        <select class="form-control here" id="quiz" name="quiz" style="height: 40px" required> 
+                                        <select onclick="getSub2()" class="form-control here" id="quiz" name="quiz" style="height: 40px" required> 
                                         </select>
                                     </div>
                                 </div>

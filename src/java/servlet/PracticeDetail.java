@@ -58,13 +58,16 @@ public class PracticeDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int testId=Integer.parseInt(request.getParameter("testId"));
+        int testId=0;
+        try{
+            testId=Integer.parseInt(request.getParameter("testId"));
+        }catch(NumberFormatException e){
+            request.getRequestDispatcher("PracticeDetail.jsp").forward(request, response);
+        }      
         //int testId = 1;
         TestDAO dao = new TestDAO();
         Test t = dao.getTest(testId);     
-        if (!"add".equals(request.getParameter("op"))) {
-            request.setAttribute("test", t);
-        }
+        request.setAttribute("test", t);   
         request.getRequestDispatcher("PracticeDetail.jsp").forward(request, response);
     }
 

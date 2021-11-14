@@ -108,7 +108,7 @@ public class LessonDAO {
         ResultSet rs;
         PreparedStatement ps;
         try {
-            String sql = "insert into Lesson values (?,?,?,?,?)";
+            String sql = "insert into Lesson (subID,title,status,brief,content) values (?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(l.getSubject()));

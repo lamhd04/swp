@@ -32,16 +32,16 @@ public class TestDAO {
     public Test getTest(int testId) {
         Test t = new Test();
         try {
-            String sql = "select * from Test where testID=?";
+            String sql = "select * from Test where testId=?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, testId);
             rs = ps.executeQuery();
             SubjectDAO dao = new SubjectDAO();
             if (rs.next()) {
-                t.setTestId(rs.getInt("testID"));
+                t.setTestId(rs.getInt("testId"));
                 t.setDuration(rs.getInt("duration"));
-                t.setStarttime(rs.getDate("start_time").toString());
+                t.setStarttime(rs.getString("start_time").toString());
                 t.setType(rs.getString("type"));
                 t.setSubject(dao.getById(rs.getInt("subID")).getTitle());
                 t.setTag(rs.getString("tag"));
@@ -60,7 +60,7 @@ public class TestDAO {
 
     public void addTest(Test t) {
         try {
-            String sql = "insert into Test values (?,?,'" + t.getStarttime() + "',?,?,?,?,?,?)";
+            String sql = "insert into Test (subID,type,start_time,duration,result,tag,ques_numb,ques_cate,ques_subcate) values (?,?,'" + t.getStarttime() + "',?,?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(t.getSubject()));
@@ -82,8 +82,8 @@ public class TestDAO {
     public List<TestDTO> getTest(int pageIndex, int pageNum, int userId) {
         List<TestDTO> result = new ArrayList<>();
         String sql = "SELECT * FROM\n"
-                + "(SELECT ROW_NUMBER() OVER(ORDER BY testId) rowNum,t.testId,t.type, s.name as subjectName, t.start_time, t.duration,t.result  FROM [dbo].[Test] t\n"
-                + "JOIN [dbo].[Subject] s ON s.subID =  t.subID\n"
+                + "(SELECT ROW_NUMBER() OVER(ORDER BY testId) rowNum,t.testId,t.type, s.name as subjectName, t.start_time, t.duration,t.result  FROM Test t\n"
+                + "JOIN Subject s ON s.subID =  t.subID\n"
                 + ") temp\n"
                 + "where temp.rowNum >= ? AND temp.rowNum < ?";
 
@@ -107,7 +107,6 @@ public class TestDAO {
                 test.setStartTime(rs.getString("start_time"));
                 test.setDuration(rs.getInt("duration"));
                 test.setResult(rs.getFloat("result"));
-                test.setPassRate(rs.getFloat("pass_rate"));
                 test.setDurationText(getDurationText(test.getDuration()));
                 result.add(test);
             }
@@ -132,7 +131,7 @@ public class TestDAO {
     }
 
     public int count() {
-        String sql = "SELECT COUNT(*) as total FROM [dbo].[Test]";
+        String sql = "SELECT COUNT(*) as total FROM Test";
 
         Connection conn = dbconnection.DBConnection.open();
 

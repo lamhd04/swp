@@ -81,7 +81,7 @@ import model.QuestionSearch;
     public void editQuestion(Question q) {
         try {
             conn = DBConnection.open();
-            String sql = "update Question set [subject] = ?, category= ?,subcategory=?,[level]=?,[status]=?, quiz=?,content=?,media=?,explanation=? where qId = ?";
+            String sql = "update Question set subject = ?, category= ?,subcategory=?,level=?,status=?, quiz=?,content=?,media=?,explanation=? where qId = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, q.getSubject());
             ps.setString(2, q.getCategory());
@@ -119,7 +119,7 @@ import model.QuestionSearch;
 
     public void addQuestion(Question q) {
         try {
-            String sql = "insert into Question values (?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into Question (subject,category,subcategory,level,status,quiz,content,media,explanation) values (?,?,?,?,?,?,?,?,?)";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(q.getSubject()));
