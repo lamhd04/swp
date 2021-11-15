@@ -112,13 +112,19 @@
                                             </ul>
                                         </li>
                                     </c:when>
+                                    <c:when test="${sessionScope.acc.permission == 'Marketing'}">
+                                        <li class="nav-item"><a class="nav-link">Marketing Menu</a>                                    
+                                            <ul class="navbar-nav nav mx-auto">
+                                                <li class="nav-item"><a href="SliderListServlet" class="nav-link">Slider</a></li>
+                                                <li class="nav-item"><a href="postmanager" class="nav-link">Manager Post</a> </li>
+                                            </ul>
+                                        </li>  
+                                    </c:when>
                                 </c:choose>
                                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
                                 </li>
                                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                                <c:if test="${sessionScope.acc!=null}">
-                                <li class="nav-item"><a href="SliderListServlet" class="nav-link">Slider</a></li>
-                                    </c:if>
+                                
                                 <li class="nav-item"><a href="blog.html" class="nav-link">Document</a>
                                     <ul class="navbar-nav nav mx-auto">
                                         <li class="nav-item"><a href="DocumentControl" class="nav-link">Document List</a></li>
