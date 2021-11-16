@@ -55,9 +55,9 @@
                             <div class="blog_post">
                                 <h3>${pt.title}</h3>
                             <div class="post_by d-flex">
-                                <span>By - <a href="#" title="" class="bloger_name">${pt.author}</a></span>
+                                <span>By - <a href="#" title="" class="bloger_name">${sessionScope.acc.fullname}</a></span>
                                 <span>Posted On : ${pt.time}</span>                        
-                                <span><a href="#" title="">${pt.cId}</a></span>
+                                <span><a href="#" title="">${pt.post_cate}</a></span>
                             </div>
                             <img src="${pt.thumbnail}" alt="" class="img-fluid">
                             <div class="postpage_content_wrapper">
@@ -104,7 +104,7 @@
                                 <div class="items-title">
                                     <h3 class="title">Recent Post</h3>
                                 </div>
-                                <c:forEach items="${sessionScope.listRecent}" var="o">
+                                <c:forEach items="${listRecent}" var="o">
                                     <div class="single-post">
                                         <div class="recent_img">
                                             <a href="postdetail?postid=${o.postid}" title=""><img src="${o.thumbnail}" alt="" class="img-fluid"></a>
@@ -126,7 +126,7 @@
                                 <c:forEach items="${listPC}" var="o">
                                     <div class="archives-items">
                                         <ul class="list-unstyled">
-                                            <li><a href="postcategory?cid=${o.cid}" title="">${o.cname}</a></li>
+                                            <li><a href="postcategory?post_cate=${o.settingOrder}" title="">${o.settingValue}</a></li>
                                         </ul>
                                     </div>
                                 </c:forEach>
