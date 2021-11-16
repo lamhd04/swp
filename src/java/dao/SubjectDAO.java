@@ -33,10 +33,10 @@ public class SubjectDAO {
         List<Subject> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "select * from Subject\n"
+            String sql = "select * from (select ROW_NUMBER() OVER(ORDER BY subID) as RowNum, * from [Subject]\n"
                     + "where 1=1 @@@\n"
-                    + "order by subID\n"
-                    + "offset (?-1)*? row fetch next ? row only";
+                    + ") as temp"
+                    + " where temp.RowNum >= ? AND temp.RowNum < ?";
             List<Object> params = new ArrayList<>();
             StringBuilder condition = new StringBuilder();
             if (param.getTitle() != null) {
@@ -53,9 +53,10 @@ public class SubjectDAO {
             }
             int pageIndex = param.getPageIndex() != null ? param.getPageIndex() : 1;
             int pageSize = param.getPageSize() != null ? param.getPageSize() : 10;
-            params.add(pageIndex);
-            params.add(pageSize);
-            params.add(pageSize);
+            int start = (pageIndex - 1) * pageSize;
+            int end = start + pageSize;
+            params.add(start);
+            params.add(end);
             sql = sql.replace("@@@", condition);
             ps = conn.prepareStatement(sql);
 
