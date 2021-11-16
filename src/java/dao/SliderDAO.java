@@ -141,6 +141,24 @@ public class SliderDAO {
         }
         return t;
     }
+    
+    public void addSlider(Slider s) {
+        String query = "insert into Slider(title,image,backlink,note,status) values(?,?,?,?,?)";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, s.getTitle());
+            ps.setString(2, s.getImage());
+            ps.setString(3, s.getBacklink());
+            ps.setString(4, s.getNote());     
+            ps.setString(5, s.getStatus());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+    }
 
     public List<Slider> getSliders(String search,String status ) {
         List<Slider> list = new ArrayList<>();
