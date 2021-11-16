@@ -57,7 +57,7 @@
                                     <a href="postdetail?postid=${o.postid}" title=""><img src="${o.thumbnail}" alt="" class="img-fluid"></a>
                                 </div>
                                 <div class="post_content_wrapper">
-                                    <div class="post_date"><p>Posted On : ${o.time} - <span>Education Category</span></p></div>
+                                    <div class="post_date"><p>Posted On : ${o.time} - <span>Category: ${o.post_cate}</span></p></div>
                                     <h3><a href="postdetail?postid=${o.postid}" title="">${o.title}</a></h3>
                                     <p>${o.brief}</p>
                                     <div class="post_by d-flex justify-content-between">
@@ -73,7 +73,7 @@
                                         </div>
                                     </div>
                                     <ul class="post_bloger">
-                                        <li>BY : ${o.author}</li>                                        
+                                        <li>BY : ${sessionScope.acc.fullname}</li>                                        
                                     </ul>               
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                 <div class="items-title">
                                     <h3 class="title">Recent Post</h3>
                                 </div>
-                                <c:forEach items="${sessionScope.listRecent}" var="o">
+                                <c:forEach items="${listRecent}" var="o">
                                     <div class="single-post">
                                         <div class="recent_img">
                                             <a href="postdetail?postid=${o.postid}" title=""><img src="${o.thumbnail}" alt="" class="img-fluid"></a>
@@ -139,7 +139,7 @@
                                 <c:forEach items="${listPC}" var="o">
                                     <div class="archives-items">
                                         <ul class="list-unstyled">
-                                            <li><a href="postcategory?cid=${o.cid}" title="">${o.cname}</a></li>
+                                            <li><a href="postcategory?post_cate=${o.settingId}" title="">${o.settingValue}</a></li>
                                         </ul>
                                     </div>
                                 </c:forEach>
