@@ -58,17 +58,17 @@ public class PracticeDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int testId=0;
-        try{
-            testId=Integer.parseInt(request.getParameter("testId"));
-        }catch(NumberFormatException e){
-            request.getRequestDispatcher("PracticeDetail.jsp").forward(request, response);
-        }      
-        //int testId = 1;
+        int testId = 0;
+        try {
+            testId = Integer.parseInt(request.getParameter("testId"));
+
+        } catch (NumberFormatException e) {
+        }
         TestDAO dao = new TestDAO();
-        Test t = dao.getTest(testId);     
-        request.setAttribute("test", t);   
+        Test t = dao.getTest(testId);
+        request.setAttribute("test", t);
         request.getRequestDispatcher("PracticeDetail.jsp").forward(request, response);
+        //int testId = 1;
     }
 
     /**
@@ -92,16 +92,16 @@ public class PracticeDetail extends HttpServlet {
         QuestionSearch qs = new QuestionSearch();
         SubjectDAO d = new SubjectDAO();
         qs.setSubject(subject);
-        qs.setCategory("cat"+ques_cate);
-        qs.setSubcategory("subcat"+ques_subcate);
+        qs.setCategory("cat" + ques_cate);
+        qs.setSubcategory("subcat" + ques_subcate);
         QuestionDAO qd = new QuestionDAO();
-        int q=qd.questionCount(qs);
-        if(q<ques_numb){
-            check=1;
-            ques_numb=0;
-            request.setAttribute("errorques_numb", "question number cannot be more than "+q);
-        }  
-        int duration = ques_numb*2;
+        int q = qd.questionCount(qs);
+        if (q < ques_numb) {
+            check = 1;
+            ques_numb = 0;
+            request.setAttribute("errorques_numb", "question number cannot be more than " + q);
+        }
+        int duration = ques_numb * 2;
         Test t = new Test();
         t.setDuration(duration);
         t.setQues_cate(ques_cate);
@@ -113,9 +113,8 @@ public class PracticeDetail extends HttpServlet {
         TestDAO dao = new TestDAO();
         if (check == 0) {
             dao.addTest(t);
-            request.setAttribute("alert", "Success");
-            request.getRequestDispatcher("PracticeDetail").forward(request, response);
-        }else{
+            request.setAttribute("alert", "success");
+        } else {
             t.setTestId(0);
         }
         request.setAttribute("test", t);

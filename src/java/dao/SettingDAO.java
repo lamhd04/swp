@@ -80,7 +80,7 @@ public class SettingDAO {
 
     public void addSetting(String type, String value,
             String order, String status) {
-        String sql = "insert into Setting([type],settingValue,settingOrder,[status]) values (?,?,?,?)";
+        String sql = "insert into Setting(type,settingValue,settingOrder,status) values (?,?,?,?)";
         try {
             conn = DBConnection.open();
 
@@ -99,7 +99,7 @@ public class SettingDAO {
 
     public void editSetting(String type, String value,
             String order, String status, String sid) {
-        String query = "Update Setting set [type]=?,settingValue=? , settingOrder=? , [status]=? Where settingId = ?";
+        String query = "Update Setting set type=?,settingValue=? , settingOrder=? , status=? Where settingId = ?";
         try {
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
@@ -172,7 +172,7 @@ public class SettingDAO {
     public List<Setting> getSettingByType(String type) {
         List<Setting> list = new ArrayList<Setting>();
         try {
-            String sql = "select * from Setting where [type]= ?";
+            String sql = "select * from Setting where type= ?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setString(1, type);

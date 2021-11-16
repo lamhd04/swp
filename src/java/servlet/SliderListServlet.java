@@ -45,7 +45,7 @@ public class SliderListServlet extends HttpServlet {
         }
         SliderDAO sdao = new SliderDAO();
         //String indexPage = request.getParameter("index");
-        List<Slider> listS = sdao.getSliders123(search, status);
+        List<Slider> listS = sdao.getSliders(search, status);
         int size = listS.size();
         int numperPage = 4;
         int numPage = size / numperPage + (size % numperPage == 0 ? 0 : 1);
@@ -60,7 +60,7 @@ public class SliderListServlet extends HttpServlet {
         int start, end;
         start = (page - 1) * numperPage;
         end = Math.min(size, page * numperPage);
-        List<Slider> arr = sdao.getSubjectByPage(listS, start, end);
+        List<Slider> arr = sdao.getSliderByPage(listS, start, end);
 //        if(indexPage == null){
 //            indexPage = "1";
 //        }
