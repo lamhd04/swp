@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
+import dbconnection.DBConnection;
 import entity.Exam;
+import entity.Exam;
+import entity.Setting;
+import entity.Setting;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,91 +17,266 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Admin
+ * @author HaGau
  */
 public class ExamDAO {
 
-    public List<Exam> getExam(int number) {
-        String sql = "SELECT * FROM [dbo].[Exam]";
-        List<Exam> result = new ArrayList<>();
-        Connection con = dbconnection.DBConnection.open();
-        PreparedStatement stm = null;
+    private Connection conn;
+    private Statement stmt;
+    private ResultSet rs;
+    private PreparedStatement ps;
+
+    public List<Exam> getExams() {
+        List<Exam> list = new ArrayList<>();
         try {
-            stm = con.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
+            conn = DBConnection.open();
+            String sql = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Exam ex = new Exam();
-                ex.setId(rs.getInt("examID"));
+                ex.setExamID(rs.getInt("examID"));
+                ex.setTitle(rs.getString("title"));
                 ex.setThumbnail(rs.getString("thumbnail"));
-                result.add(ex);
+                ex.setExam_cate(rs.getString("settingValue"));
+                ex.setBrief(rs.getString("brief"));
+                ex.setContent(rs.getString("content"));
+                ex.setType(rs.getString("type"));
+                ex.setDate(rs.getDate("date"));
+                list.add(ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
-        return result;
+        return list;
     }
 
-    public List<Exam> getTop3Exam() {
-        String sql = "SELECT TOP 3 * FROM [dbo].[Exam]"
-                + " ORDER BY Exam.date DESC";
-        List<Exam> result = new ArrayList<>();
-        Connection con = dbconnection.DBConnection.open();
-        PreparedStatement stm = null;
+    public List<Exam> getFreeExams() {
+        List<Exam> list = new ArrayList<>();
         try {
-            stm = con.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
+            conn = DBConnection.open();
+            String sql = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID where Exam.type = 'Free'";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Exam ex = new Exam();
-                ex.setId(rs.getInt("examID"));
-                ex.setThumbnail(rs.getString("thumbnail"));
+                ex.setExamID(rs.getInt("examID"));
                 ex.setTitle(rs.getString("title"));
-                result.add(ex);
+                ex.setThumbnail(rs.getString("thumbnail"));
+                ex.setExam_cate(rs.getString("settingValue"));
+                ex.setBrief(rs.getString("brief"));
+                ex.setContent(rs.getString("content"));
+                ex.setType(rs.getString("type"));
+                ex.setDate(rs.getDate("date"));
+                list.add(ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
-        return result;
+        return list;
     }
 
-    public List<String> getCategory() {
-        String sql = "SELECT exam_cate FROM [dbo].[Exam]"
-                + " GROUP BY exam_cate";
-        List<String> result = new ArrayList<>();
-        Connection con = dbconnection.DBConnection.open();
-        PreparedStatement stm = null;
+    public List<Setting> getExamCategories() {
+        List<Setting> list = new ArrayList<>();
+        String query = "Select * from Setting where type = 'exam_category'";
         try {
-            stm = con.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                result.add(rs.getString("exam_cate"));
+                list.add(new Setting(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
-        return result;
+        return list;
     }
-    
-        public List<Exam> searchExamByTitle(String title) {
-        String sql = "SELECT * FROM [dbo].[Exam]"
-                + " WHERE title LIKE '?'"
-                + " ORDER BY Exam.date DESC";
-        List<Exam> result = new ArrayList<>();
-        Connection con = dbconnection.DBConnection.open();
-        PreparedStatement stm = null;
+
+    public List<Exam> getPostbyCID(String id) {
+        List<Exam> list = new ArrayList<>();
+        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID where exam_cate = ?";
         try {
-            stm = con.prepareStatement(sql);
-            stm.setString(1, "%"+title+"%");
-            ResultSet rs = stm.executeQuery();
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                Exam ex = new Exam();
-                ex.setId(rs.getInt("examID"));
-                ex.setThumbnail(rs.getString("thumbnail"));
-                ex.setTitle(rs.getString("title"));
-                result.add(ex);
+                list.add(new Exam(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
-        return result;
+        return list;
+    }
+
+    public Exam getExambyID(String id) {
+        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID where examID = ?";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Exam(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return null;
+    }
+
+    public int getTotalExam() {
+        String query = "select count(*) from Exam";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return 0;
+    }
+
+    public List<Exam> pagingExam(int index) {
+        List<Exam> list = new ArrayList<>();
+        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID order by examID limit 4 offset ?";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Exam(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
+
+    public List<Exam> SearchExambyTitle(String searchTitle) {
+        List<Exam> list = new ArrayList<>();
+        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID where title like ?";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + searchTitle + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Exam(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
+
+    public List<Exam> getRecentExam() {
+        List<Exam> list = new ArrayList<>();
+        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID order by date desc limit 2";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Exam(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
+
+    public void addExam(String title, String thumbnail, int exam_cate, String brief, String content, String type) {
+        String query = "insert into Post(title,thumbnail,exam_cate,brief,detail,type) values (?,?,?,?,?,?)";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, title);
+            ps.setString(2, thumbnail);
+            ps.setInt(3, exam_cate);
+            ps.setString(4, brief);
+            ps.setString(5, content);
+            ps.setString(6, type);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+    }
+
+    public void deleteExam(String id) {
+        String query = "delete from Exam where examID = ?";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
     }
 }
