@@ -17,6 +17,7 @@
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script
         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <jsp:useBean id="a" class="dao.SliderDAO" scope="request"></jsp:useBean>
     </head>
     <style>
         .pagination {
@@ -77,23 +78,7 @@
     </style>
     <body>
         <jsp:include page="Header.jsp" flush="true"></jsp:include>
-            <header class="header_inner about_page">
-                <div class="intro_wrapper">
-                    <div class="container">  
-                        <div class="row">        
-                            <div class="col-sm-12 col-md-8 col-lg-8">
-                                <div class="intro_text">
-                                    <h1>Slider List</h1>
-                                    <div class="pages_links">
-                                        <a href="Home.jsp" title="">Home</a>
-                                        <a href="#" title="" class="active">Slider</a>
-                                    </div>
-                                </div>
-                            </div>              
-                        </div>
-                    </div> 
-                </div>
-            </header>
+            
 
             <div class="container">
                 <h2>LIST SLIDERS</h2>
@@ -101,20 +86,21 @@
                     <div class="search">
                         <input type="text" name="search" class="searchTerm" value="${search}" placeholder="What are you looking for?">
 
-                        <input type="hidden" value="" name="status" />
-                        <input type="hidden" value="" name="search" />
-                        <button type="submit" class="searchButton">
-                            <i value="Search">Search</i>
-                        </button>
-                    </div>
-                </form>
-                <div class="" style="float: right ">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" style="" type="button" data-toggle="dropdown">Filter
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="SliderListServlet?search=${search}&status=active">Active</a></li>
+                    <input type="hidden" value="" name="status" />
+                    <input type="hidden" value="" name="search" />
+                    <button type="submit" class="searchButton">
+                        <i value="Search">Search</i>
+                    </button>
+                </div>
+            </form>
+            <a href="SliderAdd.jsp" style="text-decoration: none">Add new slider</a>
+            <div class="" style="float: right ">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" style="" type="button" data-toggle="dropdown">Filter
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="SliderListServlet?search=${search}&status=active">Active</a></li>
                         <li><a href="SliderListServlet?search=${search}&status=inactive">Inactive</a></li>
                     </ul>
                 </div>
@@ -127,7 +113,6 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Back link</th>
-                        <th>Note</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -139,10 +124,15 @@
                             <td>${list.sliderID}</td>
                             <td>${list.title}</td>
                             <td>${list.backlink}</td>
-                            <td>${list.note}</td>
                             <td>${list.status}</td>                            
                             <td>
-                                <a style="padding: 5px 10px ;" class="btn btn-primary btn-sm" href="SliderServlet?id=${list.sliderID}">Edit</a> 
+                                <a style="padding: 5px 10px ;" class="btn btn-primary btn-sm" href="SliderServlet?id=${list.sliderID}&op=edit">Edit</a>
+                                <c:if test="${list.status == 'active'}">
+                                    <a style="padding: 5px 10px ;" class="btn btn-primary btn-sm" href="SliderServlet?id=${list.sliderID}&op=deactivate">Deactivate</a>
+                                </c:if>
+                                <c:if test="${list.status == 'inactive'}">
+                                    <a style="padding: 5px 10px ;" class="btn btn-primary btn-sm" href="SliderServlet?id=${list.sliderID}&op=activate">Activate</a>
+                                </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
