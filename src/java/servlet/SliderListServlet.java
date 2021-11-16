@@ -34,7 +34,6 @@ public class SliderListServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
         String search = request.getParameter("search");
         String status = request.getParameter("status");
         if(search == null){
@@ -44,7 +43,7 @@ public class SliderListServlet extends HttpServlet {
             status="";
         }
         SliderDAO sdao = new SliderDAO();
-        //String indexPage = request.getParameter("index");
+
         List<Slider> listS = sdao.getSliders(search, status);
         int size = listS.size();
         int numperPage = 4;
@@ -61,30 +60,12 @@ public class SliderListServlet extends HttpServlet {
         start = (page - 1) * numperPage;
         end = Math.min(size, page * numperPage);
         List<Slider> arr = sdao.getSliderByPage(listS, start, end);
-//        if(indexPage == null){
-//            indexPage = "1";
-//        }
-//        int index = Integer.parseInt(indexPage);
-        
-//        int count = sdao.getTotalSlider();
-//        int endPage = count/4;
-//        if(count % 4 != 0){
-//            endPage++;
-//        }
-//        List<Slider> list = sdao.pagingSlider(index);
-        //request.setAttribute("end", endPage);
-        //request.setAttribute("list_sliders", list);
         request.setAttribute("list_sliders", arr);
         request.setAttribute("num", numPage);
         request.setAttribute("index", page);
         request.setAttribute("status", status);
         request.setAttribute("search", search);
-        
-        session.setAttribute("SliderHome1", sdao.getSliderById(1));
-        session.setAttribute("SliderHome2", sdao.getSliderById(2));
-        session.setAttribute("SliderHome3", sdao.getSliderById(3));
-        session.setAttribute("SliderHome4", sdao.getSliderById(4));
-        session.setAttribute("SliderHome5", sdao.getSliderById(5));
+
         request.getRequestDispatcher("Slider.jsp").forward(request, response);
 
     }
