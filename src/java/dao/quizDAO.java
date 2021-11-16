@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -182,12 +184,23 @@ public class quizDAO {
         }
 
     }
-
-    public static void main(String[] args) {
-        quizDAO qd = new quizDAO();
-        List<QuizList> list = qd.paging("quizid", 1, 6, "", "", "", "", "");
-        for (QuizList quizList : list) {
-            System.out.println(quizList);
+    
+    public int countAllQuiz(){
+        int count = 0;
+        String query = "select count(*) from QuizList";
+        try{
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        }catch(Exception ex){
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
         }
+        return count;
     }
+    
 }
