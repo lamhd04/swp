@@ -21,32 +21,23 @@ public class Post {
     public String post_cate;
     public int author;
     public String featured;
-    public String time;
+    public Date time;
     public String status;
-    public String postCate;
 
     public Post() {
     }
 
-    public Post(int postid, String thumbnail, String title, String brief, String detail, int cId, int author, String featured, String time, String status) {
+    public Post(int postid, String thumbnail, String title, String brief, String detail, String post_cate, int author, String featured, Date time, String status) {
         this.postid = postid;
         this.thumbnail = thumbnail;
         this.title = title;
         this.brief = brief;
         this.detail = detail;
-        this.cId = cId;
+        this.post_cate = post_cate;
         this.author = author;
         this.featured = featured;
         this.time = time;
         this.status = status;
-    }
-
-    public String getPostCate() {
-        return postCate;
-    }
-
-    public void setPostCate(String postCate) {
-        this.postCate = postCate;
     }
 
     public int getPostid() {
@@ -89,13 +80,15 @@ public class Post {
         this.detail = detail;
     }
 
-    public int getcId() {
-        return cId;
+    public String getPost_cate() {
+        return post_cate;
     }
 
-    public void setcId(int cId) {
-        this.cId = cId;
+    public void setPost_cate(String post_cate) {
+        this.post_cate = post_cate;
     }
+
+    
 
     public int getAuthor() {
         return author;
@@ -121,17 +114,13 @@ public class Post {
         this.status = status;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" + "postid=" + postid + ", thumbnail=" + thumbnail + ", title=" + title + ", brief=" + brief + ", detail=" + detail + ", cId=" + cId + ", author=" + author + ", featured=" + featured + ", time=" + time + ", status=" + status + '}';
-    }
 
 }
