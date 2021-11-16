@@ -29,17 +29,13 @@ public class quizDAO {
     private ResultSet rs;
     private PreparedStatement ps;
 
-    /*select * from (select QuizList.quizId,QuizList.name,Subject.title,QuizList.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname, 
-  ROW_NUMBER() over (order by quizId ) as STT from ((QuizList  join Account on QuizList.expert=Account.userId)join Subject on QuizList.subject=Subject.id)
-  where Subject.title like '%%' and QuizList.category like '%%' and QuizList.[type] like '%%' and QuizList.name like '%%') 
-                       as a where STT between (1-1)*1+1 and 1*2*/
     public List<QuizList> paging(String col, int pageIndex, int pageSize, String order, String subject, String category, String type, String name) {
         List<QuizList> list = new ArrayList<QuizList>();
         try {
-            String query = "  select * from (select QuizList.quizId,QuizList.name,Subject.title,QuizList.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname, \n"
-                    + "  ROW_NUMBER() over (order by " + col + " " + order + ") as STT from((QuizList  join Account on QuizList.expert=Account.userId)join Subject on QuizList.subject=Subject.subID)\n"
-                    + "  where Subject.title like ? and QuizList.category like ? and QuizList.[type] like ? and QuizList.name like ?) \n"
-                    + "  as a where STT between (?-1)*?+1 and ?*?";
+            String query = "  select * from (select quizId,QuizList.name,title,QuizList.category,level,type,quesNum,passRate,fullname, \n" +
+                        "ROW_NUMBER() over (order by quizId) as STT from ((QuizList join Account on QuizList.expert=Account.userId) join Subject on QuizList.subject=Subject.subID)\n" +
+                        "where title like '%%' and QuizList.category like '%%' and type like '%%' and QuizList.name like '%%') \n" +
+                        "as a where STT between (?-1)*?+1 and ?*?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             ps.setString(1, "%" + subject + "%");
@@ -117,7 +113,7 @@ public class quizDAO {
 
     public void addQuiz(String title, String subject,
             String category, String level, String type, int quesNum, String passRate, int expert) {
-        String sql = "insert into QuizList values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into QuizList(name,subject,category,level,type,quesNum,passRate,expert) values (?,?,?,?,?,?,?,?)";
         try {
             conn = DBConnection.open();
 
@@ -142,8 +138,8 @@ public class quizDAO {
         QuizList quiz = new QuizList();
         try {
             conn = DBConnection.open();
-            String sql = "select QuizList.quizId,QuizList.name,Subject.title,Subject.category,QuizList.level,QuizList.type,QuizList.quesNum,QuizList.passRate,Account.fullname\n"
-                    + " from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.subID) where QuizList.quizId=? ";
+            String sql = "select quizId,QuizList.name,Subject.title,Subject.category,level,type,quesNum,passRate,fullname\n" +
+                "from ((QuizList  join Account on QuizList.expert=Account.userId )join Subject on QuizList.subject=Subject.subID) where quizId=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, quizId);
             rs = ps.executeQuery();
