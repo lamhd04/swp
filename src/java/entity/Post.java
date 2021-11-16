@@ -18,7 +18,7 @@ public class Post {
     public String title;
     public String brief;
     public String detail;
-    public int cId;
+    public String post_cate;
     public int author;
     public String featured;
     public String time;
