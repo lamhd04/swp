@@ -73,6 +73,10 @@
         <servlet-class>servlet.DocumentCategoryServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EditSliderServlet</servlet-name>
+        <servlet-class>servlet.EditSliderServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SliderServlet</servlet-name>
         <servlet-class>servlet.SliderServlet</servlet-class>
     </servlet>
@@ -455,6 +459,10 @@
     <servlet-mapping>
         <servlet-name>ExamSearch</servlet-name>
         <url-pattern>/examsearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSliderServlet</servlet-name>
+        <url-pattern>/EditSliderServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ClassRemoveSubjectServlet</servlet-name>
