@@ -118,7 +118,9 @@ public class Authorization implements Filter {
 //                    ||url.contains(".ttf")||url.contains(".png")||url.contains(".jpg")||url.contains(".jpeg")||url.contains(".css")||url.contains(".css")
 //		||url.contains(".js")||url.contains("/DocumentControl")||url.contains("/DocumentDetailsServlet")||
 //                url.contains("/ResetPasswordServlet")||url.contains("/DocumentCategoryServlet")
-//                    ||(url.contains(".js")&&!url.contains(".jsp"))) {
+//                    ||(url.contains(".js")&&!url.contains(".jsp")) || url.equals("/post")|| url.equals("/postcategory")
+                    ||url.equals("/postdetail")|| url.equals("/postsearch") || url.equals("/exam")
+                    ||url.equals("/examdetail")|| url.equals("/examsearch")|| url.equals("/examcategory")) {
 //
 //                chain.doFilter(request, response);
 //            }
