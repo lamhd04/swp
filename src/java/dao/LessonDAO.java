@@ -101,6 +101,31 @@ public class LessonDAO {
         }
         return t;
     }
+        public List<Lesson> getLessonBySubject(int subID) {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs;
+        PreparedStatement ps;
+        List<Lesson> list = new ArrayList<Lesson>();
+        try {
+            String sql = "select * from Lesson where subID=?";
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, subID);
+            rs = ps.executeQuery();
+            SubjectDAO dao = new SubjectDAO();
+            while (rs.next()) {
+                Lesson l = new Lesson(rs.getInt("lessonId"), dao.getById(rs.getInt("subID")).getTitle(), rs.getString("title"),
+                        rs.getString("status"), rs.getString("brief"), rs.getString("content"));
+                list.add(l);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LessonDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
 
     public void addLesson(Lesson l) {
         Connection conn = null;

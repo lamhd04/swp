@@ -59,6 +59,7 @@
 
                     <button class="btn btn-primary" style="font-size: 26px">Submit</button> <br><br>
                     <a style="font-size: 20px;text-decoration: underline" href="subjects">Back</a>
+                    <a href="LessonBySubject?subID=${subject.id}">View Lesson</a>
                 </form>
             </div>
         </div>

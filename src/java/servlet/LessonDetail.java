@@ -7,6 +7,7 @@ package servlet;
 
 import dao.LessonDAO;
 import dao.SubjectDAO;
+import entity.Account;
 import entity.Lesson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,6 +50,8 @@ public class LessonDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
         String id = request.getParameter("qId");
         int testId = 0;
         if (id != null) {
@@ -55,13 +59,18 @@ public class LessonDetail extends HttpServlet {
             LessonDAO dao = new LessonDAO();
             Lesson t = dao.getLesson(testId);
             request.setAttribute("lesson", t);
-        }else{
+        } else {
             Lesson t = new Lesson();
             t.setLessonId(0);
             request.setAttribute("lesson", t);
         }
         //int testId = 1;
-        request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);
+        if ("Expert".equals(acc.getPermission())) {
+            request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("LessonCustomer.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -90,8 +99,8 @@ public class LessonDetail extends HttpServlet {
             check = 1;
             request.setAttribute("errorbrief", "brief must be under 100 characters");
         }
-        if("".equals(content)){
-            check=1;
+        if ("".equals(content)) {
+            check = 1;
             request.setAttribute("errorcontent", "content cannot be empty");
         }
         SubjectDAO dao1 = new SubjectDAO();
@@ -114,8 +123,7 @@ public class LessonDetail extends HttpServlet {
                 l.setSubject(dao1.getById(Integer.parseInt(sub)).getTitle());
                 request.setAttribute("lesson", l);
             }
-        }
-        else{
+        } else {
             request.setAttribute("lesson", l);
         }
         request.getRequestDispatcher("LessonDetail.jsp").forward(request, response);

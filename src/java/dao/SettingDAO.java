@@ -216,6 +216,4 @@ public class SettingDAO {
         }
         return list;
     }
-
-
 }

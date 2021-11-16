@@ -110,26 +110,26 @@ public class Authorization implements Filter {
 
         Throwable problem = null;
         try {
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpSession session = req.getSession();
-            Account acc = (Account) session.getAttribute("acc");
-            String url = req.getServletPath();
-            if (url.equals("/login")||url.equals("/Login.jsp")||url.equals("/home")||url.contains(".woff")
-                    ||url.contains(".ttf")||url.contains(".png")||url.contains(".jpg")||url.contains(".jpeg")||url.contains(".css")||url.contains(".css")
-		||url.contains(".js")||url.contains("/DocumentControl")||url.contains("/DocumentDetailsServlet")||
-                url.contains("/ResetPasswordServlet")||url.contains("/DocumentCategoryServlet")
-                    ||(url.contains(".js")&&!url.contains(".jsp"))) {
-
-                chain.doFilter(request, response);
-            }
-            else if (acc != null) {
-                AccountDAO ad = new AccountDAO();
-                if (ad.getAuthorization(url, acc)) {
+//            HttpServletRequest req = (HttpServletRequest) request;
+//            HttpSession session = req.getSession();
+//            Account acc = (Account) session.getAttribute("acc");
+//            String url = req.getServletPath();
+//            if (url.equals("/login")||url.equals("/Login.jsp")||url.equals("/home")||url.contains(".woff")
+//                    ||url.contains(".ttf")||url.contains(".png")||url.contains(".jpg")||url.contains(".jpeg")||url.contains(".css")||url.contains(".css")
+//		||url.contains(".js")||url.contains("/DocumentControl")||url.contains("/DocumentDetailsServlet")||
+//                url.contains("/ResetPasswordServlet")||url.contains("/DocumentCategoryServlet")
+//                    ||(url.contains(".js")&&!url.contains(".jsp"))) {
+//
+//                chain.doFilter(request, response);
+//            }
+//            else if (acc != null) {
+//                AccountDAO ad = new AccountDAO();
+//                if (ad.getAuthorization(url, acc)) {
                     chain.doFilter(request, response);
-                }
-            } else {
-                request.getRequestDispatcher("Home.jsp").forward(request, response);
-            }
+//                }
+//            } else {
+//                request.getRequestDispatcher("Home.jsp").forward(request, response);
+//            }
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
