@@ -107,32 +107,23 @@
                                         <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Expert Menu</a>
                                             <ul class="navbar-nav nav mx-auto">
                                                 <li class="nav-item"><a href="QuestionPaging" class="nav-link">Question List</a></li>
-                                                <li class="nav-item"><a href="LessonList" class="nav-link">Lesson List</a></li>
                                                 <li class="nav-item"><a href="QuizListServlet" class="nav-link">Quiz List</a></li>
                                             </ul>
                                         </li>
-                                    </c:when>
-                                    <c:when test="${sessionScope.acc.permission == 'Marketing'}">
-                                        <li class="nav-item"><a class="nav-link">Marketing Menu</a>                                    
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="SliderListServlet" class="nav-link">Slider</a></li>
-                                                <li class="nav-item"><a href="postmanager" class="nav-link">Manager Post</a> </li>
-                                            </ul>
-                                        </li>  
                                     </c:when>
                                 </c:choose>
                                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
                                 </li>
                                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                                
+                                <c:if test="${sessionScope.acc!=null}">
+                                <li class="nav-item"><a href="SliderListServlet" class="nav-link">Slider</a></li>
+                                <li class="nav-item"><a href="postmanager" class="nav-link">Manager Post</a></li>
+                                </c:if>
                                 <li class="nav-item"><a href="blog.html" class="nav-link">Document</a>
                                     <ul class="navbar-nav nav mx-auto">
                                         <li class="nav-item"><a href="DocumentControl" class="nav-link">Document List</a></li>
 
                                     </ul> 
-                                </li>
-                                <li class="nav-item"><a href="${pageContext.request.contextPath}/class" class="nav-link ${param.active == 'class'? 'active':''}">Classes</a>
-                                <li class="nav-item"><a href="${pageContext.request.contextPath}/subjects" class="nav-link ${param.active == 'subject'? 'active':''}">Subjects</a>
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Pages</a>
                                     <ul class="navbar-nav nav mx-auto">
@@ -148,21 +139,13 @@
                                                 <li class="nav-item"><a href="event-details.html" class="nav-link">Event Details</a></li>
                                             </ul>    
                                         </li>                                
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Blog</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="blog.html" class="nav-link">Blog List</a></li> 
-                                                <li class="nav-item"><a href="blog-2.html" class="nav-link">Blog Grid One</a></li> 
-                                                <li class="nav-item"><a href="blog-3.html" class="nav-link">Blog Grid Two</a></li>
-                                                <li class="nav-item"><a href="blog-details.html" class="nav-link">Blog Details</a></li>
-                                            </ul>    
-                                        </li> 
-                                        <li class="nav-item"><a href="become-a-teacher.html" class="nav-link">Become A Teacher</a></li>
-                                        <li class="nav-item"><a href="teacher-profile.html" class="nav-link">Teachers Profile</a></li>
-                                        <li class="nav-item"><a href="team.html" class="nav-link">Teachers Page</a></li>
-                                        <li class="nav-item"><a href="forgot-password.html" class="nav-link">Forgot Password</a></li>
+                                        <li class="nav-item"><a href="post" class="nav-link">Post</a>
+                                        <li class="nav-item"><a href="exam" class="nav-link">Exam</a>
                                     </ul>                            
-                                </li>     
-
+                                </li>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/class" class="nav-link ${param.active == 'class'? 'active':''}">Classes</a>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/subjects" class="nav-link ${param.active == 'subject'? 'active':''}">Subjects</a>
+                                </li>
                             </ul>
                         </div>
                     </nav><!-- END NAVBAR -->
