@@ -48,7 +48,8 @@ public class PostServlet extends HttpServlet {
         }
         request.setAttribute("endP", endPage);
         List<Post> list = pdao.pagingPost(index);
-        List<PostCategory> listPC = pdao.getPostCategories();
+        List<Setting> listPC = pdao.getPostCategories();
+        List<Post> listRecent = pdao.getRecentPost();
         request.setAttribute("listP", list);
         request.setAttribute("listPC", listPC);
         session.setAttribute("listRecent", pdao.getRecentPost());
