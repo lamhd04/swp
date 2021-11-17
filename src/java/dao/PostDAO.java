@@ -269,17 +269,16 @@ public class PostDAO {
         }
     }
 
-    public void editPost(String title,String thumbnail, String author, String brief, String detail, String postid) {
-        String query = "update Post set title =? ,thumbnail = ?,author = ?,brief =?,detail = ? where postid = ?";
+    public void editPost(String title,String thumbnail, String brief, String detail, String postid) {
+        String query = "update Post set title =? ,thumbnail = ?,brief =?,detail = ? where postid = ?";
         try {
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             ps.setString(1, title);
             ps.setString(2, thumbnail);
-            ps.setString(3, author);
-            ps.setString(4, brief);     
-            ps.setString(5, detail);
-            ps.setString(6, postid);
+            ps.setString(3, brief);     
+            ps.setString(4, detail);
+            ps.setString(5, postid);
             ps.executeUpdate();
         }  catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
