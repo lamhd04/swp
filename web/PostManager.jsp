@@ -36,7 +36,6 @@
                         </div>
                         <div class="col-sm-6">
                             <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Post</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
                         </div>
                     </div>
                 </div>
@@ -118,7 +117,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Detail</label>
-                                <textarea name="detail" class="form-control" required></textarea>
+                                <textarea id="editor" name="detail" class="form-control" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -129,8 +128,14 @@
                 </div>
             </div>
         </div>
-
-
         <script src="js/manager.js" type="text/javascript"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+        <script>
+            ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .catch(error => {
+                        console.error(error);
+                    });
+        </script>
     </body>
 </html>
