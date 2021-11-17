@@ -44,7 +44,7 @@ public class DocumentControl extends HttpServlet {
         if(condition == null){
             condition ="";
         } else {
-            condition = "and doccategory = '" + condition +"'";
+            condition = "and doc_cate = '" + condition +"'";
         }
         
         if(docSearch == null){
@@ -56,8 +56,9 @@ public class DocumentControl extends HttpServlet {
         }
         int pageindex = Integer.parseInt(pageind);
         
-        
         int pagenum = ddao.documentCount(docSearch);
+        //int pagenum = ddao.getDocuments(docSearch).size();
+        //int pagenum = 10;
         int pagesize = 4;
         int endpage = pagenum / pagesize;
         if (pagenum % pagesize != 0) {
@@ -70,7 +71,7 @@ public class DocumentControl extends HttpServlet {
         request.setAttribute("list", list);
         request.setAttribute("pagesize", pagesize);
         request.setAttribute("end", endpage);
-        request.setAttribute("url", "Documentpaging?pageindex=");
+        request.setAttribute("url", "DocumentControl?pageindex=");
         int x = 0;
         int y = 0;
         if (pageindex < 3 && endpage > 4) {
