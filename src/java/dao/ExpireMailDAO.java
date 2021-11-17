@@ -7,7 +7,7 @@ package dao;
 
 import dbconnection.DBConnection;
 import entity.Account;
-import entity.EmailExpire;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
