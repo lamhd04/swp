@@ -49,7 +49,7 @@ public class PostManagerServlet extends HttpServlet {
         }
         request.setAttribute("endP", endPage);
         List<Post> list = pdao.pagingPost(index);
-        List<PostCategory> listPC = pdao.getPostCategories();
+        List<Setting> listPC = pdao.getPostCategories();
         request.setAttribute("listP", list);
         request.setAttribute("listPC", listPC);
         request.getRequestDispatcher("PostManager.jsp").forward(request, response);
