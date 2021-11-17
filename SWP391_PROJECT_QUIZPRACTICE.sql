@@ -364,6 +364,7 @@ insert into Authorization(permission,url)  values (4,'/ResetPasswordServlet');
 insert into Authorization(permission,url)  values (5,'/ResetPasswordServlet');
 insert into Authorization(permission,url)  values (3,'/SliderListServlet');
 insert into Authorization(permission,url)  values (3,'/SliderServlet');
+insert into Authorization(permission,url)  values (3,'/EditSliderServlet');
 insert into Authorization(permission,url)  values (3,'/postmanager');
 insert into Authorization(permission,url)  values (3,'/postload');
 insert into Authorization(permission,url)  values (3,'/postadd');
