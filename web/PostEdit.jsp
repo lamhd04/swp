@@ -28,59 +28,46 @@
         </style>
     <body>
         <div class="container">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>Edit <b>Post</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                        </div>
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                <form action="postedit" method="post">
+                    <div class="blog_post">
+                        <h1>Edit Post</h1>
+                        <label>ID:</label>
+                        <input value="${detail.postid}" name="postid" type="text" readonly required>
+                        <br>
+                        <br>
+                        <label>Title:</label>
+                        <input value="${detail.title}" name="title" type="text" class="form-control" required>
+                        <br>
+                        <br>
+                        <label>Thumbnail:</label>
+                        <img src="${detail.thumbnail}" alt="" class="img-fluid">
+                        <br>
+                        <br>
+                        <input value="${detail.thumbnail}" name="thumbnail" type="text" class="form-control" required>
+                        <br>
+                        <br>
+                        <label>Brief:</label>
+                        <textarea name="brief" class="form-control" required>${detail.brief}</textarea>
+                        <br>
+                        <br>
+                        <label>Detail</label>
+                        <textarea id="editor" name="detail" class="form-control" required>${detail.detail}</textarea>
                     </div>
-                </div>
-            </div>
-            <div id="editEmployeeModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form action="postedit" method="post">
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Edit Post</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>ID</label>
-                                    <input value="${detail.postid}" name="postid" type="text" class="form-control" readonly required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Title</label>
-                                    <input value="${detail.title}" name="title" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Thumbnail</label>
-                                    <input value="${detail.thumbnail}" name="thumbnail" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Author</label>
-                                    <input value="${detail.author}" name="author" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Brief</label>
-                                    <textarea name="brief" class="form-control" required>${detail.brief}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Detail</label>
-                                    <textarea name="detail" class="form-control" required>${detail.detail}</textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-success" value="Change">
-                            </div>
-                        </form>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Change">
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <script src="js/manager.js" type="text/javascript"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+        <script>
+            ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .catch(error => {
+                        console.error(error);
+                    });
+        </script>
     </body>
 </html>
