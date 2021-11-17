@@ -101,17 +101,18 @@ public class LessonDAO {
         }
         return t;
     }
-        public List<Lesson> getLessonBySubject(int subID) {
+        public List<Lesson> getLessonBySubject(int subID,String status) {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs;
         PreparedStatement ps;
         List<Lesson> list = new ArrayList<Lesson>();
         try {
-            String sql = "select * from Lesson where subID=?";
+            String sql = "select * from Lesson where subID=? and status=?";
             conn = DBConnection.open();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, subID);
+            ps.setString(2, status);
             rs = ps.executeQuery();
             SubjectDAO dao = new SubjectDAO();
             while (rs.next()) {

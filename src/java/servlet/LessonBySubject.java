@@ -38,7 +38,7 @@ public class LessonBySubject extends HttpServlet {
         try{
             int subID=Integer.parseInt(request.getParameter("subID"));
             LessonDAO dao = new LessonDAO();
-            List<Lesson> list = dao.getLessonBySubject(subID);
+            List<Lesson> list = dao.getLessonBySubject(subID,"published");
             request.setAttribute("lesson", list);
             request.getRequestDispatcher("Lesson.jsp").forward(request, response);
         }catch(NumberFormatException e)
