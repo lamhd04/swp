@@ -49,7 +49,7 @@ public class ExpireMailDAO {
     public Date getdueDate(int id){
         Date dt = null;
         try {
-            String sql = "select top(1)dueDate from ExpireMail where id = ? order by dueDate desc";
+            String sql = "select dueDate from ExpireMail where id = ? order by dueDate desc limit 1";
             conn = DBConnection.open();            
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);            
@@ -64,11 +64,6 @@ public class ExpireMailDAO {
             DBConnection.close(conn, stmt);
         }
         return dt;
-    }
-
-    public static void main(String[] args) {
-        ExpireMailDAO e = new ExpireMailDAO();        
-        System.out.println(e.getdueDate(3));
     }
 
 }
