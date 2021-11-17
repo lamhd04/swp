@@ -24,29 +24,34 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/assets/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/bootstrap.min.css">
         <!-- Font awsome CSS -->
-        <link rel="stylesheet" href="css/assets/font-awesome.min.css">    
-        <link rel="stylesheet" href="css/assets/flaticon.css">
-        <link rel="stylesheet" href="css/assets/magnific-popup.css">    
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/font-awesome.min.css">    
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/flaticon.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/magnific-popup.css">    
         <!-- owl carousel -->
-        <link rel="stylesheet" href="css/assets/owl.carousel.css">
-        <link rel="stylesheet" href="css/assets/owl.theme.css">     
-        <link rel="stylesheet" href="css/assets/animate.css"> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/owl.carousel.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/owl.theme.css">     
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/animate.css"> 
         <!-- Slick Carousel -->
-        <link rel="stylesheet" href="css/assets/slick.css">  
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/slick.css">  
         <!-- Mean Menu-->
-        <link rel="stylesheet" href="css/assets/meanmenu.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assets/meanmenu.css">
         <!-- main style-->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/responsive.css">
-        <link rel="stylesheet" href="css/demo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/demo.css">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+            header .edu_nav nav .navbar li a{
+                padding: 28px
+            }
+        </style>
     </head>
     <body>
         <header class="header_inner about_page">
@@ -83,10 +88,10 @@
                 </div>
             </div>
 
-            <div class="edu_nav">
-                <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light bg-faded">
-                        <a class="navbar-brand" href="index-2.html"><img src="images/logo.png" alt="logo"></a>
+            <div class="edu_nav" style="max-height: 100px;border-bottom: 2px solid">
+                <div class="container-fluid" style="max-height: 80px">
+                    <nav class="navbar navbar-expand-md navbar-light bg-faded" style="max-height: 80px">
+                        <a class="navbar-brand" href="index-2.html"><img src="${pageContext.request.contextPath}/images/logo.png" alt="logo"></a>
                         <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav nav lavalamp ml-auto menu">
                                 <c:choose>
@@ -102,20 +107,24 @@
                                         <li class="nav-item"><a href="AccountControl?op=profile&userId=${sessionScope.acc.userId}" class="nav-link">Expert Menu</a>
                                             <ul class="navbar-nav nav mx-auto">
                                                 <li class="nav-item"><a href="QuestionPaging" class="nav-link">Question List</a></li>
+                                                <li class="nav-item"><a href="LessonList" class="nav-link">Lesson List</a></li>
                                                 <li class="nav-item"><a href="QuizListServlet" class="nav-link">Quiz List</a></li>
                                             </ul>
                                         </li>
                                     </c:when>
                                 </c:choose>
-                                <li class="nav-item"><a href="Home.jsp" class="nav-link">Home</a>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link ${param.active == 'home'? 'active':''}">Home</a>
                                 </li>
-                                <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
-                                <li class="nav-item"><a href="course.html" class="nav-link">Courses</a>
-                                    <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
-                                        <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
-                                    </ul> 
-                                </li>
+                                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                                <c:if test="${sessionScope.acc!=null}">
+                                <li class="nav-item"><a href="SliderListServlet" class="nav-link">Slider</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.permission == 'Marketing'}">
+                                <li class="nav-item"><a href="postmanager" class="nav-link">Manager Post</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.permission == 'Admin'||sessionScope.acc.permission == 'Expert'||sessionScope.acc.permission == 'Manager' }">
+                                <li class="nav-item"><a href="DashBoard.jsp" class="nav-link">Dashboard</a></li>
+                                </c:if>
                                 <li class="nav-item"><a href="blog.html" class="nav-link">Document</a>
                                     <ul class="navbar-nav nav mx-auto">
                                         <li class="nav-item"><a href="DocumentControl" class="nav-link">Document List</a></li>
@@ -124,39 +133,18 @@
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Pages</a>
                                     <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Courses</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
-                                                <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
-                                            </ul>    
-                                        </li>                                 
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Events</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="event.html" class="nav-link">Event</a></li>
-                                                <li class="nav-item"><a href="event-details.html" class="nav-link">Event Details</a></li>
-                                            </ul>    
-                                        </li>                                
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Blog</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="blog.html" class="nav-link">Blog List</a></li> 
-                                                <li class="nav-item"><a href="blog-2.html" class="nav-link">Blog Grid One</a></li> 
-                                                <li class="nav-item"><a href="blog-3.html" class="nav-link">Blog Grid Two</a></li>
-                                                <li class="nav-item"><a href="blog-details.html" class="nav-link">Blog Details</a></li>
-                                            </ul>    
-                                        </li> 
-                                        <li class="nav-item"><a href="become-a-teacher.html" class="nav-link">Become A Teacher</a></li>
-                                        <li class="nav-item"><a href="teacher-profile.html" class="nav-link">Teachers Profile</a></li>
-                                        <li class="nav-item"><a href="team.html" class="nav-link">Teachers Page</a></li>
-                                        <li class="nav-item"><a href="forgot-password.html" class="nav-link">Forgot Password</a></li>
+                                        <li class="nav-item"><a href="post" class="nav-link">Post</a>
+                                        <li class="nav-item"><a href="exam" class="nav-link">Exam</a>
                                     </ul>                            
-                                </li>     
-
+                                </li>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/class" class="nav-link ${param.active == 'class'? 'active':''}">Classes</a>
+                                <li class="nav-item"><a href="${pageContext.request.contextPath}/subjects" class="nav-link ${param.active == 'subject'? 'active':''}">Subjects</a>
+                                </li>
                             </ul>
                         </div>
                     </nav><!-- END NAVBAR -->
                 </div> 
             </div>
-
 
         </header>
 </html>

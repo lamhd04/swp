@@ -7,7 +7,6 @@ package servlet;
 
 import dao.PostDAO;
 import entity.Post;
-import entity.PostCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
