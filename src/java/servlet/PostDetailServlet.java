@@ -7,7 +7,7 @@ package servlet;
 
 import dao.PostDAO;
 import entity.Post;
-import entity.PostCategory;
+import entity.Setting;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -37,7 +37,7 @@ public class PostDetailServlet extends HttpServlet {
         String postid = request.getParameter("postid");
         PostDAO pdao = new PostDAO();
         Post pt = pdao.getPostbyID(postid);
-        List<PostCategory> listPC = pdao.getPostCategories();
+        List<Setting> listPC = pdao.getPostCategories();
         request.setAttribute("pt", pt);
         request.setAttribute("listPC", listPC);
         request.getRequestDispatcher("PostDetail.jsp").forward(request, response);
