@@ -135,6 +135,7 @@
                                 </li>
                                 <li class="nav-item"><a href="${pageContext.request.contextPath}/class" class="nav-link ${param.active == 'class'? 'active':''}">Classes</a>
                                 <li class="nav-item"><a href="${pageContext.request.contextPath}/subjects" class="nav-link ${param.active == 'subject'? 'active':''}">Subjects</a>
+                                <li class="nav-item"><a href="practice-list" class="nav-link">Practice</a>
                                 </li>
                             </ul>
                         </div>

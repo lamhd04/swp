@@ -33,7 +33,7 @@ public class SubjectDAO {
         List<Subject> list = new ArrayList<>();
         try {
             conn = DBConnection.open();
-            String sql = "select * from (select ROW_NUMBER() OVER(ORDER BY subID) as RowNum, * from [Subject]\n"
+            String sql = "select * from (select ROW_NUMBER() OVER(ORDER BY subID) as RowNum, * from Subject\n"
                     + "where 1=1 @@@\n"
                     + ") as temp"
                     + " where temp.RowNum >= ? AND temp.RowNum < ?";
