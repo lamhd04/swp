@@ -117,7 +117,12 @@
                                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                                 <c:if test="${sessionScope.acc!=null}">
                                 <li class="nav-item"><a href="SliderListServlet" class="nav-link">Slider</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.permission == 'Marketing'}">
                                 <li class="nav-item"><a href="postmanager" class="nav-link">Manager Post</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.permission == 'Admin'||sessionScope.acc.permission == 'Expert'||sessionScope.acc.permission == 'Manager' }">
+                                <li class="nav-item"><a href="DashBoard.jsp" class="nav-link">Dashboard</a></li>
                                 </c:if>
                                 <li class="nav-item"><a href="blog.html" class="nav-link">Document</a>
                                     <ul class="navbar-nav nav mx-auto">
@@ -127,18 +132,6 @@
                                 </li>
                                 <li class="nav-item"><a href="#" class="nav-link">Pages</a>
                                     <ul class="navbar-nav nav mx-auto">
-                                        <li class="nav-item"><a href="${pageContext.request.contextPath}/practice-list" class="nav-link dropdown_icon">Practice List</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="course.html" class="nav-link">Courses</a></li>
-                                                <li class="nav-item"><a href="course-details.html" class="nav-link">Courses Details</a></li>
-                                            </ul>    
-                                        </li>                                 
-                                        <li class="nav-item"><a href="#" class="nav-link dropdown_icon">Events</a>
-                                            <ul class="navbar-nav nav mx-auto">
-                                                <li class="nav-item"><a href="event.html" class="nav-link">Event</a></li>
-                                                <li class="nav-item"><a href="event-details.html" class="nav-link">Event Details</a></li>
-                                            </ul>    
-                                        </li>                                
                                         <li class="nav-item"><a href="post" class="nav-link">Post</a>
                                         <li class="nav-item"><a href="exam" class="nav-link">Exam</a>
                                     </ul>                            
