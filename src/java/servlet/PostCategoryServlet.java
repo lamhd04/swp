@@ -35,9 +35,9 @@ public class PostCategoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PostDAO pdao = new PostDAO();
-        String cid = request.getParameter("cid");
-        List<Post> list = pdao.getPostbyCID(cid);
-        List<PostCategory> listPC = pdao.getPostCategories();
+        String post_cate = request.getParameter("post_cate");
+        List<Post> list = pdao.getPostbyCID(post_cate);
+        List<Setting> listPC = pdao.getPostCategories();
         request.setAttribute("listP", list);
         request.setAttribute("listPC", listPC);
         request.getRequestDispatcher("PostList.jsp").forward(request, response);
