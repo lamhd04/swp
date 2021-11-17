@@ -35,11 +35,10 @@ public class PostEditServlet extends HttpServlet {
         String ppostid = request.getParameter("postid");
         String ptitle = request.getParameter("title");
         String pthumbnail = request.getParameter("thumbnail");
-        String pauthor = request.getParameter("author");
         String pbrief = request.getParameter("brief");
         String pdetail = request.getParameter("detail");
         PostDAO pdao = new PostDAO();
-        pdao.editPost(ptitle, pthumbnail, pauthor, pbrief, pdetail, ppostid);
+        pdao.editPost(ptitle, pthumbnail, pbrief, pdetail, ppostid);
         response.sendRedirect("postmanager");
     }
 
