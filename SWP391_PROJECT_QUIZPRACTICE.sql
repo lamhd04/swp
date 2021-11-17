@@ -406,7 +406,9 @@ insert into Authorization(permission,url)  values (1,'/getSubcategory');
 insert into Authorization(permission,url)  values (2,'/getSubcategory');
 insert into Authorization(permission,url)  values (3,'/getSubcategory');
 insert into Authorization(permission,url)  values (4,'/getSubcategory');
-
+insert into Authorization(permission,url)  values (2,'/subjects');
+insert into Authorization(permission,url)  values (2,'/subject-detail');
+insert into Authorization(permission,url)  values (2,'/subject-add');
 create table Exam
 (
 examID int AUTO_INCREMENT,
