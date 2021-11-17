@@ -344,5 +344,65 @@ import model.QuestionSearch;
     public static void main(String[] args) {
 
     }
+public List<Question> Test(int quizId) {
+        Connection conn;
+        Statement stmt = null;
+        ResultSet rs;
+        PreparedStatement ps;
+        conn = DBConnection.open();
+        List<Question> list = new ArrayList<>();
 
+        try {
+            conn = DBConnection.open();
+            String sql = "select * from question where quiz=? ";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, quizId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+//                Question q = new Question(rs.getInt("qId"),
+//                        rs.getString("subject"),
+//                        rs.getString("category"),
+//                        rs.getString("subcategory"),
+//                        rs.getString("level"),
+//                        rs.getString("status"),
+//                        rs.getString("quiz"),
+//                        rs.getString("content"),
+//                        rs.getString("media"),
+//                        rs.getString("explanation"));
+//                        ArrayList<Answer> a = getAnswer(q.getqId());
+//                        q.setList(a);
+//                        list.add(q);
+
+                list.add(getQuestion(rs.getInt("qId")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
+    
+    public String findCorrectAns(String qid){
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs;
+        PreparedStatement ps;
+        String s="";
+        try {
+            conn = DBConnection.open();
+            String sql = "select answer from AnswerOption where qId=? and key_ao=1 ";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, qid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                s= rs.getString("answer");                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return s;
+    }
 }
