@@ -279,4 +279,29 @@ public class ExamDAO {
             DBConnection.close(conn, stmt);
         }
     }
+    
+    public List<Exam> getTop3Exam() {
+        List<Exam> list = new ArrayList<>();
+        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID order by time desc limit 3";
+        try {
+            conn = DBConnection.open();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Exam(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8)));
+            }
+        }  catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.close(conn, stmt);
+        }
+        return list;
+    }
 }
