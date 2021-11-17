@@ -303,7 +303,8 @@ create table Result
 (
 userID int,
 quesID int not null,
-status varchar(10),
+user_answer text,
+true_answer text,
 constraint FK_result_quesID foreign key (quesID) references Question(qId)
 );
 
