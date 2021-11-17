@@ -472,6 +472,22 @@
         <servlet-name>AddClassServlet</servlet-name>
         <url-pattern>/class/add</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>QuizHandle</servlet-name>
+        <servlet-class>servlet.QuizHandle</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuizHandle</servlet-name>
+        <url-pattern>/QuizHandle</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>QuizReviewServlet</servlet-name>
+        <servlet-class>servlet.QuizReviewServlet</servlet-class>
+    </servlet>
+        <servlet-mapping>
+        <servlet-name>QuizReviewServlet</servlet-name>
+        <url-pattern>/QuizReviewServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
