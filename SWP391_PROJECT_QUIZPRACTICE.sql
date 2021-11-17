@@ -105,7 +105,7 @@ post_cate int,
 author int not null,
 featured varchar(1000),
 time datetime,
-status varchar(10),
+status varchar(20),
 constraint FK_post_author foreign key (author) references Account(userId),
 constraint FK_post_cate foreign key (post_cate) references Setting(settingID)
 );
