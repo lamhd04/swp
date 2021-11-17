@@ -126,6 +126,8 @@ public class Authorization implements Filter {
                 AccountDAO ad = new AccountDAO();
                 if (ad.getAuthorization(url, acc)) {
                     chain.doFilter(request, response);
+                }else {
+                    request.getRequestDispatcher("Login.jsp").forward(request, response);
                 }
             } else {
                 request.getRequestDispatcher("/home").forward(request, response);
