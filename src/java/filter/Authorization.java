@@ -117,7 +117,7 @@ public class Authorization implements Filter {
             if (url.contains(".jsp")||url.equals("/login")||url.equals("Home.jsp")||url.contains(".woff")
                     ||url.contains(".ttf")||url.contains(".png")||url.contains(".jpg")||url.contains(".css")
                     ||url.contains(".js") || url.equals("/post")|| url.equals("/postcategory")
-                    ||url.equals("/postdetail")|| url.equals("/postsearch") || url.equals("/exam")
+                    ||url.equals("/postdetail")||url.equals(".jpeg")|| url.equals("/postsearch") || url.equals("/exam")
                     ||url.equals("/examdetail")||url.contains("/DocumentDetailsServlet")||url.contains("/DocumentControl")||
                 url.contains("/ResetPasswordServlet")||url.contains("/DocumentCategoryServlet")|| url.equals("/examsearch")|| url.equals("/examcategory")) {
                 chain.doFilter(request, response);
