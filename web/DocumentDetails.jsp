@@ -174,7 +174,6 @@
                         </div>
                     </div>
 
-
                 </div>
             </div> 
         </section><!-- End Event Details Wrapper -->
