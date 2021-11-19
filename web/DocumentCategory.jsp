@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-     <head>
+    <head>
         <!-- Required meta tags -->
         <meta charset="UTF-8">
         <meta name="description" content="">
@@ -46,35 +46,18 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]--> 
         <jsp:useBean id="a" class="dao.SettingDAO" scope="request"></jsp:useBean>
-    </head>
-    <body>
-       
+        </head>
+        <body>
+
         <jsp:include page="Header.jsp" flush="true"></jsp:include>
-        <header class="header_inner blog_page">
-            <div class="intro_wrapper">
+            
+
+
+            <section class="blog_wrapper">
                 <div class="container">  
-                    <div class="row">        
-                        <div class="col-sm-12 col-md-8 col-lg-8">
-                            <div class="intro_text">
-                                <h1>Document List</h1>
-                                <div class="pages_links">
-                                    <a href="#" title="">Home</a>
-                                    <a href="#" title="" class="active">Document</a>
-                                </div>
-                            </div>
-                        </div>              
+                    <div class="row">
 
-                    </div>
-                </div> 
-            </div> 
-        </header>
-
-
-        <section class="blog_wrapper">
-            <div class="container">  
-                <div class="row">
-
-                    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                        <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                         <c:forEach var="list" items="${listDocCate}">
                             <a href="DocumentDetailsServlet?id=${list.docID}" >
                                 <div class="single_blog" style="margin-bottom: 30px; border: 1px solid #FFC321 ">
@@ -121,19 +104,23 @@
 
                             <div class="recent_post_wrapper widget_single">
                                 <div class="items-title">
-                                    <h3 class="title">Featured Post</h3>
+                                    <h3 class="title">Featured Document</h3>
                                 </div>
-                                <div class="single-post">
-                                    <div class="recent_img">
-                                        <a href="#" title=""><img src="images/blog/side_blog_1.jpg" alt="" class="img-fluid"></a>
-                                    </div>
-                                    <div class="post_title">
-                                        <a href="#" title="">Research of Learn training process</a>
-                                        <div class="post-date">
-                                            <span>May 29, 2019</span>
+                                <c:forEach items="${sessionScope.top5}" var="top">
+                                    <a href="DocumentDetailsServlet?id=${top.docID}">
+                                        <div class="single-post">
+                                            <div class="recent_img">
+                                                <img src="${top.thumbnail}"  class="img-fluid">
+                                            </div>
+                                            <div class="post_title">
+                                                <p style="font-weight: 700;color: #333146;font-size: 18px;">${top.title}</p>
+                                                <div class="post-date">
+                                                    <span>${top.update_date}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </a>
+                                </c:forEach>
                             </div>
 
                             <div class="archives widget_single">
