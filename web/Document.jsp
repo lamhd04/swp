@@ -47,12 +47,14 @@
         <jsp:include page="Header.jsp" flush="true"></jsp:include>
             
             <section class="blog_wrapper">
+                
             <c:if test="${docsearch != ''}">
                 <p class=" col-12 col-sm-12 col-md-4 col-lg-4" style="font-size: 20px;text-align: center;font-weight: bold;color: black">Result for: ${docsearch}</p>
             </c:if>
             <div class="container">
                 <h1>List Of Document</h1>
                 <div class="row">
+                    
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8">  
                         <c:choose>
                             <c:when test="${!list.isEmpty()}">
@@ -175,3 +177,4 @@
         <jsp:include page="Footer.jsp" flush="true"></jsp:include>
     </body>
 </html>
+
