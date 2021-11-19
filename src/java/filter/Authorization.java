@@ -114,7 +114,7 @@ public class Authorization implements Filter {
             HttpSession session = req.getSession();
             Account acc = (Account) session.getAttribute("acc");
             String url = req.getServletPath();
-            if (url.contains(".jsp")||url.equals("/login")||url.equals("Home.jsp")||url.contains(".woff")
+            if (url.contains("/home")||url.contains(".jsp")||url.equals("/login")||url.equals("Home.jsp")||url.contains(".woff")
                     ||url.contains(".ttf")||url.contains(".png")||url.contains(".jpg")||url.contains(".css")
                     ||url.contains(".js") || url.equals("/post")|| url.equals("/postcategory")
                     ||url.equals("/postdetail")||url.equals(".jpeg")|| url.equals("/postsearch") || url.equals("/exam")
@@ -130,7 +130,7 @@ public class Authorization implements Filter {
                     request.getRequestDispatcher("Login.jsp").forward(request, response);
                 }
             } else {
-                request.getRequestDispatcher("/home").forward(request, response);
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
             }
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
