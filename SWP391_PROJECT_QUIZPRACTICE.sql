@@ -339,12 +339,12 @@ status varchar(10),
 constraint PK_sliderID primary key (sliderID)
 );
 
-insert into Slider(title,image,backlink,note,status) values('Slider1','pic/slider1.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=1','note of slider1','active');
-insert into Slider(title,image,backlink,note,status) values('Slider2','pic/slider2.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=2','note of slider2','active');
-insert into Slider(title,image,backlink,note,status) values('Slider3','pic/slider3.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=3','note of slider3','active');
-insert into Slider(title,image,backlink,note,status) values('Slider4','pic/slider4.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=5','note of slider4','active');
-insert into Slider(title,image,backlink,note,status) values('Slider5','pic/slider5.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=9','note of slider5','active');
-insert into Slider(title,image,backlink,note,status) values('Slider6','pic/slider6.jpg','http://localhost:8084/Project/DocumentDetailsServlet?id=7','note of slider6','active');
+insert into Slider(title,image,backlink,note,status) values('Slider1','pic/slider1.jpg','DocumentDetailsServlet?id=1','note of slider1','active');
+insert into Slider(title,image,backlink,note,status) values('Slider2','pic/slider2.jpg','DocumentDetailsServlet?id=2','note of slider2','active');
+insert into Slider(title,image,backlink,note,status) values('Slider3','pic/slider3.jpg','DocumentDetailsServlet?id=3','note of slider3','active');
+insert into Slider(title,image,backlink,note,status) values('Slider4','pic/slider4.jpg','DocumentDetailsServlet?id=5','note of slider4','active');
+insert into Slider(title,image,backlink,note,status) values('Slider5','pic/slider5.jpg','DocumentDetailsServlet?id=9','note of slider5','active');
+insert into Slider(title,image,backlink,note,status) values('Slider6','pic/slider6.jpg','DocumentDetailsServlet?id=7','note of slider6','active');
 
 create table Authorization(
 permission int not null,
