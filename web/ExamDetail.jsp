@@ -53,7 +53,7 @@
                     <div class="row">        
                         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
 
-                            <a href="$QuizHandle?testId=${ex.examID}">Take Test</a>
+                            <a href="QuizHandle?testId=${ex.examID}">Take Test</a>
 
                         <div class="blog_post">
                             <h3>${ex.title}</h3>
