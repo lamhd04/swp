@@ -71,7 +71,7 @@
                                     <c:if test="${sessionScope.acc==null}">
                                         <ul class="d-flex">                                       
                                             <li class="nav-item"><a href="Signup.jsp" class="nav-link sign-in js-modal-show"><i class="flaticon-user-male-black-shape-with-plus-sign"></i>Sign Up</a></li>
-                                            <li class="nav-item"><a href="Login.jsp" class="nav-link join_now js-modal-show"><i class="flaticon-padlock"></i>Log In</a></li>
+                                            <li class="nav-item"><a href="${pageContext.request.contextPath}/Login.jsp" class="nav-link join_now js-modal-show"><i class="flaticon-padlock"></i>Log In</a></li>
                                         </ul>
                                     </c:if>
                                     <c:if test="${sessionScope.acc!=null}">

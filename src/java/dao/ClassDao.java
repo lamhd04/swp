@@ -23,8 +23,8 @@ import entity.Class;
 public class ClassDao {
 
     public List<Class> getByClassName(int pageIndex, int pageSize, String className) {
-        String sql = "SELECT * FROM ( SELECT ROW_NUMBER() OVER(ORDER BY classID) AS rowNum,c.classID,c.createdDate,c.endDate,c.status,c.className ,a.fullname FROM [dbo].[Class] c\n"
-                + "JOIN [dbo].[Account] a ON c.userID = a.userID) temp\n"
+        String sql = "SELECT * FROM ( SELECT ROW_NUMBER() OVER(ORDER BY classID) AS rowNum,c.classID,c.status,c.className ,a.fullname FROM Class c\n"
+                + "JOIN Account a ON c.userID = a.userID) temp\n"
                 + "WHERE temp.className LIKE ? AND temp.rowNum >= ? AND temp.rowNum < ?";
         Connection conn = null;
         PreparedStatement stm = null;;
@@ -60,7 +60,7 @@ public class ClassDao {
     }
 
     public int countByClassName(String keyword) {
-        String sql = "SELECT COUNT(*) as total FROM [dbo].[Class]"
+        String sql = "SELECT COUNT(*) as total FROM Class"
                 + " WHERE className LIKE ?";
         Connection conn = null;
         PreparedStatement stm = null;;
@@ -82,8 +82,8 @@ public class ClassDao {
     }
 
     public Class getById(int id) {
-        String sql = " SELECT c.classID,c.createdDate,c.endDate,c.status,c.className ,a.fullname, a.userID, s.total_student,sj.total_subject FROM [dbo].[Class] c\n"
-                + "             LEFT  JOIN [dbo].[Account] a ON c.userID = a.userID\n"
+        String sql = " SELECT c.classID, c.status,c.className ,a.fullname, a.userID, s.total_student,sj.total_subject FROM Class c\n"
+                + "             LEFT  JOIN Account a ON c.userID = a.userID\n"
                 + "				LEFT JOIN (\n"
                 + "				SELECT  count(*) as total_student, class_id from class_student\n"
                 + "				GROUP by class_id) s\n"

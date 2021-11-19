@@ -229,6 +229,7 @@ public class ExamDAO {
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
+            System.out.println(query);
             while (rs.next()) {
                 list.add(new Exam(rs.getInt(1),
                         rs.getString(2),
@@ -282,7 +283,7 @@ public class ExamDAO {
     
     public List<Exam> getTop3Exam() {
         List<Exam> list = new ArrayList<>();
-        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID order by time desc limit 3";
+        String query = "select examID,title,thumbnail,settingValue,brief,content,Exam.type,date from Exam join Setting on Exam.exam_cate = Setting.settingID order by date desc limit 3";
         try {
             conn = DBConnection.open();
             ps = conn.prepareStatement(query);
@@ -304,4 +305,6 @@ public class ExamDAO {
         }
         return list;
     }
+    
+    
 }

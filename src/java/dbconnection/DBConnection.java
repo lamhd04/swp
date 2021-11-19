@@ -20,9 +20,9 @@ public class DBConnection {
 
     public static Connection open() {
         try {
-           Class.forName("com.mysql.jdbc.Driver");
+           Class.forName("com.mysql.cj.jdbc.Driver");
             //2. Tạo và mở kết nối
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/swp391_quizpractice","root","hung190501");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/swp391_quizpractice?allowPublicKeyRetrieval=true&useSSL=false","root","12345");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -13,6 +13,7 @@ import entity.Category;
 import entity.Document;
 import entity.Exam;
 import entity.Post;
+import entity.Setting;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -51,8 +52,7 @@ public class HomeServlet extends HttpServlet {
         ExamDAO exDao = new ExamDAO();
         List<Exam> exam = exDao.getTop3Exam();
         request.setAttribute("exam", exam);
-        CategoryDao cateDao = new CategoryDao();
-        List<Category> examCate = cateDao.getByType(Constant.Category.EXAM);
+        List<Setting> examCate = exDao.getExamCategories();
         request.setAttribute("exCate", examCate);
         System.out.println(exam.get(0).getTitle());
         List<Document> document = new DocumentDAO().getTopDocument().subList(0, 3);

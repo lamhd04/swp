@@ -103,30 +103,22 @@ public class SignupServlet extends HttpServlet {
                         + "No space or tab");
                 check = 1;
             }
-
-            Account acc = new Account(0, fname, gender, email, pass, mobile, add, "User", "inactive");
+            //có lỗi validate
+            if (check == 1) {
+                addParamExceptToRequest(request, paramExcept);
+                request.getRequestDispatcher("Signup.jsp").forward(request, response);
+                return;
+            }
+            Account acc = new Account(new AccountDAO().getMaxId() + 1, fname, gender, email, pass, mobile, add, "User", "inactive");
             EmailController emailController = new EmailController();
             AccountDAO accountDao = new AccountDAO();
-            int maxId = accountDao.getMaxId();
-            acc.setUserId(maxId + 1);
             //thêm vào database
             accountDao.addAcc(acc);
 
             //gửi mail để verify account
             int isSuccess = emailController.sendVerifyAccount(acc);
-            if (isSuccess == -1) {
-                  request.setAttribute("common", "Signup fail ! Please contact to System admin for more detail");
-                check = 1;
-            }
-
             request.setAttribute("acc", acc);
-            //có lỗi validate
-            if (check == 1) {
-                addParamExceptToRequest(request, paramExcept);
-                request.getRequestDispatcher("Signup.jsp").forward(request, response);
-            } else {
-                response.sendRedirect("RegistSuccessPage.jsp");
-            }
+            response.sendRedirect("RegistSuccessPage.jsp");
         } catch (Exception e) {
         }
     }

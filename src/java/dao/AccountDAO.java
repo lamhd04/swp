@@ -90,7 +90,7 @@ public class AccountDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
                 user.setPermission(getSetting(rs.getInt("permission")));
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,7 +109,7 @@ public class AccountDAO {
             ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
-                user.setStatus(rs.getString("status"));               
+                user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUserTitle(rs.getString("userTitle"));
@@ -131,10 +131,11 @@ public class AccountDAO {
     public void addAcc(Account account) {
         try {
             conn = DBConnection.open();
-            String sql = "INSERT INTO Account( fullname, userTitle, email, password, phone, address, permission,status)"
-                    + " VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Account(userId, fullname, userTitle, email, password, phone, address, permission,status)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
             int index = 0;
+            ps.setInt(++index, account.getUserId());
             ps.setString(++index, account.getFullname());
             ps.setString(++index, account.getUserTitle());
             ps.setString(++index, account.getEmail());
@@ -150,13 +151,14 @@ public class AccountDAO {
             DBConnection.close(conn, stmt);
         }
     }
-public boolean getAuthorization(String url, Account acc) {
-        List<Integer> i=new ArrayList<Integer>();
+
+    public boolean getAuthorization(String url, Account acc) {
+        List<Integer> i = new ArrayList<Integer>();
         try {
             conn = DBConnection.open();
-            String sql = "Select * from Authorization where url = ?";
+            String sql = "Select * from Authorization where url like ?";
             ps = conn.prepareStatement(sql);
-            ps.setString(1, url);
+            ps.setString(1, "%" + url + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 i.add(rs.getInt("permission"));
@@ -173,6 +175,7 @@ public boolean getAuthorization(String url, Account acc) {
         }
         return false;
     }
+
     public String getSetting(int permission) {
         String role = null;
         try {
@@ -228,14 +231,14 @@ public boolean getAuthorization(String url, Account acc) {
             DBConnection.close(conn, stmt);
         }
     }
-    
+
     public void editUserPass(Account user) {
         try {
             conn = DBConnection.open();
-           
+
             String sql = "update Account set password=? where userId = ?;";
             ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, user.getPassword());
             ps.setInt(2, user.getUserId());
             ps.executeUpdate();
@@ -260,7 +263,7 @@ public boolean getAuthorization(String url, Account acc) {
             ps.setInt(4, pageIndex);
             ps.setInt(5, pageSize);
             rs = ps.executeQuery();
-            while (rs.next()) {              
+            while (rs.next()) {
                 Account user = new Account();
                 user.setStatus(rs.getString("status"));
                 user.setUserId(rs.getInt("userId"));
@@ -270,7 +273,7 @@ public boolean getAuthorization(String url, Account acc) {
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
-                user.setPermission(rs.getString("permission"));                
+                user.setPermission(rs.getString("permission"));
                 list.add(user);
             }
             for (int i = 0; i < list.size(); i++) {

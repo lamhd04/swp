@@ -38,8 +38,9 @@ public class VerifyAccountController extends HttpServlet {
         }
         AccountDAO accountDao = new AccountDAO();
         Account account = accountDao.getAccount(email);
+        System.out.println(account.getEmail());
         account.setStatus("active");
-        accountDao.editAccount(account);
+        new AccountDAO().editAccount(account);
         request.setAttribute("verifyed", "OK");
         request.getRequestDispatcher("../VerifySuccess.jsp").forward(request, response);
     }

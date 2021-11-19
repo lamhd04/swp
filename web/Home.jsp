@@ -167,7 +167,7 @@
                         <div class="slider-nav"></div>
                             <c:forEach var="l" items="${a.allSliders}">
                                 <div class="item active" style="background-image: url(${l.image})">
-                                    <a href="${l.backlink}">
+                                    <a href="${pageContext.request.contextPath}${l.backlink}">
                                         <div class="item-content">
                                             <h1>${l.title}</h1>
                                             <p>${l.note}</p>                        
@@ -198,7 +198,7 @@
                             <h3>>HOT POSTS</h3>
                             <div class="w3-content w3-display-container" style="border: 1px solid #FFFFFF;margin-top: 10px">
                                 <c:forEach var="item" items="${post}">
-                                    <a class="mySlides"  href="${pageContext.request.contextPath}/PracticeDetail?testId=1">
+                                    <a class="mySlides"  href="${pageContext.request.contextPath}/postdetail?postid=${item.getPostid()}">
                                         <label style="width: 100%;padding: 5px 0px;background-color: white;font-size: 18px">**${item.getTitle()}</label>
                                         <img src="${item.getThumbnail()}" style="width:100%; height: 500px;margin-top: -9px"> 
                                     </a>
@@ -214,7 +214,7 @@
                             <h3>>FREE EXAM</h3>
                             <div class="w3-content w3-display-container" style="border: 1px solid #FFFFFF;margin-top: 10px">
                                 <c:forEach var="item" items="${exam}">
-                                    <a class="mySlides1"  href="${pageContext.request.contextPath}/PracticeDetail?testId=1">
+                                    <a class="mySlides1"  href="${pageContext.request.contextPath}/examdetail?examID=${item.getExamID()}">
                                         <label style="width: 100%;padding: 5px 0px;background-color: white;font-size: 18px">**${item.getTitle()}</label>
                                         <img src="${item.getThumbnail()}" style="width:100%; height: 500px;margin-top: -9px"> 
                                     </a>
@@ -234,7 +234,7 @@
                 <div class="container" style="width: 80%;font-size: 25px;">
                     <h3>>>RECENT POST</h3>
                     <c:forEach var="item" items="${lastestPost}">
-                        ><a href="#" style="padding: 5px;"> ${item.getTitle()}</a><br>
+                        ><a href="${pageContext.request.contextPath}/postdetail?postid=${item.getPostid()}" style="padding: 5px;"> ${item.getTitle()}</a><br>
                     </c:forEach>>
                 </div>
             </div>
@@ -245,7 +245,7 @@
                 </form>
                 <div style="font-size: 20px;margin-top: 10px">
                     <c:forEach var="item" items="${exCate}">
-                        > <a style="margin-bottom: 40%" href="#">${item.getName()}</a><br>
+                        > <a href="${pageContext.request.contextPath}/examcategory?exam_cate=${item.getSettingId()}" style="margin-bottom: 40%" href="#">${item.getSettingValue()}</a><br>
                     </c:forEach>
                 </div>
                 <br>                
