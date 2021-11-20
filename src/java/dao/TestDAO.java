@@ -58,7 +58,8 @@ public class TestDAO {
         return t;
     }
 
-    public void addTest(Test t) {
+    public int addTest(Test t) {
+        int idValue = 0;
         try {
             String sql = "insert into Test (subID,type,start_time,duration,result,tag,ques_numb,ques_cate,ques_subcate) values (?,?,'" + t.getStarttime() + "',?,?,?,?,?,?)";
             conn = DBConnection.open();
@@ -71,11 +72,17 @@ public class TestDAO {
             ps.setInt(6, t.getQues_numb());
             ps.setString(7, t.getQues_cate());
             ps.setString(8, t.getQues_subcate());
-            ps.executeUpdate();
+            rs=ps.getGeneratedKeys();
+            
+		if (rs.next()) {
+			idValue = rs.getInt(1);
+                        
+		}
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        } finally {          
             DBConnection.close(conn, stmt);
+            return idValue;
         }
     }
 

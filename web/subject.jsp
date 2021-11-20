@@ -49,7 +49,7 @@
                         &nbsp;&nbsp;
                         <a href="AdminControl?userId=${x.userId}&op=delete">Delete</a>
                         &nbsp;&nbsp;
-                        <a href="LessonList?subject=${subject.id}">Lesson</a>
+                        <a href="LessonBySubject?subID=${subject.id}">Lesson</a>
                     </td>
                 </tr>
             </c:forEach>
