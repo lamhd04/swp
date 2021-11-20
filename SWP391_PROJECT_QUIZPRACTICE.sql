@@ -410,6 +410,21 @@ insert into Authorization(permission,url)  values (4,'/getSubcategory');
 insert into Authorization(permission,url)  values (2,'/subjects');
 insert into Authorization(permission,url)  values (2,'/subject-detail');
 insert into Authorization(permission,url)  values (2,'/subject-add');
+insert into Authorization(permission,url)  values (0,'/home');
+insert into Authorization(permission,url)  values (1,'/home');
+insert into Authorization(permission,url)  values (2,'/home');
+insert into Authorization(permission,url)  values (3,'/home');
+insert into Authorization(permission,url)  values (4,'/home');
+insert into Authorization(permission,url)  values (5,'/home');
+insert into Authorization(permission,url)  values (1,'/practice-list');
+insert into Authorization(permission,url)  values (3,'/practice-list');
+insert into Authorization(permission,url)  values (4,'/practice-list');
+insert into Authorization(permission,url)  values (5,'/practice-list');
+insert into Authorization(permission,url)  values (1,'/PracticeDetail');
+insert into Authorization(permission,url)  values (3,'/PracticeDetail');
+insert into Authorization(permission,url)  values (4,'/PracticeDetail');
+insert into Authorization(permission,url)  values (5,'/PracticeDetail');
+insert into Authorization(permission,url)  values (3,'/EditSliderServlet');
 create table Exam
 (
 examID int AUTO_INCREMENT,
