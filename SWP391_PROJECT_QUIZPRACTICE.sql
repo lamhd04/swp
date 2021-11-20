@@ -436,3 +436,12 @@ id int not null ,
 dueDate Date not null,
 FOREIGN KEY (id) REFERENCES Account(userId)
 );
+create table Result
+(
+resultId int not null,
+userId int ,
+quesID int not null,
+user_answer text,
+true_answer text,
+constraint FK_result_quesID foreign key (quesID) references Question(qId)
+);
