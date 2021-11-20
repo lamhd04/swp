@@ -301,7 +301,7 @@ insert into Question(subject,category,subcategory,level,status,quiz,content,medi
 
 create table Result
 (
-resultID int,
+resultId int,
 userID int,
 quesID int not null,
 user_answer text,
