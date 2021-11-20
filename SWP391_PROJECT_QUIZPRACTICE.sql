@@ -425,6 +425,11 @@ insert into Authorization(permission,url)  values (3,'/PracticeDetail');
 insert into Authorization(permission,url)  values (4,'/PracticeDetail');
 insert into Authorization(permission,url)  values (5,'/PracticeDetail');
 insert into Authorization(permission,url)  values (3,'/EditSliderServlet');
+insert into Authorization(permission,url)  values (1,'/QuizHandle');
+insert into Authorization(permission,url)  values (2,'/QuizHandle');
+insert into Authorization(permission,url)  values (3,'/QuizHandle');
+insert into Authorization(permission,url)  values (4,'/QuizHandle');
+insert into Authorization(permission,url)  values (5,'/QuizHandle');
 create table Exam
 (
 examID int AUTO_INCREMENT,
