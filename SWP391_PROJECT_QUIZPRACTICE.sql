@@ -430,6 +430,12 @@ insert into Authorization(permission,url)  values (2,'/QuizHandle');
 insert into Authorization(permission,url)  values (3,'/QuizHandle');
 insert into Authorization(permission,url)  values (4,'/QuizHandle');
 insert into Authorization(permission,url)  values (5,'/QuizHandle');
+insert into Authorization(permission,url)  values (1,'/QuizReviewServlet');
+insert into Authorization(permission,url)  values (2,'/QuizReviewServlet');
+insert into Authorization(permission,url)  values (3,'/QuizReviewServlet');
+insert into Authorization(permission,url)  values (4,'/QuizReviewServlet');
+insert into Authorization(permission,url)  values (5,'/QuizReviewServlet');
+
 create table Exam
 (
 examID int AUTO_INCREMENT,
