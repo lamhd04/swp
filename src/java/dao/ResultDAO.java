@@ -60,15 +60,14 @@ public class ResultDAO {
         return count;
     }
     
-    public List<Result> ViewResult(int uId){
+    public List<Result> ViewResult(){
         List<Result> list=new ArrayList<>();
         int rId=ResultId();
         try {
             conn = DBConnection.open();
-            String sql = "select resultId,userId,Question.content,user_answer,true_answer from result join Question on result.quesId = Question.qID where resultId="+rId+"userId=?";
+            String sql = "select resultId,userId,Question.content,user_answer,true_answer from result join Question on result.quesId = Question.qID where resultId="+rId;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            ps.setInt(1, uId);
             while (rs.next()) {
                 list.add(new Result(rs.getInt("resultId"),
                         rs.getInt("userId"),
@@ -83,9 +82,5 @@ public class ResultDAO {
 
         return list;
     }
-    public static void main(String[] args) {
-       
-        ResultDAO rd=new ResultDAO();
-        
-    }
+    
 }
