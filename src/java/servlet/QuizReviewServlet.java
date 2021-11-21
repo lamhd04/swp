@@ -39,7 +39,7 @@ public class QuizReviewServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("acc");
         int uid = acc.getUserId();
-        List<Result> list=rd.ViewResult(uid);
+        List<Result> list=rd.ViewResult();
         request.setAttribute("list", list);
         request.getRequestDispatcher("QuizReview.jsp").forward(request, response);
     }
