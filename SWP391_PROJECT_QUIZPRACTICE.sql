@@ -1,3 +1,7 @@
+create database swp391_quizpractice;
+
+use swp391_quizpractice;
+
 create table Account
 (
 userId int not null,
